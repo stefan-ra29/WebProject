@@ -25,12 +25,15 @@ Vue.component("register", {
 					<tr><td><input type="submit" v-on:click = "submitFormData(customer)" value="Registruj se"></td></tr>
 				</table>
 			</form>
+			<button name="facilities" v-on:click = "facilitiesDisplay" >View Facilities</button>
     	</div>		  
     	`,
     mounted () {
     },
     methods: {
-
+        facilitiesDisplay: function(){
+            router.push("sf-display/");
+        }
 	}
     
 });

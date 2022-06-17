@@ -2,9 +2,11 @@ package beans;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class SportFacility {
-	
+
+	private String id;
 	private String name;
 	private FacilityType type;
 	private ArrayList<WorkoutType> offer;
@@ -18,6 +20,7 @@ public class SportFacility {
 	public SportFacility(String name, FacilityType type, ArrayList<WorkoutType> offer, boolean isOpen,
 			Location location, String logo, double averageGrade, LocalTime startHour, LocalTime closingHour) {
 		super();
+		this.id = UUID.randomUUID().toString();
 		this.name = name;
 		this.type = type;
 		this.offer = offer;
@@ -101,5 +104,7 @@ public class SportFacility {
 		this.closingHour = closingHour;
 	}
 
-	
+	public String getId() {
+		return id;
+	}
 }

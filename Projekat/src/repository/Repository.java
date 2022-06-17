@@ -16,7 +16,11 @@ import java.util.List;
 
 public abstract class Repository<Entity, Key> {
 
-    private Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+    private Gson gson = new GsonBuilder()
+            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+            .setPrettyPrinting()
+            .create();
+
     private String filePath = Paths.get("").toAbsolutePath() + File.separator + "data" + File.separator
             + this.getClass().getSimpleName() + ".json";
 
@@ -96,7 +100,7 @@ public abstract class Repository<Entity, Key> {
     }
 
     private void save(List<LogicalEntity<Entity>> entites) {
-        try {
+        try{
             FileWriter fw = new FileWriter(filePath);
             gson.toJson(entites, fw);
             fw.close();

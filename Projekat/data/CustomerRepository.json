@@ -1,1 +1,36 @@
-[{"entity":{"points":0,"firstName":"u","lastName":"a","username":"user1","password":"pass","gender":"male","dob":{"year":2006,"month":6,"day":6},"role":"Customer"},"deleted":false}]
+[
+  {
+    "entity": {
+      "points": 0,
+      "firstName": "u",
+      "lastName": "a",
+      "username": "user1",
+      "password": "pass",
+      "gender": "male",
+      "dob": {
+        "year": 2006,
+        "month": 6,
+        "day": 6
+      },
+      "role": "Customer"
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "points": 0,
+      "firstName": "fbngf",
+      "lastName": "bfdb",
+      "username": "aaaa",
+      "password": "ds",
+      "gender": "male",
+      "dob": {
+        "year": 2022,
+        "month": 6,
+        "day": 1
+      },
+      "role": "Customer"
+    },
+    "deleted": false
+  }
+]

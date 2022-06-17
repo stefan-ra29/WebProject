@@ -1,7 +1,6 @@
 package rest;
 
 import controller.SportFacilityController;
-import controller.TestController;
 import repository.SportFacilityRepository;
 import service.SportFacilityService;
 
@@ -18,6 +17,6 @@ public class SparkMainApp {
     public static void main(String[] args) throws IOException {
         port(8081);
         staticFiles.externalLocation(new File("./static").getCanonicalPath());
-        TestController.test();
+        sportFacilityController.GetAllSportFacilities();
     }
 }

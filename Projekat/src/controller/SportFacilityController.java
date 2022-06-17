@@ -1,28 +1,19 @@
 package controller;
 
-import beans.SportFacility;
+import com.google.gson.Gson;
+import service.SportFacilityService;
 
-import java.util.List;
+import static spark.Spark.get;
 
 public class SportFacilityController {
-    SportFacilityController sportFacilityController = new SportFacilityController();
+    private static Gson gson = new Gson();
+    public static SportFacilityService sportFacilityService = new SportFacilityService();
+    public static void GetAllSportFacilities(){
+        get("rest/facilities/get_all", (req, res) ->{
+            res.type("application/json");
 
-    public List<SportFacility> getAll() {
-        return sportFacilityController.getAll();
-    }
-    public SportFacility getOne(String id) {
-        return sportFacilityController.getOne(id);
-    }
+            return sportFacilityService.getAll();
 
-    public boolean addOne(SportFacility newSportFacility) {
-        return sportFacilityController.addOne(newSportFacility);
-    }
-
-    public void update(String id, SportFacility newSportFacility) {
-        sportFacilityController.update(id, newSportFacility);
-    }
-
-    public void delete(String id) {
-        sportFacilityController.delete(id);
+        });
     }
 }

@@ -1,16 +1,34 @@
 package service;
 
 import beans.SportFacility;
+import com.google.gson.Gson;
 import repository.SportFacilityRepository;
-
-import java.util.List;
 
 public class SportFacilityService {
 
     SportFacilityRepository sportFacilityRepository = new SportFacilityRepository();
+    Gson gson = new Gson();
+    public String getAll() {
 
-    public List<SportFacility> getAll() {
-        return sportFacilityRepository.getAll();
+//        ArrayList<WorkoutType> list1 = new ArrayList<WorkoutType>();
+//        list1.add(new WorkoutType("Grupni"));
+//        //list1.add(new WorkoutType("Personalni"));
+////        list1.add(new WorkoutType("Zenski"));
+////        list1.add(new WorkoutType("Muski"));
+//
+//        ArrayList<WorkoutType> list2 = new ArrayList<WorkoutType>();
+//        list2.add(new WorkoutType("Grupni"));
+//        list2.add(new WorkoutType("Personalni"));
+//
+//        //Location location1 = new Location(10,10,"Petra Drapsina", "117", "Sajkascity", 21244);
+//        Location location3 = new Location(50,50,"Pa Pavla", "50", "Novi Sad", 21200);
+//
+//        SportFacility sportFacility2 = new SportFacility("Jaka teretana", new FacilityType("Teretana"),
+//                list2, true,
+//                location3, "", 4.4, LocalTime.of(5,00), LocalTime.of(22,00));
+//        addOne(sportFacility2);
+
+        return gson.toJson(sportFacilityRepository.getAll());
     }
     public SportFacility getOne(String id) {
         return sportFacilityRepository.getOne(id);

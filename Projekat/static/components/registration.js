@@ -2,7 +2,8 @@ Vue.component("register", {
 	data: function () {
 	    return {
 	      id: '-1',
-	      customer: {username:'', password: '', firstName: '', lastName: '', gender: null, dob: null},
+	      customer: {username:'', password: '', firstName: '', lastName: '', email: '', gender: '', dob: {} },
+	      dateOfBirth: {},
 	      isValid: 'true'
 	    }
 	},
@@ -20,9 +21,8 @@ Vue.component("register", {
 										  <option value="female">Zenski</option>
 										  <option value="else">Drugo</option>
 										</select></td></tr>
-					<tr><td>Datum rodjenja</td><td><input style="width: 165px" type="date" name="dob" v-model = "customer.dob"></td></tr>
-
-					<tr><td><input type="submit" v-on:click = "submitFormData(customer)" value="Registruj se"></td></tr>
+                    <tr><td>Datum rodjenja</td><td><input style="width: 165px" type="date" name="dob" v-model = "dateOfBirth"></td></tr>
+					<tr><td><input type="submit" v-on:click = "receiveFormData" value="Registruj se"></td></tr>
 				</table>
 			</form>
     	</div>		  
@@ -30,7 +30,34 @@ Vue.component("register", {
     mounted () {
     },
     methods: {
+        receiveFormData: function(e) {
+            e.preventDefault();
+            if(this.customer.username === "" || this.customer.password === "" || this.customer.firstName === "" || this.customer.lastName === ""
+            || this.customer.email === "" || this.customer.gender === "" || !this.dateOfBirth) {
+                alert("Morate popuniti sva polja!")
+            }
 
+            const date = new Date(this.dateOfBirth)
+            let month = date.getMonth()
+            month = month + 1
+            let text = '{ "year" :' + date.getFullYear() + ', "month" : ' + month + ', "day" : ' + date.getDate() + ' }';
+            const obj = JSON.parse(text);
+            this.customer.dob = obj;
+
+            axios
+                .post('rest/customers/register/', this.customer)
+                .then(response => (this.checkResponse(response, e) ))
+
+        },
+
+        checkResponse: function(response, e) {
+            if(!response.data) {
+                alert("Korisnicko ime je zauzeto!")
+            }
+            else{
+                alert("Uspjesno ste se registrovali!")
+            }
+        }
 	}
     
 });

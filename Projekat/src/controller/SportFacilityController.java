@@ -16,4 +16,15 @@ public class SportFacilityController {
 
         });
     }
+    public static void SearchSportFacilities(){
+        get("rest/facilities/search", (req, res) ->{
+            res.type("application/json");
+
+            String criteria = req.queryParams("criteria");
+            String searchInput = req.queryParams("searchInput");
+            String gradeCriteria = req.queryParams("gradeCriteria");
+            return sportFacilityService.SearchSportFacilities(criteria, searchInput, gradeCriteria);
+
+        });
+    }
 }

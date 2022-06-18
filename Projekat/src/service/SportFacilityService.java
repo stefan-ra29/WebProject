@@ -4,6 +4,9 @@ import beans.SportFacility;
 import com.google.gson.Gson;
 import repository.SportFacilityRepository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SportFacilityService {
 
     SportFacilityRepository sportFacilityRepository = new SportFacilityRepository();
@@ -57,4 +60,50 @@ public class SportFacilityService {
 //            e.printStackTrace();
 //        }
 //    }
+
+    public String SearchSportFacilities(String criteria, String searchInput, String gradeCriteria){
+
+        List<SportFacility> allFacilities = sportFacilityRepository.getAll();
+        ArrayList<SportFacility> filteredList = new ArrayList<SportFacility>();
+
+        for( SportFacility facility : allFacilities){
+            switch (criteria) {
+                case "name":
+                    if(facility.getName().toLowerCase().contains(searchInput.toLowerCase().trim()))
+                        filteredList.add(facility);
+                    break;
+                case "type":
+                    if(facility.getType().getType().toLowerCase().contains(searchInput.toLowerCase().trim()))
+                        filteredList.add(facility);
+                    break;
+                case "location":
+                    if(facility.getLocation().getCity().toLowerCase().contains(searchInput.toLowerCase().trim()))
+                        filteredList.add(facility);
+                    break;
+
+                case "average_grade":
+                    switch(gradeCriteria){
+                        case "1-2":
+                            if(facility.getAverageGrade() > 1 && facility.getAverageGrade() <= 2)
+                                filteredList.add(facility);
+                            break;
+                        case "2-3":
+                            if(facility.getAverageGrade() > 2 && facility.getAverageGrade() <= 3)
+                                filteredList.add(facility);
+                            break;
+                        case "3-4":
+                            if(facility.getAverageGrade() > 3 && facility.getAverageGrade() <= 4)
+                                filteredList.add(facility);
+                            break;
+                        case "4-5":
+                            if(facility.getAverageGrade() > 4 && facility.getAverageGrade() <= 5)
+                                filteredList.add(facility);
+                            break;
+                    }
+                    break;
+            }
+        }
+
+        return gson.toJson(filteredList);
+    }
 }

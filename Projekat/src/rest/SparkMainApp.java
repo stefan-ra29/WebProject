@@ -17,6 +17,8 @@ public class SparkMainApp {
     public static void main(String[] args) throws IOException {
         port(8081);
         staticFiles.externalLocation(new File("./static").getCanonicalPath());
+
         sportFacilityController.GetAllSportFacilities();
+        sportFacilityController.SearchSportFacilities();
     }
 }

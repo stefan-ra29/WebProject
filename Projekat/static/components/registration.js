@@ -9,7 +9,7 @@ Vue.component("register", {
 	},
 	    template: ` 
     	<div class="registration_wrap">
-    	    <h1>Registruj se</h1>
+    	    <h1>REGISTRACIJA</h1>
     		<form id="form" class="registration_form">
 				<table>
 				    <tr><td>Korisnicko ime</td><td><input type="text" name="username" v-model = "customer.username"></td></tr>

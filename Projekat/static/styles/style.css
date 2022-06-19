@@ -1,6 +1,18 @@
+body{
+    margin: 0px;
+}
+
 .login_wrap{
     text-align: center;
+    padding-top: 20px;
+    padding-bottom: 488px;
+    background-color: #e76f51;
 }
+.login_wrap h1{
+        margin-top: 20px;
+        color: #f0f0f0;
+}
+
 .login_form{
     display:flex;
     justify-content: center;
@@ -13,14 +25,30 @@
 
 .registration_wrap{
     text-align: center;
+    padding-top: 20px;
+    padding-bottom: 310px;
+    background-color: #e76f51;
 }
+
+.registration_wrap h1 {
+    margin-top: 20px;
+    color: #f0f0f0;
+}
+
 .registration_form{
     display:flex;
     justify-content: center;
 }
+table{
+    border: 2px solid #f0f0f0;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #f4a261;
+}
 .registration_form td{
     font-size: 20px;
     padding: 5px;
+    color: #1f1f1f;
 }
 
 .facility_heading {

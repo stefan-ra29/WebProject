@@ -9,7 +9,7 @@ Vue.component("login", {
 	    template: `
 
     	<div class="login_wrap">
-    	    <h1>Prijavite se</h1>
+    	    <h1>PRIJAVA</h1>
             <form class="login_form">
                 <table>
                     <tr><td>Korisnicko ime</td><td><input type="text" name="username" v-model = "username"></td></tr>

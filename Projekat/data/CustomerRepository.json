@@ -66,5 +66,22 @@
       "role": "Customer"
     },
     "deleted": false
+  },
+  {
+    "entity": {
+      "points": 0,
+      "firstName": "Zlatko",
+      "lastName": "Ivanovic",
+      "username": "zlaja",
+      "password": "zlaiva",
+      "gender": "else",
+      "dob": {
+        "year": 1996,
+        "month": 3,
+        "day": 5
+      },
+      "role": "Customer"
+    },
+    "deleted": false
   }
 ]

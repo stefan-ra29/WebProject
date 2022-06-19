@@ -1,7 +1,7 @@
 package rest;
 
 import controller.CustomerController;
-import controller.TestController;
+import controller.UserController;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,6 +15,6 @@ public class SparkMainApp {
         port(8081);
         staticFiles.externalLocation(new File("./static").getCanonicalPath());
         CustomerController.registerCustomer();
-        TestController.test();
+        UserController.login();
     }
 }

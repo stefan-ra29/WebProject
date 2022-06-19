@@ -4,7 +4,8 @@ Vue.component("sport_facility_display", {
 	      facilities: {},
 	      criteria : "",
 	      searchInput : "",
-	      grade_criteria: ""
+	      grade_criteria: "",
+	      filter : ""
 	    }
 	},
 	    template: `

@@ -10,11 +10,11 @@ Vue.component("sport_facility_display", {
 	},
 	    template: `
     	<div>
-    	    <div style="margin-bottom:10px">
+    	    <div class="sport_facility_display_header">
     	        <a href="http://localhost:8081/#/login" style="margin-right:10px">Prijava</a>
     	        <a href="http://localhost:8081/#/registration">Registracija</a>
     	    </div>
-    	    <form>
+    	    <form class="sport_facility_search_display">
     	        <select style="width: 125px; padding:1px" name="search_criteria" id="search_criteria" v-model = "criteria">
                 										  <option value="name">Naziv</option>
                 										  <option value="type">Tip</option>
@@ -32,36 +32,33 @@ Vue.component("sport_facility_display", {
     	        <input type="submit" value="Pretrazi" v-on:click="searchSubmit" name="search_button">
     	    </form>
 
-    	    <h1>Objekti:</h1>
-    		<table>
-                <tr>
-                    <th>Ime sportskog objekta</th>
-                    <th>Tip sportskog objekta</th>
-                    <th>Prosecna ocena</th>
-                    <th>Adresa</th>
-                    <th>Vreme otvaranja</th>
-                    <th>Vreme zatvaranja</th>
+    	    <h1 class="facility_heading">Objekti:</h1>
 
-                </tr>
-                <tr v-for="facility in facilities" v-bind:key="facility.id">
-                    <td>{{facility.name}}</td>
-                    <td>{{facility.type.type}}</td>
-                    <td>{{facility.averageGrade}}</td>
-                    <td>{{facility.location.street}} {{facility.location.streetNumber}} {{facility.location.city}}</td>
-                    <td v-if="facility.startHour.minute < 10 ">
-                        {{facility.startHour.hour}}:0{{facility.startHour.minute}}
-                    </td>
-                    <td v-else>
-                        {{facility.startHour.hour}}:{{facility.startHour.minute}}
-                    </td>
-                    <td v-if="facility.closingHour.minute < 10 ">
-                        {{facility.closingHour.hour}}:0{{facility.closingHour.minute}}
-                    </td>
-                    <td v-else>
-                        {{facility.closingHour.hour}}:{{facility.closingHour.minute}}
-                    </td>
-                </tr>
-            </table>
+            <div v-for="facility in facilities" class="facility_display_wrap">
+                <table class="facility_table_wrap">
+                    <tr><th>{{facility.name}}</th>
+                        <th rowspan="6"><img :src="facility.logo" class= "image_display"/></th>
+                    <tr>
+                    <tr>
+                        <td v-if="facility.startHour.minute < 10">Radno vreme:
+                            {{facility.startHour.hour}}:0{{facility.startHour.minute}} - {{facility.closingHour.hour}}:0{{facility.closingHour.minute}}</td>
+                        <td v-else>Radno vreme:
+                            {{facility.startHour.hour}}:{{facility.startHour.minute}} - {{facility.closingHour.hour}}:0{{facility.closingHour.minute}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Adresa: {{facility.location.street}} {{facility.location.streetNumber}} {{facility.location.city}}</td>
+                    </tr>
+                    <tr>
+                        <td>Tip objekta: {{facility.type.type}}</td>
+                    </tr>
+                    <tr>
+                        <td>Prosecna ocena: {{facility.averageGrade}}</td>
+                    </tr>
+                </table>
+
+            </div>
+
     	</div>
     	`,
     mounted () {

@@ -2,6 +2,7 @@ package rest;
 
 import controller.CustomerController;
 import controller.UserController;
+import controller.SportFacilityController;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,5 +17,7 @@ public class SparkMainApp {
         staticFiles.externalLocation(new File("./static").getCanonicalPath());
         CustomerController.registerCustomer();
         UserController.login();
+        SportFacilityController.GetAllSportFacilities();
+        SportFacilityController.SearchSportFacilities();
     }
 }

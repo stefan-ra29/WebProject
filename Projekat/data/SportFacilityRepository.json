@@ -1,0 +1,169 @@
+[
+  {
+    "entity": {
+      "id": "8eb7aeaf-1fab-4503-93af-69fec50ba92c",
+      "name": "Fitnes studio",
+      "type": {
+        "type": "Teretana"
+      },
+      "offer": [
+        {
+          "type": "Grupni"
+        },
+        {
+          "type": "Personalni"
+        },
+        {
+          "type": "Zenski"
+        },
+        {
+          "type": "Muski"
+        }
+      ],
+      "isOpen": true,
+      "location": {
+        "longditude": 10.0,
+        "latitude": 10.0,
+        "street": "Petra Drapsina",
+        "streetNumber": "117",
+        "city": "Sajkascity",
+        "postalCode": 21244
+      },
+      "logo": "",
+      "averageGrade": 4.2,
+      "startHour": {
+        "hour": 8,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "closingHour": {
+        "hour": 20,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "id": "a8ffbc7c-cf81-4fe3-a9ab-9df625b43cb6",
+      "name": "Joga studio",
+      "type": {
+        "type": "Studio"
+      },
+      "offer": [
+        {
+          "type": "Grupni"
+        }
+      ],
+      "isOpen": true,
+      "location": {
+        "longditude": 100.0,
+        "latitude": 100.0,
+        "street": "Turgenjeva",
+        "streetNumber": "9",
+        "city": "Novi Sad",
+        "postalCode": 21200
+      },
+      "logo": "",
+      "averageGrade": 2.2,
+      "startHour": {
+        "hour": 10,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "closingHour": {
+        "hour": 22,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "id": "c2da373d-0ed1-4bb7-b566-d64e33701156",
+      "name": "Jovanina zumba",
+      "type": {
+        "type": "Zumba studio"
+      },
+      "offer": [
+        {
+          "type": "Grupni"
+        },
+        {
+          "type": "Personalni"
+        }
+      ],
+      "isOpen": true,
+      "location": {
+        "longditude": 54.0,
+        "latitude": 54.0,
+        "street": "Bulevar Oslobodjenja",
+        "streetNumber": "100",
+        "city": "Novi Sad",
+        "postalCode": 2120
+      },
+      "logo": "",
+      "averageGrade": 4.9,
+      "startHour": {
+        "hour": 10,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "closingHour": {
+        "hour": 19,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "id": "4ac81e9a-b556-4f37-ad02-537c2d4db0b6",
+      "name": "Jaka teretana",
+      "type": {
+        "type": "Teretana"
+      },
+      "offer": [
+        {
+          "type": "Grupni"
+        },
+        {
+          "type": "Personalni"
+        }
+      ],
+      "isOpen": true,
+      "location": {
+        "longditude": 50.0,
+        "latitude": 50.0,
+        "street": "Pa Pavla",
+        "streetNumber": "50",
+        "city": "Novi Sad",
+        "postalCode": 21200
+      },
+      "logo": "",
+      "averageGrade": 4.4,
+      "startHour": {
+        "hour": 5,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "closingHour": {
+        "hour": 22,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "deleted": false
+  }
+]

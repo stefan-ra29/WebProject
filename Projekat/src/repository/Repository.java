@@ -20,7 +20,6 @@ public abstract class Repository<Entity, Key> {
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
             .setPrettyPrinting()
             .create();
-
     private String filePath = Paths.get("").toAbsolutePath() + File.separator + "data" + File.separator
             + this.getClass().getSimpleName() + ".json";
 

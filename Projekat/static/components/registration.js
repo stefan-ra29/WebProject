@@ -25,6 +25,7 @@ Vue.component("register", {
 					<tr><td><input type="submit" v-on:click = "receiveFormData" value="Registruj se"></td></tr>
 				</table>
 			</form>
+			<button name="facilities" v-on:click = "facilitiesDisplay" >View Facilities</button>
     	</div>		  
     	`,
     mounted () {
@@ -57,6 +58,10 @@ Vue.component("register", {
             else{
                 alert("Uspjesno ste se registrovali!")
             }
+        },
+
+        facilitiesDisplay: function(){
+            router.push("sf-display/");
         }
 	}
     

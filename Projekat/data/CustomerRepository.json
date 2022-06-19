@@ -2,14 +2,31 @@
   {
     "entity": {
       "points": 0,
-      "firstName": "u",
-      "lastName": "a",
-      "username": "user1",
-      "password": "pass",
+      "firstName": "Aleksandra",
+      "lastName": "Vujovic",
+      "username": "saska",
+      "password": "saska",
+      "gender": "female",
+      "dob": {
+        "year": 2000,
+        "month": 6,
+        "day": 3
+      },
+      "role": "Customer"
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "points": 0,
+      "firstName": "Stefan",
+      "lastName": "Tosic",
+      "username": "stefan",
+      "password": "stefan",
       "gender": "male",
       "dob": {
-        "year": 2006,
-        "month": 6,
+        "year": 2000,
+        "month": 1,
         "day": 6
       },
       "role": "Customer"
@@ -19,15 +36,15 @@
   {
     "entity": {
       "points": 0,
-      "firstName": "fbngf",
-      "lastName": "bfdb",
-      "username": "aaaa",
-      "password": "ds",
+      "firstName": "Marko",
+      "lastName": "Markovic",
+      "username": "marko",
+      "password": "marko",
       "gender": "male",
       "dob": {
-        "year": 2022,
-        "month": 6,
-        "day": 1
+        "year": 2000,
+        "month": 8,
+        "day": 22
       },
       "role": "Customer"
     },

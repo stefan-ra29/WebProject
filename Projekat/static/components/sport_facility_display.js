@@ -10,6 +10,10 @@ Vue.component("sport_facility_display", {
 	},
 	    template: `
     	<div>
+    	    <div style="margin-bottom:10px">
+    	        <a href="http://localhost:8081/#/login" style="margin-right:10px">Prijava</a>
+    	        <a href="http://localhost:8081/#/registration">Registracija</a>
+    	    </div>
     	    <form>
     	        <select style="width: 125px; padding:1px" name="search_criteria" id="search_criteria" v-model = "criteria">
                 										  <option value="name">Naziv</option>

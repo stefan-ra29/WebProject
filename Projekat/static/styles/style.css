@@ -1,0 +1,24 @@
+.login_wrap{
+    text-align: center;
+}
+.login_form{
+    display:flex;
+    justify-content: center;
+}
+
+.login_form td{
+    font-size: 20px;
+    padding: 5px;
+}
+
+.registration_wrap{
+    text-align: center;
+}
+.registration_form{
+    display:flex;
+    justify-content: center;
+}
+.registration_form td{
+    font-size: 20px;
+    padding: 5px;
+}

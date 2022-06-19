@@ -49,5 +49,22 @@
       "role": "Customer"
     },
     "deleted": false
+  },
+  {
+    "entity": {
+      "points": 0,
+      "firstName": "Ognjen",
+      "lastName": "Gogi",
+      "username": "ogi",
+      "password": "bogi",
+      "gender": "male",
+      "dob": {
+        "year": 1998,
+        "month": 7,
+        "day": 31
+      },
+      "role": "Customer"
+    },
+    "deleted": false
   }
 ]

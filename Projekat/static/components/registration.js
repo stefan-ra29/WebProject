@@ -8,8 +8,9 @@ Vue.component("register", {
 	    }
 	},
 	    template: ` 
-    	<div>
-    		<form id="form" >
+    	<div class="registration_wrap">
+    	    <h1>Registruj se</h1>
+    		<form id="form" class="registration_form">
 				<table>
 				    <tr><td>Korisnicko ime</td><td><input type="text" name="username" v-model = "customer.username"></td></tr>
 				    <tr><td>Lozinka</td><td><input type="password" name="password" v-model = "customer.password"></td></tr>
@@ -22,10 +23,9 @@ Vue.component("register", {
 										  <option value="else">Drugo</option>
 										</select></td></tr>
                     <tr><td>Datum rodjenja</td><td><input style="width: 165px" type="date" name="dob" v-model = "dateOfBirth"></td></tr>
-					<tr><td><input type="submit" v-on:click = "receiveFormData" value="Registruj se"></td></tr>
+					<tr><td></td><td><input type="submit" v-on:click = "receiveFormData" value="Registruj se"></td></tr>
 				</table>
 			</form>
-			<button name="facilities" v-on:click = "facilitiesDisplay" >View Facilities</button>
     	</div>		  
     	`,
     mounted () {
@@ -57,6 +57,7 @@ Vue.component("register", {
             }
             else{
                 alert("Uspjesno ste se registrovali!")
+                router.push('/login')
             }
         },
 

@@ -5,9 +5,9 @@ const SFDisplay = { template: '<sport_facility_display></sport_facility_display>
 const router = new VueRouter({
 	mode: 'hash',
 	  routes: [
-		{ path: '/', name: 'home', component: Register},
+		{ path: '/registration', component: Register},
 		{ path: '/login', component: Login},
-		{ path: '/sf-display/', component: SFDisplay}
+		{ path: '/', name: 'home', component: SFDisplay}
 	  ]
 });
 

@@ -16,6 +16,17 @@ public class User {
 	public User() {
 	}
 
+	public User(User user) {
+		this.firstName = user.firstName;
+		this.lastName = user.lastName;
+		this.email = user.email;
+		this.username = user.username;
+		this.password = user.password;
+		this.gender = user.gender;
+		this.dob = user.dob;
+		this.role = user.role;
+	}
+
 	public User(String firstName, String lastName, String email, String username, String password, String gender,
 			LocalDate dob, Role role) {
 		super();

@@ -19,5 +19,7 @@ public class SparkMainApp {
         UserController.login();
         SportFacilityController.GetAllSportFacilities();
         SportFacilityController.SearchSportFacilities();
+        UserController.getLoggedUser();
+        UserController.updateUserInfo();
     }
 }

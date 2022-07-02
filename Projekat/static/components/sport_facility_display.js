@@ -5,7 +5,8 @@ Vue.component("sport_facility_display", {
 	      criteria : "",
 	      searchInput : "",
 	      grade_criteria: "",
-	      filter : ""
+	      filter : "",
+	      sort : ""
 	    }
 	},
 	    template: `
@@ -31,8 +32,17 @@ Vue.component("sport_facility_display", {
 
     	        <input type="submit" value="Pretrazi" v-on:click="searchSubmit" name="search_button">
     	    </form>
-
-    	    <h1 class="facility_heading">Objekti:</h1>
+            <form>Sortiraj:
+                <select style="width: 195px; padding:1px" name="sort" id="sort" v-model = "sort" @change = "sortFacilities($event)" >
+                                										  <option value="name_increasing">Naziv (A-Z)</option>
+                                										  <option value="name_decreasing">Naziv (Z-A)</option>
+                                										  <option value="location_increasing">Lokacija (A-Z)</option>
+                                										  <option value="location_decreasing">Lokacija (Z-A)</option>
+                                										  <option value="average_grade_increasing">Prosecna ocena (rastuce)</option>
+                                										  <option value="average_grade_decreasing">Prosecna ocena (opadajuce)</option>
+                </select>
+            </form>
+    	    <h1 class="facility_heading">Objekti</h1>
 
             <div v-for="facility in facilities" class="facility_display_wrap">
                 <table class="facility_table_wrap">
@@ -47,7 +57,7 @@ Vue.component("sport_facility_display", {
                         </td>
                     </tr>
                     <tr>
-                        <td>Adresa: {{facility.location.street}} {{facility.location.streetNumber}} {{facility.location.city}}</td>
+                        <td>Adresa: {{facility.location.street}} {{facility.location.streetNumber}}, {{facility.location.city}}</td>
                     </tr>
                     <tr>
                         <td>Tip objekta: {{facility.type.type}}</td>
@@ -68,13 +78,28 @@ Vue.component("sport_facility_display", {
     },
     methods: {
         searchSubmit : function(e){
-        e.preventDefault()
+            e.preventDefault()
+
+            if(this.criteria == "")
+                return;
+
             axios
             .get("rest/facilities/search",
             { params : {
                 criteria : this.criteria,
                 searchInput : this.searchInput,
                 gradeCriteria: this.grade_criteria
+            }})
+
+            .then(response => {this.facilities = response.data});
+        },
+        sortFacilities(event){
+            event.preventDefault()
+
+            axios
+            .get("rest/facilities/sort",
+            { params : {
+                sortBy : event.target.value
             }})
 
             .then(response => {this.facilities = response.data});

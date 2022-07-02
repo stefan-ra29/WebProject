@@ -27,4 +27,14 @@ public class SportFacilityController {
 
         });
     }
+
+    public static void SortSportFacilities(){
+        get("rest/facilities/sort", (req, res) ->{
+            res.type("application/json");
+
+            String sortBy = req.queryParams("sortBy");
+            return sportFacilityService.SortSportFacilities(sortBy);
+
+        });
+    }
 }

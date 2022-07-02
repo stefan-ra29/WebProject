@@ -5,6 +5,8 @@ import com.google.gson.Gson;
 import repository.SportFacilityRepository;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class SportFacilityService {
@@ -105,5 +107,47 @@ public class SportFacilityService {
         }
 
         return gson.toJson(filteredList);
+    }
+
+    public String SortSportFacilities(String sortBy ){
+
+        List<SportFacility> allFacilities = sportFacilityRepository.getAll();
+        ArrayList<SportFacility> filteredList = new ArrayList<SportFacility>();
+
+        switch (sortBy) {
+            case "name_increasing":
+                Collections.sort(allFacilities, new Comparator<SportFacility>() {
+                    @Override
+                    public int compare(SportFacility o1, SportFacility o2) {
+                        return o1.getName().compareTo(o2.getName());
+                    }
+                });
+                break;
+            case "name_decreasing":
+                Collections.sort(allFacilities, new Comparator<SportFacility>() {
+                    @Override
+                    public int compare(SportFacility o1, SportFacility o2) {
+                        int i = o2.getName().compareTo(o1.getName());
+                        return i;
+                    }
+                });
+            case "location_increasing":
+                Collections.sort(allFacilities, new LocationComparator());
+                break;
+
+            case "location_decreasing":
+                Collections.sort(allFacilities, new LocationComparator().reversed());
+                break;
+
+            case "average_grade_increasing":
+                Collections.sort(allFacilities, new AverageGradeComparator());
+                break;
+
+            case "average_grade_decreasing":
+                Collections.sort(allFacilities, new AverageGradeComparator().reversed());
+                break;
+        }
+
+        return gson.toJson(allFacilities);
     }
 }

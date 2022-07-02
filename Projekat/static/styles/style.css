@@ -62,7 +62,8 @@ table{
 }
 
 .sport_facility_search_display {
-    text-align: right;
+    text-align: left;
+    margin-left: 10px;
 }
 
 .facility_table_wrap{

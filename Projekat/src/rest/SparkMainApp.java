@@ -20,5 +20,8 @@ public class SparkMainApp {
         SportFacilityController.GetAllSportFacilities();
         SportFacilityController.SearchSportFacilities();
         SportFacilityController.SortSportFacilities();
+        SportFacilityController.GetSportFacilityTypes();
+        SportFacilityController.FilterSportFacilities();
+        SportFacilityController.GetCurrentlyOpenedSportFacilities();
     }
 }

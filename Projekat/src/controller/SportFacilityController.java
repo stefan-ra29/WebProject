@@ -23,8 +23,9 @@ public class SportFacilityController {
             String criteria = req.queryParams("criteria");
             String searchInput = req.queryParams("searchInput");
             String gradeCriteria = req.queryParams("gradeCriteria");
-            return sportFacilityService.SearchSportFacilities(criteria, searchInput, gradeCriteria);
-
+            String facilities = req.body();
+            System.out.println(facilities);
+            return sportFacilityService.SearchSportFacilities(criteria, searchInput, gradeCriteria, facilities);
         });
     }
 
@@ -34,6 +35,33 @@ public class SportFacilityController {
 
             String sortBy = req.queryParams("sortBy");
             return sportFacilityService.SortSportFacilities(sortBy);
+
+        });
+    }
+
+    public static void GetSportFacilityTypes(){
+        get("rest/facilities/get_facility_types", (req, res) ->{
+            res.type("application/json");
+
+            return sportFacilityService.GetSportFacilityTypes();
+
+        });
+    }
+    public static void FilterSportFacilities(){
+        get("rest/facilities/filter", (req, res) ->{
+            res.type("application/json");
+
+            String filterBy = req.queryParams("filterBy");
+            return sportFacilityService.FilterSportFacilities(filterBy);
+
+        });
+    }
+
+    public static void GetCurrentlyOpenedSportFacilities(){
+        get("rest/facilities/get_currently_opened_facilities", (req, res) ->{
+            res.type("application/json");
+
+            return sportFacilityService.GetCurrentlyOpenedSportFacilities();
 
         });
     }

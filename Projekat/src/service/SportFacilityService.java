@@ -2,11 +2,13 @@ package service;
 
 import beans.SportFacility;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import repository.SportFacilityRepository;
 
+import java.lang.reflect.Type;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class SportFacilityService {
@@ -63,10 +65,14 @@ public class SportFacilityService {
 //        }
 //    }
 
-    public String SearchSportFacilities(String criteria, String searchInput, String gradeCriteria){
+    public String SearchSportFacilities(String criteria, String searchInput, String gradeCriteria, String facilities){
 
         List<SportFacility> allFacilities = sportFacilityRepository.getAll();
         ArrayList<SportFacility> filteredList = new ArrayList<SportFacility>();
+
+        Type facilitiesListType = new TypeToken<ArrayList<SportFacility>>(){}.getType();
+
+        ArrayList<SportFacility> facilitiesArray = gson.fromJson(facilities, facilitiesListType);
 
         for( SportFacility facility : allFacilities){
             switch (criteria) {
@@ -116,21 +122,10 @@ public class SportFacilityService {
 
         switch (sortBy) {
             case "name_increasing":
-                Collections.sort(allFacilities, new Comparator<SportFacility>() {
-                    @Override
-                    public int compare(SportFacility o1, SportFacility o2) {
-                        return o1.getName().compareTo(o2.getName());
-                    }
-                });
+                Collections.sort(allFacilities, new NameComparator());
                 break;
             case "name_decreasing":
-                Collections.sort(allFacilities, new Comparator<SportFacility>() {
-                    @Override
-                    public int compare(SportFacility o1, SportFacility o2) {
-                        int i = o2.getName().compareTo(o1.getName());
-                        return i;
-                    }
-                });
+                Collections.sort(allFacilities, new NameComparator().reversed());
             case "location_increasing":
                 Collections.sort(allFacilities, new LocationComparator());
                 break;
@@ -149,5 +144,41 @@ public class SportFacilityService {
         }
 
         return gson.toJson(allFacilities);
+    }
+    public String GetSportFacilityTypes(){
+
+        List<SportFacility> allFacilities = sportFacilityRepository.getAll();
+        ArrayList<String> types = new ArrayList<String>();
+
+        for(SportFacility sf : allFacilities){
+            if(!types.contains(sf.getType().getType()))
+                types.add(sf.getType().getType());
+        }
+
+        return gson.toJson(types);
+    }
+    public String FilterSportFacilities(String filter){
+
+        List<SportFacility> allFacilities = sportFacilityRepository.getAll();
+        ArrayList<SportFacility> filteredFacilities = new ArrayList<SportFacility>();
+
+        for(SportFacility sf : allFacilities){
+            if(sf.getType().getType().equals(filter))
+                filteredFacilities.add(sf);
+        }
+        return gson.toJson(filteredFacilities);
+    }
+
+    public String GetCurrentlyOpenedSportFacilities(){
+
+        List<SportFacility> allFacilities = sportFacilityRepository.getAll();
+        ArrayList<SportFacility> currentlyOpenedFacilities = new ArrayList<SportFacility>();
+
+        LocalTime now = LocalTime.now();
+        for(SportFacility sf : allFacilities){
+            if(sf.getStartHour().isBefore(now) && now.isBefore(sf.getClosingHour()))
+                currentlyOpenedFacilities.add(sf);
+        }
+        return gson.toJson(currentlyOpenedFacilities);
     }
 }

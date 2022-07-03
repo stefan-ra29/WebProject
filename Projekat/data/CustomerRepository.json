@@ -22,13 +22,14 @@
       "points": 0,
       "firstName": "Stefan",
       "lastName": "Tosic",
+      "email": "stefantosic23@gmail.com",
       "username": "stefan",
       "password": "stefan",
       "gender": "male",
       "dob": {
         "year": 2000,
         "month": 1,
-        "day": 6
+        "day": 7
       },
       "role": "Customer"
     },

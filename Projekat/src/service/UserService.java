@@ -1,5 +1,6 @@
 package service;
 
+import beans.Customer;
 import beans.User;
 import com.google.gson.Gson;
 import io.jsonwebtoken.Claims;
@@ -58,12 +59,32 @@ public class UserService {
 //        return retVal;
     }
 
+    public String getUserFromJWT(String token) {
+        String username = getUsernameFromJWT(token);
+        String user = gson.toJson(FindbyId(username));
+
+        return user;
+    }
+
     public static String getUsernameFromJWT(String token) {
         if (token == null)
             return "";
         String jwt = token;
         Jws<Claims> claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt);
         return claims.getBody().getSubject();
+    }
+
+    public void Update(User user) {
+        switch (user.getRole()) {
+            case  Administrator:
+                administratorRepository.update(user.getUsername(), user);
+                break;
+            case Customer:
+                customerRepository.update(user.getUsername(), (Customer) user);
+                break;
+            default:
+                break;
+        }
     }
 
 }

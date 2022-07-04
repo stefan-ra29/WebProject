@@ -1,1 +1,19 @@
-[{"entity":{"username":"admin","password":"123admin456","role":"Administrator"},"deleted":false}]
+[
+  {
+    "entity": {
+      "firstName": "SvetskiMegaCar",
+      "lastName": "Legenda",
+      "email": "admin@gmail.com",
+      "username": "admin",
+      "password": "123admin456",
+      "gender": "else",
+      "dob": {
+        "year": 1970,
+        "month": 8,
+        "day": 20
+      },
+      "role": "Administrator"
+    },
+    "deleted": false
+  }
+]

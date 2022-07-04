@@ -2,6 +2,8 @@ const Register = { template: '<register></register>' }
 const Login = {template : '<login></login>'}
 const SFDisplay = { template: '<sport_facility_display></sport_facility_display>' }
 const singleSFDisplay = { template: '<single_facility_display></single_facility_display>' }
+const UserProfile = {template : '<user_profile></user_profile>'}
+const CreateFacility = {template: '<create_facility></create_facility>'}
 
 const router = new VueRouter({
 	mode: 'hash',
@@ -10,6 +12,9 @@ const router = new VueRouter({
 		{ path: '/login', component: Login},
 		{ path: '/', name: 'home', component: SFDisplay},
 		{ path: '/single_facility', component: singleSFDisplay}
+		{ path: '/userProfile', component: UserProfile},
+		{ path: '/createFacility', component: CreateFacility}
+
 	  ]
 });
 

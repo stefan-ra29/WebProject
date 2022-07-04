@@ -10,12 +10,18 @@ Vue.component("sport_facility_display", {
 	      filter : "",
 	      sort : "",
 	      currently_open: true
+	      isLoggedIn: false,
+	      role : window.localStorage.getItem('role'),
+	      jwt: window.localStorage.getItem('jwt')
 	    }
 	},
 	    template: `
     	<div>
     	    <div class="sport_facility_display_header">
-    	        <a href="http://localhost:8081/#/login" style="margin-right:10px">Prijava</a>
+    	        <a href="http://localhost:8081/#/createFacility" v-if="this.role == 'Administrator'" style="margin-right:10px">Dodaj objekat</a>
+    	        <a href="http://localhost:8081/#/login" v-if="this.jwt == '-1' || this.jwt == null" style="margin-right:10px">Prijavite se</a>
+    	        <button v-on:click="logout" v-else>Odjava</button>
+    	        <a href="http://localhost:8081/#/userProfile" v-if="this.role == 'Customer'" style="margin-right:10px">Vas profil</a>
     	        <a href="http://localhost:8081/#/registration">Registracija</a>
     	    </div>
 
@@ -120,6 +126,7 @@ Vue.component("sport_facility_display", {
 
             .then(response => {this.facilities = response.data});
         },
+
         sortFacilities(event){
             event.preventDefault()
 
@@ -155,6 +162,13 @@ Vue.component("sport_facility_display", {
         details : function(facility){
            localStorage.setItem("facilityID", facility.id)
            router.push('/single_facility')
+        },
+
+        logout : function(e) {
+            localStorage.setItem("role", '');
+            localStorage.setItem("jwt", '-1');
+            window.location.reload();
+
         }
 	}
 

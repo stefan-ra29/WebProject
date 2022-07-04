@@ -26,14 +26,10 @@ public class CustomerService {
         customer.setDob(customerDTO.getDob());
         customer.setRole(Role.Customer);
         customer.setGender(customerDTO.getGender());
+        customer.setEmail(customerDTO.getEmail());
 
         return customerRepository.addOne(customer);
-
-//        User admin = new User();
-//        admin.setUsername("admin");
-//        admin.setPassword("123admin456");
-//        admin.setRole(Role.Administrator);
-//
-//        return administratorRepository.addOne(admin);
     }
+
+
 }

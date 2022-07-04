@@ -24,6 +24,10 @@ public class Customer extends User {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Customer(User user){
+		super(user);
+	}
+
 	public Customer(String firstName, String lastName, String email, String username, String password, String gender,
 			LocalDate dob, Role role) {
 		super(firstName, lastName, email, username, password, gender, dob, role);

@@ -1,9 +1,10 @@
 package controller;
 
+import beans.User;
 import com.google.gson.Gson;
 import service.UserService;
 
-import static spark.Spark.post;
+import static spark.Spark.*;
 
 public class UserController {
     private static Gson g = new Gson();
@@ -23,6 +24,36 @@ public class UserController {
             res.type("application/json");
             String jwt = req.queryParams("jwt");
             return userService.getUsernameFromJWT(jwt);
+        });
+    }
+
+    public static void getLoggedUser(){
+        get("rest/users/getLoggedUser", (req, res) ->{
+            res.type("application/json");
+
+            String jwt = req.queryParams("jwt");
+            return userService.getUserFromJWT(jwt);
+        });
+    }
+
+    public static void updateUserInfo(){
+        post("rest/users/update/", (req, res) ->{
+
+            User changedUser = g.fromJson(req.body(), User.class);
+
+            String username = changedUser.getUsername();
+            User user = userService.FindbyId(username);
+
+            user.setFirstName(changedUser.getFirstName());
+            user.setLastName(changedUser.getLastName());
+            user.setEmail(changedUser.getEmail());
+            user.setPassword(changedUser.getPassword());
+            user.setGender(changedUser.getGender());
+            user.setDob(changedUser.getDob());
+
+            userService.Update(user);
+
+            return true;
         });
     }
 }

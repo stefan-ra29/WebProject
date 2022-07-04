@@ -4,6 +4,7 @@
       "points": 0,
       "firstName": "Aleksandra",
       "lastName": "Vujovic",
+      "email": "saskav@gmail.com",
       "username": "saska",
       "password": "saska",
       "gender": "female",
@@ -21,13 +22,14 @@
       "points": 0,
       "firstName": "Stefan",
       "lastName": "Tosic",
+      "email": "stefantosic23@gmail.com",
       "username": "stefan",
       "password": "stefan",
       "gender": "male",
       "dob": {
         "year": 2000,
         "month": 1,
-        "day": 6
+        "day": 7
       },
       "role": "Customer"
     },
@@ -79,6 +81,42 @@
         "year": 1996,
         "month": 3,
         "day": 5
+      },
+      "role": "Customer"
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "points": 0,
+      "firstName": "Vladanka",
+      "lastName": "Tosic",
+      "email": "tvladanka@gmail.com",
+      "username": "pilja",
+      "password": "pilja56",
+      "gender": "female",
+      "dob": {
+        "year": 1989,
+        "month": 10,
+        "day": 5
+      },
+      "role": "Customer"
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "points": 0,
+      "firstName": "Nebojsa",
+      "lastName": "Tosic",
+      "email": "neso@gmail.com",
+      "username": "neso",
+      "password": "shone",
+      "gender": "male",
+      "dob": {
+        "year": 1995,
+        "month": 4,
+        "day": 4
       },
       "role": "Customer"
     },

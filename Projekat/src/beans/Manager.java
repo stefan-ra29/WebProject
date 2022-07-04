@@ -4,11 +4,11 @@ import java.time.LocalDate;
 
 public class Manager extends User {
 	
-	private SportFacility sportFacility;
+	private String sportFacilityId;
 
-	public Manager(SportFacility sportFacility) {
+	public Manager(String sportFacilityId) {
 		super();
-		this.sportFacility = sportFacility;
+		this.sportFacilityId = sportFacilityId;
 	}
 
 	public Manager() {
@@ -22,12 +22,12 @@ public class Manager extends User {
 		// TODO Auto-generated constructor stub
 	}
 
-	public SportFacility getSportFacility() {
-		return sportFacility;
+	public String getSportFacilityId() {
+		return sportFacilityId;
 	}
 
-	public void setSportFacility(SportFacility sportFacility) {
-		this.sportFacility = sportFacility;
+	public void setSportFacilityId(String sportFacilityId) {
+		this.sportFacilityId = sportFacilityId;
 	}
 	
 	

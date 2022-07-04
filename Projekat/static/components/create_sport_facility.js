@@ -22,12 +22,24 @@ Vue.component("create_facility", {
 					<tr><td>Grad</td><td><input type="text" name="city" v-model = "location.city"></td></tr>
 					<tr><td>Postanski broj</td><td><input type="text" name="postalCode" v-model = "location.postalCode"></td></tr>
 					<tr><td>Link za logo</td><td><input type="text" name="logo" v-model = "logo"></td></tr>
+					<tr v-if="this.managers.length !== 0">
+                                            <td>Menadzer</td>
+                                            <td>
+                                                <select v-model="manager">
+                                                    <option v-for="m in managers">{{m}}</option>
+                                                </select>
+                                            </td>
+                    </tr>
 					<tr><td></td><td><input type="submit" v-on:click = "receiveFormData" value="Dodaj"></td></tr>
 				</table>
 			</form>
     	</div>
     	`,
     mounted () {
+
+        axios
+            .get('rest/managers/getAvailableManagers')
+            .then(response => {this.managers = response.data});
 
     },
     methods: {

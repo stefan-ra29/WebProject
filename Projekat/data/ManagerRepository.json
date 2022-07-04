@@ -1,0 +1,26 @@
+[
+  {
+    "entity": {
+      "firstName": "Miki",
+      "lastName": "Roki",
+      "email": "m1@gmail.com",
+      "username": "menadzer1",
+      "password": "menadzer1",
+      "gender": "male",
+      "role": "Manager"
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "firstName": "Koki",
+      "lastName": "Boki",
+      "email": "m2@gmail.com",
+      "username": "menadzer2",
+      "password": "menadzer2",
+      "gender": "male",
+      "role": "Manager"
+    },
+    "deleted": false
+  }
+]

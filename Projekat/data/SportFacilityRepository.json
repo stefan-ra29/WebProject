@@ -58,7 +58,7 @@
           "type": "Grupni"
         }
       ],
-      "isOpen": true,
+      "isOpen": false,
       "location": {
         "longditude": 100.0,
         "latitude": 100.0,

@@ -87,7 +87,7 @@ Vue.component("sport_facility_display", {
                     <tr>
                         <td>Prosecna ocena: {{facility.averageGrade}}</td>
                     </tr>
-                    <tr ><td colspan="2" ><button class="facility_button" v-on:click = "details(facility)">Prikazi detaljnije</button></td></tr>
+                    <tr ><td colspan="2" class="facility_button_row" ><button class="facility_button" v-on:click = "details(facility)">Prikazi detaljnije</button></td></tr>
                 </table>
 
             </div>

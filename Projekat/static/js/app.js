@@ -11,7 +11,7 @@ const router = new VueRouter({
 		{ path: '/registration', component: Register},
 		{ path: '/login', component: Login},
 		{ path: '/', name: 'home', component: SFDisplay},
-		{ path: '/single_facility', component: singleSFDisplay}
+		{ path: '/single_facility', component: singleSFDisplay},
 		{ path: '/userProfile', component: UserProfile},
 		{ path: '/createFacility', component: CreateFacility}
 

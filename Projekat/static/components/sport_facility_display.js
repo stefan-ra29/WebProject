@@ -9,7 +9,7 @@ Vue.component("sport_facility_display", {
 	      grade_criteria: "",
 	      filter : "",
 	      sort : "",
-	      currently_open: true
+	      currently_open: true,
 	      isLoggedIn: false,
 	      role : window.localStorage.getItem('role'),
 	      jwt: window.localStorage.getItem('jwt')

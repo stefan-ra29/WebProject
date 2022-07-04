@@ -2,10 +2,8 @@ package service;
 
 import beans.SportFacility;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import repository.SportFacilityRepository;
 
-import java.lang.reflect.Type;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,8 +35,10 @@ public class SportFacilityService {
 
         return gson.toJson(sportFacilityRepository.getAll());
     }
-    public SportFacility getOne(String id) {
-        return sportFacilityRepository.getOne(id);
+    public String getOne(String id) {
+
+        SportFacility sf = sportFacilityRepository.getOne(id);
+        return gson.toJson(sf);
     }
 
     public boolean addOne(SportFacility newSportFacility) {
@@ -65,14 +65,14 @@ public class SportFacilityService {
 //        }
 //    }
 
-    public String SearchSportFacilities(String criteria, String searchInput, String gradeCriteria, String facilities){
+    public String SearchSportFacilities(String criteria, String searchInput, String gradeCriteria){
 
         List<SportFacility> allFacilities = sportFacilityRepository.getAll();
         ArrayList<SportFacility> filteredList = new ArrayList<SportFacility>();
 
-        Type facilitiesListType = new TypeToken<ArrayList<SportFacility>>(){}.getType();
-
-        ArrayList<SportFacility> facilitiesArray = gson.fromJson(facilities, facilitiesListType);
+//        Type facilitiesListType = new TypeToken<ArrayList<SportFacility>>(){}.getType();
+//
+//        ArrayList<SportFacility> facilitiesArray = gson.fromJson(facilities, facilitiesListType);
 
         for( SportFacility facility : allFacilities){
             switch (criteria) {

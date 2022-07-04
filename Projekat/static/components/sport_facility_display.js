@@ -81,7 +81,7 @@ Vue.component("sport_facility_display", {
                     <tr>
                         <td>Prosecna ocena: {{facility.averageGrade}}</td>
                     </tr>
-                    <tr ><td colspan="2" ><input class="facility_button" type="button" value="Prikazi detaljnije" v-on:click = "details(facility)"></td></tr>
+                    <tr ><td colspan="2" ><button class="facility_button" v-on:click = "details(facility)">Prikazi detaljnije</button></td></tr>
                 </table>
 
             </div>
@@ -111,7 +111,7 @@ Vue.component("sport_facility_display", {
             var copied_facilities = this.facilities
 
             axios
-            .get("rest/facilities/search", {facilities : this.facilities},
+            .get("rest/facilities/search",
             { params : {
                 criteria : this.criteria,
                 searchInput : this.searchInput,
@@ -153,9 +153,8 @@ Vue.component("sport_facility_display", {
             }
         },
         details : function(facility){
-            var chosenFacility = facility
-
-            router.push('/single_facility', chosenFacility)
+           localStorage.setItem("facilityID", facility.id)
+           router.push('/single_facility')
         }
 	}
 

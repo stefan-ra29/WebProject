@@ -16,6 +16,16 @@ public class SportFacilityController {
 
         });
     }
+
+    public static void GetSportFacility(){
+        get("rest/facilities/get_one", (req, res) ->{
+            res.type("application/json");
+
+            String id = req.queryParams("id");
+            return sportFacilityService.getOne(id);
+
+        });
+    }
     public static void SearchSportFacilities(){
         get("rest/facilities/search", (req, res) ->{
             res.type("application/json");
@@ -23,9 +33,7 @@ public class SportFacilityController {
             String criteria = req.queryParams("criteria");
             String searchInput = req.queryParams("searchInput");
             String gradeCriteria = req.queryParams("gradeCriteria");
-            String facilities = req.body();
-            System.out.println(facilities);
-            return sportFacilityService.SearchSportFacilities(criteria, searchInput, gradeCriteria, facilities);
+            return sportFacilityService.SearchSportFacilities(criteria, searchInput, gradeCriteria);
         });
     }
 

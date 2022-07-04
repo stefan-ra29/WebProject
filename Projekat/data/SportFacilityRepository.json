@@ -29,7 +29,7 @@
         "city": "Sajkascity",
         "postalCode": 21244
       },
-      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTp1FjFlsvpIirFMMDMWavGzQHYl2IPE5sT4g&usqp=CAU",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q\u003dtbn:ANd9GcTp1FjFlsvpIirFMMDMWavGzQHYl2IPE5sT4g\u0026usqp\u003dCAU",
       "averageGrade": 4.2,
       "startHour": {
         "hour": 8,
@@ -163,6 +163,27 @@
         "second": 0,
         "nano": 0
       }
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "id": "6845daa1-7ec1-49fb-9e8a-9443e154ee4b",
+      "name": "SuperNova",
+      "type": {
+        "type": "Teretana"
+      },
+      "isOpen": false,
+      "location": {
+        "longditude": 45.5,
+        "latitude": 102.5,
+        "street": "Ilije Malica",
+        "streetNumber": "38",
+        "city": "Prnjavor",
+        "postalCode": 78430
+      },
+      "logo": "https://external-content.duckduckgo.com/iu/?u\u003dhttps%3A%2F%2Fclipground.com%2Fimages%2Fgym-logo-design-png-2.png\u0026f\u003d1\u0026nofb\u003d1",
+      "averageGrade": 0.0
     },
     "deleted": false
   }

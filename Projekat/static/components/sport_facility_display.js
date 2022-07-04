@@ -71,7 +71,7 @@ Vue.component("sport_facility_display", {
                     <tr><th>{{facility.name}}</th>
                         <th rowspan="6"><img :src="facility.logo" class= "image_display"/></th>
                     <tr>
-                    <tr>
+                    <tr v-if="facility.startHour != null && facility.closingHour != null">
                         <td v-if="facility.startHour.minute < 10">Radno vreme:
                             {{facility.startHour.hour}}:0{{facility.startHour.minute}} - {{facility.closingHour.hour}}:0{{facility.closingHour.minute}}</td>
                         <td v-else>Radno vreme:

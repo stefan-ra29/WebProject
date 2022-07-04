@@ -1,9 +1,13 @@
 package controller;
 
+import beans.SportFacility;
 import com.google.gson.Gson;
 import service.SportFacilityService;
 
+import java.util.UUID;
+
 import static spark.Spark.get;
+import static spark.Spark.post;
 
 public class SportFacilityController {
     private static Gson gson = new Gson();
@@ -71,6 +75,17 @@ public class SportFacilityController {
 
             return sportFacilityService.GetCurrentlyOpenedSportFacilities();
 
+        });
+    }
+
+    public static void CreateNew() {
+        post("rest/facilities/createNew/", (req, res) -> {
+            res.type("application/json");
+
+            SportFacility facility = gson.fromJson(req.body(), SportFacility.class);
+            facility.setId(UUID.randomUUID().toString());
+
+            return sportFacilityService.addOne(facility);
         });
     }
 }

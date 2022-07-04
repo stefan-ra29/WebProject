@@ -24,6 +24,7 @@ public class SparkMainApp {
         SportFacilityController.FilterSportFacilities();
         SportFacilityController.GetCurrentlyOpenedSportFacilities();
         SportFacilityController.GetSportFacility();
+        SportFacilityController.CreateNew();
         UserController.getLoggedUser();
         UserController.updateUserInfo();
     }

@@ -16,6 +16,10 @@ public class SportFacility {
 	private double averageGrade;
 	private LocalTime startHour;
 	private LocalTime closingHour;
+
+	public SportFacility(){
+		super();
+	}
 	
 	public SportFacility(String name, FacilityType type, ArrayList<WorkoutType> offer, boolean isOpen,
 			Location location, String logo, double averageGrade, LocalTime startHour, LocalTime closingHour) {
@@ -107,4 +111,5 @@ public class SportFacility {
 	public String getId() {
 		return id;
 	}
+	public void setId(String id) { this.id = id;}
 }

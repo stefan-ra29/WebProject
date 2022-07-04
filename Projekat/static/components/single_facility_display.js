@@ -45,6 +45,7 @@ Vue.component("single_facility_display", {
                         id : id
                     }})
         .then(response => {this.facility = response.data});
+
     },
     methods: {
         previousState: function(e){

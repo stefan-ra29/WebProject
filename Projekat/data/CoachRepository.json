@@ -1,0 +1,53 @@
+[
+  {
+    "entity": {
+      "firstName": "Mina",
+      "lastName": "Minic",
+      "email": "mina@gmail.com",
+      "username": "mina",
+      "password": "mina",
+      "gender": "female",
+      "dob": {
+        "year": 1987,
+        "month": 9,
+        "day": 13
+      },
+      "role": "Coach"
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "firstName": "David",
+      "lastName": "Davidovic",
+      "email": "david@gmail.com",
+      "username": "david",
+      "password": "david",
+      "gender": "male",
+      "dob": {
+        "year": 1995,
+        "month": 4,
+        "day": 26
+      },
+      "role": "Coach"
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "firstName": "Tina",
+      "lastName": "Tinic",
+      "email": "tina@gmail.com",
+      "username": "tina",
+      "password": "tina",
+      "gender": "female",
+      "dob": {
+        "year": 1992,
+        "month": 11,
+        "day": 13
+      },
+      "role": "Coach"
+    },
+    "deleted": false
+  }
+]

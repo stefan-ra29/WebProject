@@ -1,12 +1,12 @@
 [
   {
     "entity": {
-      "firstName": "Miki",
-      "lastName": "Roki",
-      "email": "m1@gmail.com",
-      "username": "menadzer1",
-      "password": "menadzer1",
-      "gender": "male",
+      "firstName": "Ivana",
+      "lastName": "Ivanic",
+      "email": "ivana@gmail.com",
+      "username": "ivana",
+      "password": "ivana",
+      "gender": "female",
       "role": "Manager"
     },
     "deleted": false

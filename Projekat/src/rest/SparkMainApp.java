@@ -1,5 +1,6 @@
 package rest;
 
+import controller.CoachController;
 import controller.CustomerController;
 import controller.UserController;
 import controller.SportFacilityController;
@@ -28,5 +29,6 @@ public class SparkMainApp {
         SportFacilityController.GetAvailableManagers();
         UserController.getLoggedUser();
         UserController.updateUserInfo();
+        CoachController.registerCoach();
     }
 }

@@ -9,7 +9,9 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import repository.AdministratorRepository;
+import repository.CoachRepository;
 import repository.CustomerRepository;
+import repository.ManagerRepository;
 
 import java.security.Key;
 import java.util.ArrayList;
@@ -19,6 +21,8 @@ public class UserService {
 
     private CustomerRepository customerRepository = new CustomerRepository();
     private AdministratorRepository administratorRepository = new AdministratorRepository();
+    private ManagerRepository managerRepository = new ManagerRepository();
+    private CoachRepository coachRepository = new CoachRepository();
     private static Gson gson = new Gson();
 
     private static Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
@@ -48,15 +52,16 @@ public class UserService {
         if (retVal != null) {
             return retVal;
         }
+        retVal = managerRepository.getOne(username);
+        if (retVal != null) {
+            return retVal;
+        }
+        retVal = coachRepository.getOne(username);
+        if (retVal != null) {
+            return retVal;
+        }
         retVal = customerRepository.getOne(username);
         return retVal;
-
-//        retVal = managerRepository.getOne(username);
-//        if (retVal != null) {
-//            return retVal;
-//        }
-//        retVal = coachRepository.getOne(username);
-//        return retVal;
     }
 
     public String getUserFromJWT(String token) {

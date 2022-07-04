@@ -9,7 +9,7 @@ public class SportFacility {
 	private String id;
 	private String name;
 	private FacilityType type;
-	private ArrayList<WorkoutType> offer;
+	private ArrayList<String> workouts;
 	private boolean isOpen;
 	private Location location;
 	private String logo;
@@ -21,13 +21,13 @@ public class SportFacility {
 		super();
 	}
 	
-	public SportFacility(String name, FacilityType type, ArrayList<WorkoutType> offer, boolean isOpen,
+	public SportFacility(String name, FacilityType type, ArrayList<String> offer, boolean isOpen,
 			Location location, String logo, double averageGrade, LocalTime startHour, LocalTime closingHour) {
 		super();
 		this.id = UUID.randomUUID().toString();
 		this.name = name;
 		this.type = type;
-		this.offer = offer;
+		this.workouts = offer;
 		this.isOpen = isOpen;
 		this.location = location;
 		this.logo = logo;
@@ -52,12 +52,12 @@ public class SportFacility {
 		this.type = type;
 	}
 
-	public ArrayList<WorkoutType> getOffer() {
-		return offer;
+	public ArrayList<String> getWorkouts() {
+		return workouts;
 	}
 
-	public void setOffer(ArrayList<WorkoutType> offer) {
-		this.offer = offer;
+	public void setWorkouts(ArrayList<String> workouts) {
+		this.workouts = workouts;
 	}
 
 	public boolean isOpen() {

@@ -1,0 +1,9 @@
+.single_facility_header {
+    font-size: 40px;
+    text-align : center;
+}
+
+.single_facility_image_display{
+    height: 250px;
+    width: 500px;
+}

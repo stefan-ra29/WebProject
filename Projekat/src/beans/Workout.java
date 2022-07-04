@@ -1,22 +1,26 @@
 package beans;
 
+import java.util.UUID;
+
 public class Workout {
 
 	private String name;
+	private String id;
 	private WorkoutType workoutType;
-	private SportFacility sportFacility;
+	private String sportFacilityID;
 	private int duration;
 	private Coach coach;
 	private String description;
 	private String picture;
 
 	
-	public Workout(String name, WorkoutType workoutType, SportFacility sportFacility, int duration, Coach coach,
+	public Workout(String name, WorkoutType workoutType, String sportFacilityID, int duration, Coach coach,
 			String description, String picture) {
 		super();
+		this.id = UUID.randomUUID().toString();
 		this.name = name;
 		this.workoutType = workoutType;
-		this.sportFacility = sportFacility;
+		this.sportFacilityID = sportFacilityID;
 		this.duration = duration;
 		this.coach = coach;
 		this.description = description;
@@ -34,11 +38,11 @@ public class Workout {
 	public void setWorkoutType(WorkoutType workoutType) {
 		this.workoutType = workoutType;
 	}
-	public SportFacility getSportFacility() {
-		return sportFacility;
+	public String getSportFacilityID() {
+		return sportFacilityID;
 	}
-	public void setSportFacility(SportFacility sportFacility) {
-		this.sportFacility = sportFacility;
+	public void setSportFacilityID(String sportFacilityID) {
+		this.sportFacilityID = sportFacilityID;
 	}
 	public int getDuration() {
 		return duration;
@@ -64,5 +68,7 @@ public class Workout {
 	public void setPicture(String picture) {
 		this.picture = picture;
 	}
-	
+	public String getId() {
+		return id;
+	}
 }

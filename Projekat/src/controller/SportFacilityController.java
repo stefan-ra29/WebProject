@@ -2,10 +2,12 @@ package controller;
 
 import beans.SportFacility;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import repository.ManagerRepository;
 import service.ManagerService;
 import service.SportFacilityService;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 import static spark.Spark.get;
@@ -36,9 +38,10 @@ public class SportFacilityController {
         });
     }
     public static void SearchSportFacilities(){
-        get("rest/facilities/search", (req, res) ->{
+        post("rest/facilities/search", (req, res) ->{
             res.type("application/json");
 
+            ArrayList<SportFacility> facilityList = gson.fromJson(req.body(),  new TypeToken<ArrayList<SportFacility>>(){}.getType());
             String criteria = req.queryParams("criteria");
             String searchInput = req.queryParams("searchInput");
             String gradeCriteria = req.queryParams("gradeCriteria");

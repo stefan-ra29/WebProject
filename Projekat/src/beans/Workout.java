@@ -12,8 +12,6 @@ public class Workout {
 	private Coach coach;
 	private String description;
 	private String picture;
-
-	
 	public Workout(String name, WorkoutType workoutType, String sportFacilityID, int duration, Coach coach,
 			String description, String picture) {
 		super();
@@ -71,4 +69,5 @@ public class Workout {
 	public String getId() {
 		return id;
 	}
+	public void setId() { this.id = UUID.randomUUID().toString();}
 }

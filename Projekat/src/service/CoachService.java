@@ -11,4 +11,9 @@ public class CoachService {
 
         return true;
     }
+
+    public String getAll(){
+
+        return gson.toJson(coachRepository.getAll());
+    }
 }

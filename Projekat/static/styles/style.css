@@ -93,3 +93,38 @@ table{
     vertical-align: middle;
     text-align: center;
 }
+.membership_table{
+    background-color: white;
+    border: 0px;
+    border-radius: 0;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+.membership_table div{
+    text-align: center;
+    border: 2px solid #f0f0f0;
+    border-radius: 20px;
+    padding: 10px;
+}
+.membership_table div h2 {
+    color: white;
+    font-size: 28px;
+}
+
+.membership_table div p {
+    font-size: 18px;
+}
+
+.monthly_membership_premium{
+    margin-right: 80px;
+    background-color: #f46169;
+}
+
+.monthly_membership_light{
+    margin-right: 80px;
+    background-color: #f4a261;
+}
+
+.yearly_membership{
+    background-color: #f4a261;
+}

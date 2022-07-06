@@ -1,6 +1,7 @@
 package service;
 
 import beans.Customer;
+import beans.Manager;
 import beans.User;
 import com.google.gson.Gson;
 import io.jsonwebtoken.Claims;
@@ -87,6 +88,8 @@ public class UserService {
             case Customer:
                 customerRepository.update(user.getUsername(), (Customer) user);
                 break;
+            case Manager:
+                managerRepository.update(user.getUsername(), (Manager) user);
             default:
                 break;
         }

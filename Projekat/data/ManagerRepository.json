@@ -1,6 +1,7 @@
 [
   {
     "entity": {
+      "sportFacilityId": "c1111cdc-66a4-4279-ab44-947f93dd61e9",
       "firstName": "Ivana",
       "lastName": "Ivanic",
       "email": "ivana@gmail.com",
@@ -13,12 +14,48 @@
   },
   {
     "entity": {
+      "sportFacilityId": "a",
       "firstName": "Koki",
       "lastName": "Boki",
       "email": "m2@gmail.com",
       "username": "menadzer2",
       "password": "menadzer2",
       "gender": "male",
+      "role": "Manager"
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "sportFacilityId": "b",
+      "firstName": "Boban",
+      "lastName": "Todorovic",
+      "email": "bobby@gmail.com",
+      "username": "menadzer3",
+      "password": "m3",
+      "gender": "male",
+      "dob": {
+        "year": 2001,
+        "month": 9,
+        "day": 21
+      },
+      "role": "Manager"
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "firstName": "qdfl;lbm",
+      "lastName": "df;l;bmdflk",
+      "email": ";dlfmbkm",
+      "username": "test",
+      "password": "gdksggm",
+      "gender": "female",
+      "dob": {
+        "year": 2022,
+        "month": 6,
+        "day": 28
+      },
       "role": "Manager"
     },
     "deleted": false

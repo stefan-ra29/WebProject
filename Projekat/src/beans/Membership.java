@@ -1,28 +1,34 @@
 package beans;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 public class Membership {
 	
 	private String id;
-	private MembershipType type;
+	private String type;
 	private LocalDate paymentDate;
 	private LocalDate expirationDate;
 	private int fee;
-	private Customer customer;
+	private String customerId;
 	private boolean isActive;
-	private int dailyLimit;
-	public Membership(String id, MembershipType type, LocalDate paymentDate, LocalDate expirationDate, int fee,
-			Customer customer, boolean isActive, int dailyLimit) {
+	private int availableVisits;
+
+	public Membership(){
+
+	}
+
+	public Membership(String type, LocalDate paymentDate, LocalDate expirationDate, int fee,
+			String customerId, boolean isActive, int availableVisits) {
 		super();
-		this.id = id;
+		this.id = UUID.randomUUID().toString();
 		this.type = type;
 		this.paymentDate = paymentDate;
 		this.expirationDate = expirationDate;
 		this.fee = fee;
-		this.customer = customer;
+		this.customerId = customerId;
 		this.isActive = isActive;
-		this.dailyLimit = dailyLimit;
+		this.availableVisits = availableVisits;
 	}
 	public String getId() {
 		return id;
@@ -30,10 +36,10 @@ public class Membership {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public MembershipType getType() {
+	public String getType() {
 		return type;
 	}
-	public void setType(MembershipType type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 	public LocalDate getPaymentDate() {
@@ -54,23 +60,23 @@ public class Membership {
 	public void setFee(int fee) {
 		this.fee = fee;
 	}
-	public Customer getCustomer() {
-		return customer;
+	public String getCustomerId() {
+		return customerId;
 	}
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
 	}
-	public boolean isActive() {
+	public boolean getIsActive() {
 		return isActive;
 	}
-	public void setActive(boolean isActive) {
+	public void setIsActive(boolean isActive) {
 		this.isActive = isActive;
 	}
-	public int getDailyLimit() {
-		return dailyLimit;
+	public int getAvailableVisits() {
+		return availableVisits;
 	}
-	public void setDailyLimit(int dailyLimit) {
-		this.dailyLimit = dailyLimit;
+	public void setAvailableVisits(int availableVisits) {
+		this.availableVisits = availableVisits;
 	}
 	
 	

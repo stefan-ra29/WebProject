@@ -90,26 +90,7 @@ public class SportFacilityController {
             SportFacility facility = gson.fromJson(req.body(), SportFacility.class);
             facility.setId(UUID.randomUUID().toString());
 
-//            Manager customer = new Manager();
-//            customer.setUsername("menadzer1");
-//            customer.setPassword("menadzer1");
-//            customer.setFirstName("Miki");
-//            customer.setLastName("Roki");
-//            customer.setRole(Role.Manager);
-//            customer.setGender("male");
-//            customer.setEmail("m1@gmail.com");
-//
-//            Manager customer2 = new Manager();
-//            customer2.setUsername("menadzer2");
-//            customer2.setPassword("menadzer2");
-//            customer2.setFirstName("Koki");
-//            customer2.setLastName("Boki");
-//            customer2.setRole(Role.Manager);
-//            customer2.setGender("male");
-//            customer2.setEmail("m2@gmail.com");
-//
-//            managerRepository.addOne(customer);
-//            managerRepository.addOne(customer2);
+            managerService.setFacilityToManager(req.queryParams("manager"), facility.getId());
 
             return sportFacilityService.addOne(facility);
         });

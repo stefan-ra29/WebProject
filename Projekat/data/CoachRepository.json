@@ -49,5 +49,22 @@
       "role": "Coach"
     },
     "deleted": false
+  },
+  {
+    "entity": {
+      "firstName": "Vlado",
+      "lastName": "Cvijanovic",
+      "email": "dovla@gmail.com",
+      "username": "vlad",
+      "password": "dovla",
+      "gender": "male",
+      "dob": {
+        "year": 1998,
+        "month": 3,
+        "day": 13
+      },
+      "role": "Coach"
+    },
+    "deleted": false
   }
 ]

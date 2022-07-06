@@ -1,9 +1,6 @@
 package rest;
 
-import controller.CoachController;
-import controller.CustomerController;
-import controller.UserController;
-import controller.SportFacilityController;
+import controller.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,5 +27,7 @@ public class SparkMainApp {
         UserController.getLoggedUser();
         UserController.updateUserInfo();
         CoachController.registerCoach();
+        ManagerController.registerManager();
+        MembershipController.addMonthlyLight();
     }
 }

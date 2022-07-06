@@ -13,8 +13,8 @@ Vue.component("create_facility", {
 	    template: `
     	<div class="registration_wrap">
     	    <h1>DODAVANJE NOVOG OBJEKTA</h1>
-    		<form id="form" class="registration_form">
-				<table>
+    		<form id="form"  class="registration_form">
+				<table v-if="this.managers.length !== 0">
 				    <tr><td>Naziv</td><td><input type="text" name="name" v-model = "name"></td></tr>
 				    <tr><td>Tip</td><td><input type="text" name="type" v-model = "type.type"></td></tr>
 					<tr><td>Ulica</td><td><input type="text" name="street" v-model = "location.street"></td></tr>
@@ -25,14 +25,19 @@ Vue.component("create_facility", {
 					<tr v-if="this.managers.length !== 0">
                                             <td>Menadzer</td>
                                             <td>
-                                                <select v-model="manager">
+                                                <select v-model="manager" id="managerSelect" style="width: 170px; height: 22px">
                                                     <option v-for="m in managers">{{m}}</option>
                                                 </select>
                                             </td>
                     </tr>
 					<tr><td></td><td><input type="submit" v-on:click = "receiveFormData" value="Dodaj"></td></tr>
 				</table>
+				<div v-else>
+                	<p>Nema slobodnih menadzera! Kreirajte novog!</p>
+                	<input type="submit" v-on:click = "createNewManager" value="Kreiraj menadzera">
+                </div>
 			</form>
+
     	</div>
     	`,
     mounted () {
@@ -41,6 +46,9 @@ Vue.component("create_facility", {
             .get('rest/managers/getAvailableManagers')
             .then(response => {this.managers = response.data});
 
+
+        var sel = document.getElementById('managerSelect')
+        sel.selectedIndex = 0
     },
     methods: {
         receiveFormData: function(e) {
@@ -57,18 +65,22 @@ Vue.component("create_facility", {
                         name: this.name,
                         logo: this.logo,
                         type: this.type,
-                        location: this.location
-                    })
+                        location: this.location },
+                        { params: { manager: this.manager } })
                     .then(response => (this.checkResponse(response, e) ))
             }
+        },
 
-
+        createNewManager: function(e) {
+            e.preventDefault()
+            localStorage.setItem("facilityCreationInProcess", '1')
+            router.push("/managerRegistration")
         },
 
         checkResponse: function(response, e) {
             if(response.data) {
                 alert("Novi objekat uspjesno kreiran!")
-                router.push("sf-display/");
+                router.push("/");
             }
             else{
                 alert("Dogodila se greska!")

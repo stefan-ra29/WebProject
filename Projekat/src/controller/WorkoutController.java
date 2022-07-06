@@ -7,8 +7,7 @@ import service.WorkoutService;
 
 import java.util.ArrayList;
 
-import static spark.Spark.get;
-import static spark.Spark.post;
+import static spark.Spark.*;
 
 public class WorkoutController {
 
@@ -57,11 +56,23 @@ public class WorkoutController {
     }
 
     public static void changeWorkout() {
-        post("rest/workouts/change_workout", (req, res) -> {
+        put("rest/workouts/change_workout", (req, res) -> {
             res.type("application/json");
 
             Workout workout = gson.fromJson(req.body(), Workout.class);
             return workoutService.changeWorkout(workout);
+        });
+    }
+    public static void searchWorkout() {
+        post("rest/workouts/search", (req, res) -> {
+            res.type("application/json");
+
+            ArrayList<Workout> workouts = gson.fromJson(req.body(), new TypeToken<ArrayList<Workout>>(){}.getType());
+            String criteria = req.queryParams("criteria");
+            String minPrice = req.queryParams("minPrice");
+            String maxPrice = req.queryParams("maxPrice");
+
+            return workoutService.searchWorkout(workouts, criteria, minPrice, maxPrice);
         });
     }
 }

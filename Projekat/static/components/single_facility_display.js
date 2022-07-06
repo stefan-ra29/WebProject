@@ -4,8 +4,13 @@ Vue.component("single_facility_display", {
 	      facility : null,
 	      isManager : false,
 	      workouts: {},
-	      coaches: {}
-	    }
+	      workoutsBeforeSearch: {},
+	      coaches: {},
+	      criteria : "",
+	      minPrice: null,
+	      maxPrice: null,
+	      searchHappened : false
+	      }
 	},
 	    template: `
     	<div v-if="facility != null" >
@@ -38,7 +43,20 @@ Vue.component("single_facility_display", {
                  <tr><td colspan="2" ></td></tr>
              </table>
              <h2 class="managers_facility_header">Treninzi:</h2>
-             <div v-for="(workout, index) in workouts" class="facility_display_wrap">
+
+            <form v-if="workouts.length != 0" class="sport_facility_search_display">
+                <select style="width: 125px; padding:1px" name="search_criteria" id="search_criteria" v-model = "criteria">
+                      <option value="withoutSupplement">Bez doplate</option>
+                      <option value="withSupplement">Sa doplatom</option>
+                </select>
+                <div v-if="criteria == 'withSupplement'">
+                    Od: <input  type="number" name="price" min="0" max="2000" v-model = "minPrice">
+                    Do: <input  type="number" name="price" min="0" max="2000" v-model = "maxPrice">
+                </div>
+                <input type="submit" value="Pretrazi" v-on:click="searchSubmit" name="search_button">
+            </form>
+
+            <div v-for="(workout, index) in workouts" class="facility_display_wrap">
                  <table class="facility_table_wrap">
                      <tr><th>{{workout.name}}</th>
                          <th rowspan="6"><img :src="workout.picture" class= "managers_facility_workout_image_display"/></th>
@@ -100,7 +118,7 @@ Vue.component("single_facility_display", {
         }})
         .then(response => {
             this.workouts = response.data
-
+            this.workoutsBeforeSearch = this.workouts
             axios
             .post("rest/workouts/get_coaches_names", this.workouts)
             .then(response => {this.coaches = response.data});
@@ -109,7 +127,7 @@ Vue.component("single_facility_display", {
     },
     methods: {
         previousState: function(e){
-            this.facilities_before_checking = this.facilities
+            this.workouts = this.workoutsBeforeSearch
         },
         addNewWorkout : function(e){
                     router.push('/add_new_workout')
@@ -117,6 +135,35 @@ Vue.component("single_facility_display", {
         changeWorkout: function(workoutID){
             localStorage.setItem("workoutChangeID", workoutID)
             router.push('/change_workout')
+        },
+        searchSubmit : function(e){
+            e.preventDefault()
+            console.log(this.workoutsBeforeSearch)
+            if(this.criteria == "")
+                return;
+
+            if(this.criteria == "withSupplement"){
+                if(this.minPrice == "" || this.maxPrice == ""){
+                    alert("Morate uneti i minimalnu i maksimalnu vrednost!")
+                }else if(+this.minPrice > +this.maxPrice){
+                    alert("Maksimalna vrednost mora biti veca od minimalne!")
+                }
+            }
+            if(this.searchHappened == true){
+                this.previousState()
+                console.log(this.workouts)
+            }
+
+            axios
+            .post("rest/workouts/search", this.workouts,
+            { params : {
+                criteria : this.criteria,
+                minPrice : this.minPrice,
+                maxPrice: this.maxPrice
+            }})
+            .then(response => {this.workouts = response.data});
+
+            this.searchHappened = true
         }
     }
 });

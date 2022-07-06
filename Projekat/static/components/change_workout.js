@@ -34,7 +34,7 @@ Vue.component("change_workout", {
                         </td>
                     </tr>
                     <tr><td>Trajanje u minutima</td><td><input type="number" name="duration" v-model = "workout.duration" min="30" max="120"></td></tr>
-                    <tr><td>Doplata</td><td><input type="number" name="supplement" v-model = "workout.supplement" min="0" max="2000" step="500"></td></tr>
+                    <tr><td>Doplata</td><td><input type="number" name="supplement" v-model = "workout.supplement" min="0" max="2000"></td></tr>
                     <tr><td>Opis</td><td><input type="text" name="description" v-model = "workout.description"></td></tr>
                     <tr><td></td><td><input type="submit" v-on:click = "receiveFormData" value="Dodaj"></td></tr>
                 </table>
@@ -81,7 +81,7 @@ Vue.component("change_workout", {
                 }
 
 
-                if( this.workout.supplement != null && (this.workout.supplement != 0 && this.workout.supplement !=500 && this.workout.supplement !=1000
+                if( this.workout.supplement != null && (this.workout.supplement < 0 || this.workout.supplement >2000
                     && this.workout.supplement !=1500 && this.workout.supplement !=2000)){
                     alert("Vrednost doplate nije validna!")
                     e.preventDefault()
@@ -93,7 +93,7 @@ Vue.component("change_workout", {
                 this.workout.description = this.workout.description.trim()
 
                 axios
-                .post("rest/workouts/change_workout", this.workout)
+                .put("rest/workouts/change_workout", this.workout)
                 .then(response => {
                     var isAcceptable = response.data
 

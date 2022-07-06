@@ -17,7 +17,7 @@ public class ManagerService {
         ArrayList<String> usernames = new ArrayList<String>();
         for(Manager manager : managerRepository.getAll())
         {
-            if(manager.getSportFacilityId() == null)
+            if(manager.getSportFacilityId() == null || manager.getSportFacilityId().equals(""))
                 usernames.add(manager.getUsername());
         }
 

@@ -44,10 +44,9 @@ public class WorkoutService {
     }
     public boolean validateWorkoutInput(Workout workout){
 
-        if(workout.getName().trim() == "" || workout.getPicture().trim() == "" || (workout.getDuration() < 0 && workout.getDuration() >120)
+        if(workout.getName().trim() == "" || workout.getPicture().trim() == "" || (workout.getDuration() < 0 || workout.getDuration() >120)
             || !doesWorkoutTypeExist(workout.getWorkoutType().getType()) ||
-                (workout.getSupplement() != 0 && workout.getSupplement() != 500 && workout.getSupplement() != 1000 &&
-                        workout.getSupplement() != 1500 && workout.getSupplement() != 2000) || !doesCoachExist(workout.getCoachID()))
+                (workout.getSupplement() < 0 || workout.getSupplement() > 2000) || !doesCoachExist(workout.getCoachID()))
             return false;
         return true;
     }
@@ -107,5 +106,28 @@ public class WorkoutService {
 
         workoutRepository.update(workout.getId(), workout);
         return true;
+    }
+
+    public String searchWorkout(ArrayList<Workout> workouts, String criteria, String minPrice, String maxPrice){
+
+        ArrayList<Workout> filteredWorkouts = new ArrayList<Workout>();
+
+        for( Workout w : workouts){
+            switch (criteria) {
+                case "withoutSupplement":
+                    if(w.getSupplement() == 0)
+                        filteredWorkouts.add(w);
+                    break;
+                case "withSupplement":
+                    if(Integer.valueOf(minPrice) > Integer.valueOf(maxPrice)){
+                        return gson.toJson(filteredWorkouts);
+                    }
+                    if(w.getSupplement() >= Integer.valueOf(minPrice) && w.getSupplement() <= Integer.valueOf(maxPrice) )
+                        filteredWorkouts.add(w);
+                    break;
+            }
+
+        }
+        return gson.toJson(filteredWorkouts);
     }
 }

@@ -102,7 +102,7 @@ Vue.component("change_workout", {
                     }
                     else{
                         alert("Uspesno ste promenili trening!")
-                        router.push('/managers_facility')
+                        router.push('/single_facility')
                     }
                 });
             }

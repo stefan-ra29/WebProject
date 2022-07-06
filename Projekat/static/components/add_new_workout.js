@@ -101,7 +101,7 @@ Vue.component("add_new_workout", {
                     }
                     else{
                         alert("Uspesno ste dodali trening!")
-                        router.push('/managers_facility')
+                        router.push('/single_facility')
                     }
                 });
             }

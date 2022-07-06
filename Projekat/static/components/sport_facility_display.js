@@ -137,7 +137,7 @@ Vue.component("sport_facility_display", {
         },
         goToManagersFacility : function(e){
             localStorage.setItem("facilityID", this.managersFacility.id)
-            router.push('/managers_facility')
+            router.push('/single_facility')
         },
         previousState: function(e){
             this.facilities_before_checking = this.facilities

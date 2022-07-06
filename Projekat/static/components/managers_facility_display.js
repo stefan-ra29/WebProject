@@ -1,7 +1,8 @@
 Vue.component("managers_facility_display", {
 	data: function () {
 	    return {
-	      facility: {}
+	      facility: {},
+	      workouts: {}
 	    }
 	},
 	    template: `
@@ -35,6 +36,32 @@ Vue.component("managers_facility_display", {
                  <tr><td colspan="2" ></td></tr>
              </table>
             <h2 class="managers_facility_header">Treninzi:</h2>
+                <div v-for="workout in workouts" class="facility_display_wrap">
+                    <table class="facility_table_wrap">
+                        <tr><th>{{workout.name}}</th>
+                            <th rowspan="6"><img :src="workout.picture" class= "managers_facility_workout_image_display"/></th>
+                        <tr>
+                        <tr>
+                            <td>Tip: {{workout.workoutType.type}}</td>
+                        </tr>
+                        <tr v-if="workout.duration == null || workout.duration == 0">
+                            <td>Trajanje trenutno nije definisano</td>
+                        </tr>
+                        <tr v-else>
+                            <td>Trajanje: {{workout.duration}} minuta</td>
+                        </tr>
+                        <tr v-if="workout.coach.firstName == null || workout.coach.firstName == undefined">
+                            <td>Trenutno nije postavljen trener.</td>
+                        </tr>
+                        <tr v-else>
+                            <td>Trener: {{workout.coach.firstName}} {{workout.coach.lastName}}</td>
+                        </tr>
+                        <tr v-if="workout.description != ''">
+                            <td>Opis: {{workout.description}}</td>
+                        </tr>
+                        <tr><td><button v-on:click = "changeWorkout">Izmeni</button></td></tr>
+                    </table>
+                </div>
     	</div>
     	`,
     mounted () {
@@ -45,6 +72,13 @@ Vue.component("managers_facility_display", {
             id : id
         }})
         .then(response => {this.facility = response.data});
+
+        axios
+        .get("rest/workouts/get_workouts_by_facility",
+        { params : {
+            id : id
+        }})
+        .then(response => {this.workouts = response.data});
     },
     methods: {
         getFacilityName: function(response){

@@ -56,11 +56,15 @@ Vue.component("add_new_workout", {
         receiveFormData: function(e){
             e.preventDefault()
 
-            if(this.workout.name == "" || this.workout.picture == "" || this.workout.workoutType.type == undefined ){
+            if(this.workout.name.trim() == "" || this.workout.picture.trim() == "" || this.workout.workoutType.type == undefined ){
                 alert("Morate popuniti polja oznacena zvezdicom!")
                 e.preventDefault()
             }
             else{
+                this.workout.name = this.workout.name.trim()
+                this.workout.picture = this.workout.picture.trim()
+                this.workout.description = this.workout.description.trim()
+
                 axios
                 .post("rest/workouts/create_workout", this.workout)
                 .then(response => {

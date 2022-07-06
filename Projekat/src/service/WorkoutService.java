@@ -11,7 +11,7 @@ import java.util.List;
 public class WorkoutService {
     WorkoutRepository workoutRepository = new WorkoutRepository();
     Gson gson = new Gson();
-    public String GetWorkoutTypes() {
+    public String getWorkoutTypes() {
 
        List<WorkoutType> allTypes = new ArrayList<>();
 
@@ -22,19 +22,28 @@ public class WorkoutService {
         allTypes.add(new WorkoutType("Trening fleksibilnosti"));
         return gson.toJson(allTypes);
     }
-    public boolean CreateWorkout(Workout workout){
-        if(!IsWorkoutNameUnique(workout.getName()))
+    public boolean createWorkout(Workout workout){
+        if(!isWorkoutNameUnique(workout.getName()))
             return false;
         workout.setId();
         workoutRepository.addOne(workout);
         return true;
     }
-    public boolean IsWorkoutNameUnique(String name){
+    public boolean isWorkoutNameUnique(String name){
 
         for(Workout w : workoutRepository.getAll()){
             if(w.getName().equals(name))
                 return false;
         }
         return true;
+    }
+    public String getWorkoutsByFacility(String facilityID){
+        ArrayList<Workout> facilityWorkouts = new ArrayList<>();
+
+        for(Workout w : workoutRepository.getAll()){
+            if(w.getSportFacilityID().equals(facilityID))
+                facilityWorkouts.add(w);
+        }
+        return gson.toJson(facilityWorkouts);
     }
 }

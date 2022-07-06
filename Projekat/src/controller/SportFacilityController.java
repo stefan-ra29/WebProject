@@ -19,7 +19,7 @@ public class SportFacilityController {
     private static ManagerRepository managerRepository = new ManagerRepository();
     private static ManagerService managerService = new ManagerService();
 
-    public static void GetAllSportFacilities(){
+    public static void getAllSportFacilities(){
         get("rest/facilities/get_all", (req, res) ->{
             res.type("application/json");
 
@@ -28,7 +28,7 @@ public class SportFacilityController {
         });
     }
 
-    public static void GetSportFacility(){
+    public static void getSportFacility(){
         get("rest/facilities/get_one", (req, res) ->{
             res.type("application/json");
 
@@ -37,7 +37,7 @@ public class SportFacilityController {
 
         });
     }
-    public static void SearchSportFacilities(){
+    public static void searchSportFacilities(){
         post("rest/facilities/search", (req, res) ->{
             res.type("application/json");
 
@@ -45,48 +45,48 @@ public class SportFacilityController {
             String criteria = req.queryParams("criteria");
             String searchInput = req.queryParams("searchInput");
             String gradeCriteria = req.queryParams("gradeCriteria");
-            return sportFacilityService.SearchSportFacilities(criteria, searchInput, gradeCriteria);
+            return sportFacilityService.searchSportFacilities(criteria, searchInput, gradeCriteria);
         });
     }
 
-    public static void SortSportFacilities(){
+    public static void sortSportFacilities(){
         get("rest/facilities/sort", (req, res) ->{
             res.type("application/json");
 
             String sortBy = req.queryParams("sortBy");
-            return sportFacilityService.SortSportFacilities(sortBy);
+            return sportFacilityService.sortSportFacilities(sortBy);
 
         });
     }
 
-    public static void GetSportFacilityTypes(){
+    public static void getSportFacilityTypes(){
         get("rest/facilities/get_facility_types", (req, res) ->{
             res.type("application/json");
 
-            return sportFacilityService.GetSportFacilityTypes();
+            return sportFacilityService.getSportFacilityTypes();
 
         });
     }
-    public static void FilterSportFacilities(){
+    public static void filterSportFacilities(){
         get("rest/facilities/filter", (req, res) ->{
             res.type("application/json");
 
             String filterBy = req.queryParams("filterBy");
-            return sportFacilityService.FilterSportFacilities(filterBy);
+            return sportFacilityService.filterSportFacilities(filterBy);
 
         });
     }
 
-    public static void GetCurrentlyOpenedSportFacilities(){
+    public static void getCurrentlyOpenedSportFacilities(){
         get("rest/facilities/get_currently_opened_facilities", (req, res) ->{
             res.type("application/json");
 
-            return sportFacilityService.GetCurrentlyOpenedSportFacilities();
+            return sportFacilityService.getCurrentlyOpenedSportFacilities();
 
         });
     }
 
-    public static void CreateNew() {
+    public static void createNew() {
         post("rest/facilities/createNew/", (req, res) -> {
             res.type("application/json");
 
@@ -118,7 +118,7 @@ public class SportFacilityController {
         });
     }
 
-    public static void GetAvailableManagers(){
+    public static void getAvailableManagers(){
         get("rest/managers/getAvailableManagers", (req, res) ->{
             res.type("application/json");
 

@@ -2,9 +2,10 @@ Vue.component("add_new_workout", {
 	data: function () {
 	    return {
 	      facility: {},
-	      workout: {name : '', workoutType : {}, coachID: "", description: '', picture : '', duration : null, sportFacilityID: '', supplement : null},
+	      workout: {name : '', workoutType : {}, coachID: '', description: '', picture : '', duration : null, sportFacilityID: '', supplement : null},
 	      types: {},
-	      coaches: {}
+	      coaches: {},
+	      selectedCoach: null
 	    }
 	},
 	    template: `
@@ -25,8 +26,8 @@ Vue.component("add_new_workout", {
                     <tr>
                         <td>Trener</td>
                         <td v-if="this.coaches != undefined">
-                            <select @change = "addCoach($event)">
-                                <option v-bind:value="c" v-for="c in coaches">{{c.firstName}} {{c.lastName}}</option>
+                            <select v-model="this.selectedCoach" @change="getSelectedCoach($event.target.selectedIndex)">
+                                <option value="index" v-for="(c, index) in coaches">{{c.firstName}} {{c.lastName}}</option>
                             </select>
                         </td>
                     </tr>
@@ -56,7 +57,6 @@ Vue.component("add_new_workout", {
     methods: {
         receiveFormData: function(e){
             e.preventDefault()
-
             if(this.workout.name.trim() == "" || this.workout.picture.trim() == "" || this.workout.workoutType.type == undefined ){
                 alert("Morate popuniti polja oznacena zvezdicom!")
                 e.preventDefault()
@@ -107,10 +107,8 @@ Vue.component("add_new_workout", {
             .get("rest/coaches/get_all")
             .then(response => {this.coaches = response.data});
         },
-        addCoach(event){
-            event.preventDefault()
-
-            this.workout.coachID = event.target.value.username
+        getSelectedCoach(index){
+            this.workout.coachID = this.coaches[index].username
         }
 	}
 });

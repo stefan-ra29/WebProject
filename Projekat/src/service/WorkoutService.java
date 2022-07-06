@@ -63,7 +63,7 @@ public class WorkoutService {
         return exists;
     }
     public boolean doesCoachExist(String coachID){
-        if(coachID == "" || coachID == null)
+        if(coachID.equals("") || coachID == null)
             return true;
         else{
             for(Coach c : coachRepository.getAll()){
@@ -81,5 +81,19 @@ public class WorkoutService {
                 facilityWorkouts.add(w);
         }
         return gson.toJson(facilityWorkouts);
+    }
+
+    public String getCoachesNamesFromWorkoutList(ArrayList<Workout> workouts){
+        ArrayList<String> coaches = new ArrayList<>();
+
+        for(Workout w : workouts){
+            if(w.getCoachID().equals("") || w.getCoachID() == null)
+                coaches.add("");
+            else {
+                Coach coach = coachRepository.getOne(w.getCoachID());
+                coaches.add(coach.getFirstName() + " " + coach.getLastName());
+            }
+        }
+        return gson.toJson(coaches);
     }
 }

@@ -3,7 +3,7 @@ Vue.component("managers_facility_display", {
 	    return {
 	      facility: {},
 	      workouts: {},
-	      coachesName: ""
+	      coaches: {}
 	    }
 	},
 	    template: `
@@ -37,7 +37,7 @@ Vue.component("managers_facility_display", {
                  <tr><td colspan="2" ></td></tr>
              </table>
             <h2 class="managers_facility_header">Treninzi:</h2>
-                <div v-for="workout in workouts" class="facility_display_wrap">
+                <div v-for="(workout, index) in workouts" class="facility_display_wrap">
                     <table class="facility_table_wrap">
                         <tr><th>{{workout.name}}</th>
                             <th rowspan="6"><img :src="workout.picture" class= "managers_facility_workout_image_display"/></th>
@@ -55,12 +55,15 @@ Vue.component("managers_facility_display", {
                             <td>Trenutno nije postavljen trener.</td>
                         </tr>
                         <tr v-else>
-                            <td>Trener: {{this.coachesName}}</td>
+                            <td v-if="coaches != undefined">Trener: {{coaches[index]}}</td>
                         </tr>
                         <tr v-if="workout.description != ''">
                             <td>Opis: {{workout.description}}</td>
                         </tr>
-                        <tr><td><button v-on:click = "changeWorkout">Izmeni</button></td></tr>
+                        <tr v-if="workout.supplement != null & workout.supplement != 0">
+                            <td>Postoji mogucnost doplate u iznosu od {{workout.supplement}} dinara.</td>
+                        </tr>
+                        <tr><td><button v-on:click = "changeWorkout(workout.id)">Izmeni</button></td></tr>
                     </table>
                 </div>
     	</div>
@@ -79,7 +82,13 @@ Vue.component("managers_facility_display", {
         { params : {
             id : id
         }})
-        .then(response => {this.workouts = response.data});
+        .then(response => {
+            this.workouts = response.data
+
+            axios
+            .post("rest/workouts/get_coaches_names", this.workouts)
+            .then(response => {this.coaches = response.data});
+        });
     },
     methods: {
         getFacilityName: function(response){
@@ -97,20 +106,8 @@ Vue.component("managers_facility_display", {
         addNewWorkout : function(e){
             router.push('/add_new_workout')
         },
-        changeWorkout: function(e){
+        changeWorkout: function(workoutID){
 
-        },
-        getCoachesName: function(coachID){
-            console.log(coachID)
-            axios
-            .get("rest/coaches/get_one",
-            { params : {
-                id : coachID
-            }})
-            .then(response => {var coach = response.data
-
-                console.log(coach)
-            });
         }
 	}
 });

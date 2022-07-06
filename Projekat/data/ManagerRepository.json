@@ -8,7 +8,13 @@
       "username": "ivana",
       "password": "ivana",
       "gender": "female",
-      "role": "Manager"
+      "role": "Manager",
+      "dob": {
+        "year": 1998,
+        "month": 8,
+        "day": 4
+      },
+      "sportFacilityId": "a8ffbc7c-cf81-4fe3-a9ab-9df625b43cb6"
     },
     "deleted": false
   },
@@ -21,7 +27,12 @@
       "username": "menadzer2",
       "password": "menadzer2",
       "gender": "male",
-      "role": "Manager"
+      "role": "Manager",
+      "dob": {
+        "year": 1991,
+        "month": 1,
+        "day": 27
+      }
     },
     "deleted": false
   },

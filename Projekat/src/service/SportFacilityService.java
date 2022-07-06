@@ -15,25 +15,8 @@ public class SportFacilityService {
     Gson gson = new Gson();
     public String getAll() {
 
-//        ArrayList<WorkoutType> list1 = new ArrayList<WorkoutType>();
-//        list1.add(new WorkoutType("Grupni"));
-//        //list1.add(new WorkoutType("Personalni"));
-////        list1.add(new WorkoutType("Zenski"));
-////        list1.add(new WorkoutType("Muski"));
-//
-//        ArrayList<WorkoutType> list2 = new ArrayList<WorkoutType>();
-//        list2.add(new WorkoutType("Grupni"));
-//        list2.add(new WorkoutType("Personalni"));
-//
-//        //Location location1 = new Location(10,10,"Petra Drapsina", "117", "Sajkascity", 21244);
-//        Location location3 = new Location(50,50,"Pa Pavla", "50", "Novi Sad", 21200);
-//
-//        SportFacility sportFacility2 = new SportFacility("Jaka teretana", new FacilityType("Teretana"),
-//                list2, true,
-//                location3, "", 4.4, LocalTime.of(5,00), LocalTime.of(22,00));
-//        addOne(sportFacility2);
-
-        return gson.toJson(sportFacilityRepository.getAll());
+        List<SportFacility> allFacilities = sportFacilityRepository.getAll();
+        return gson.toJson(allFacilities);
     }
     public String getOne(String id) {
 
@@ -65,7 +48,7 @@ public class SportFacilityService {
 //        }
 //    }
 
-    public String SearchSportFacilities(String criteria, String searchInput, String gradeCriteria){
+    public String searchSportFacilities(String criteria, String searchInput, String gradeCriteria){
 
         List<SportFacility> allFacilities = sportFacilityRepository.getAll();
         ArrayList<SportFacility> filteredList = new ArrayList<SportFacility>();
@@ -115,7 +98,7 @@ public class SportFacilityService {
         return gson.toJson(filteredList);
     }
 
-    public String SortSportFacilities(String sortBy ){
+    public String sortSportFacilities(String sortBy ){
 
         List<SportFacility> allFacilities = sportFacilityRepository.getAll();
         ArrayList<SportFacility> filteredList = new ArrayList<SportFacility>();
@@ -145,7 +128,7 @@ public class SportFacilityService {
 
         return gson.toJson(allFacilities);
     }
-    public String GetSportFacilityTypes(){
+    public String getSportFacilityTypes(){
 
         List<SportFacility> allFacilities = sportFacilityRepository.getAll();
         ArrayList<String> types = new ArrayList<String>();
@@ -157,7 +140,7 @@ public class SportFacilityService {
 
         return gson.toJson(types);
     }
-    public String FilterSportFacilities(String filter){
+    public String filterSportFacilities(String filter){
 
         List<SportFacility> allFacilities = sportFacilityRepository.getAll();
         ArrayList<SportFacility> filteredFacilities = new ArrayList<SportFacility>();
@@ -169,7 +152,7 @@ public class SportFacilityService {
         return gson.toJson(filteredFacilities);
     }
 
-    public String GetCurrentlyOpenedSportFacilities(){
+    public String getCurrentlyOpenedSportFacilities(){
 
         List<SportFacility> allFacilities = sportFacilityRepository.getAll();
         ArrayList<SportFacility> currentlyOpenedFacilities = new ArrayList<SportFacility>();

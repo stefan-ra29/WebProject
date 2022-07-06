@@ -65,11 +65,18 @@ public class UserService {
         return retVal;
     }
 
-    public String getUserFromJWT(String token) {
+    public String getUserFromJWT(String token, String isUserManager) {
         String username = getUsernameFromJWT(token);
-        String user = gson.toJson(FindbyId(username));
-
-        return user;
+        if(isUserManager.equals("true")) {
+            Manager manager = managerRepository.getOne(username);
+            String managerGson = gson.toJson(manager);
+            return managerGson;
+        }
+        else{
+            User user = FindbyId(username);
+            String userGson = gson.toJson(user);
+            return userGson;
+        }
     }
 
     public static String getUsernameFromJWT(String token) {

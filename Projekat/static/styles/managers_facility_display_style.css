@@ -1,0 +1,15 @@
+.managers_facility_header {
+    font-size: 30px;
+    text-align : left;
+    margin-left : 210px;
+}
+
+.managers_facility_image_display{
+    height: 250px;
+    width: 500px;
+}
+
+.managers_facility_workout_image_display{
+    height: 200px;
+    width: 300px;
+}

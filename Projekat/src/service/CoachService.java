@@ -23,4 +23,9 @@ public class CoachService {
 
         return coachRepository.addOne(coach);
     }
+
+    public String getAll(){
+
+        return gson.toJson(coachRepository.getAll());
+    }
 }

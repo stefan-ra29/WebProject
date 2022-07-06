@@ -4,7 +4,8 @@ import beans.User;
 import com.google.gson.Gson;
 import service.UserService;
 
-import static spark.Spark.*;
+import static spark.Spark.get;
+import static spark.Spark.post;
 
 public class UserController {
     private static Gson g = new Gson();
@@ -32,7 +33,9 @@ public class UserController {
             res.type("application/json");
 
             String jwt = req.queryParams("jwt");
-            return userService.getUserFromJWT(jwt);
+            String isUserManager = req.queryParams("isUserManager");
+
+            return userService.getUserFromJWT(jwt, isUserManager);
         });
     }
 

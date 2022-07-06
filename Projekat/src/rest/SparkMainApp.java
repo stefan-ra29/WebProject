@@ -15,19 +15,23 @@ public class SparkMainApp {
         staticFiles.externalLocation(new File("./static").getCanonicalPath());
         CustomerController.registerCustomer();
         UserController.login();
-        SportFacilityController.GetAllSportFacilities();
-        SportFacilityController.SearchSportFacilities();
-        SportFacilityController.SortSportFacilities();
-        SportFacilityController.GetSportFacilityTypes();
-        SportFacilityController.FilterSportFacilities();
-        SportFacilityController.GetCurrentlyOpenedSportFacilities();
-        SportFacilityController.GetSportFacility();
-        SportFacilityController.CreateNew();
-        SportFacilityController.GetAvailableManagers();
+        SportFacilityController.getAllSportFacilities();
+        SportFacilityController.searchSportFacilities();
+        SportFacilityController.sortSportFacilities();
+        SportFacilityController.getSportFacilityTypes();
+        SportFacilityController.filterSportFacilities();
+        SportFacilityController.getCurrentlyOpenedSportFacilities();
+        SportFacilityController.getSportFacility();
+        SportFacilityController.createNew();
+        SportFacilityController.getAvailableManagers();
         UserController.getLoggedUser();
         UserController.updateUserInfo();
         CoachController.registerCoach();
         ManagerController.registerManager();
         MembershipController.addMonthlyLight();
+        WorkoutController.getWorkoutTypes();
+        CoachController.getAll();
+        WorkoutController.createWorkout();
+        WorkoutController.getWorkoutsByFacility();
     }
 }

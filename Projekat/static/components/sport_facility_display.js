@@ -12,7 +12,9 @@ Vue.component("sport_facility_display", {
 	      currently_open: true,
 	      isLoggedIn: false,
 	      role : window.localStorage.getItem('role'),
-	      jwt: window.localStorage.getItem('jwt')
+	      jwt: window.localStorage.getItem('jwt'),
+	      manager : {sportFacilityId: '', username:'', password: '', firstName: '', lastName: '', email: '', gender: '', dob : {} },
+	      managersFacility : {}
 	    }
 	},
 	    template: `
@@ -24,9 +26,13 @@ Vue.component("sport_facility_display", {
     	        <a href="http://localhost:8081/#/memberships" v-if="this.role == 'Customer'" style="margin-right:10px">Clanarine</a>
     	        <a href="http://localhost:8081/#/login" v-if="this.jwt == '-1' || this.jwt == null" style="margin-right:10px">Prijavite se</a>
     	        <button v-on:click="logout" v-else>Odjava</button>
-    	        <a href="http://localhost:8081/#/userProfile" v-if="this.role == 'Customer'" style="margin-right:10px">Vas profil</a>
+    	        <a href="http://localhost:8081/#/userProfile" v-if="this.jwt != '-1' && this.jwt != null" style="margin-right:10px">Vas profil</a>
     	        <a href="http://localhost:8081/#/registration">Registracija</a>
     	    </div>
+
+            <div v-if="this.manager != null && this.manager.sportFacilityId != '' && this.manager.sportFacilityId != null">
+                <button v-on:click="goToManagersFacility()">{{this.managersFacility.name}}</button>
+            </div>
 
     	    <form class="sport_facility_search_display">
     	        <select style="width: 125px; padding:1px" name="search_criteria" id="search_criteria" v-model = "criteria">
@@ -106,8 +112,33 @@ Vue.component("sport_facility_display", {
         .get("rest/facilities/get_facility_types")
         .then(response => {this.facility_types = response.data});
 
+        if(this.role == "Manager"){
+            axios
+            .get("rest/users/getLoggedUser",
+            { params : {
+                jwt : this.jwt,
+                isUserManager : true
+            }})
+            .then(response => {this.getFacilityName(response)});
+        }
     },
     methods: {
+        getFacilityName: function(response){
+            this.manager = response.data
+
+             if(this.manager.sportFacilityId != '' && this.manager.sportFacilityId != null){
+                axios
+                .get("rest/facilities/get_one",
+                { params : {
+                    id : this.manager.sportFacilityId
+                }})
+                .then(response => {this.managersFacility = response.data});
+            }
+        },
+        goToManagersFacility : function(e){
+            localStorage.setItem("facilityID", this.managersFacility.id)
+            router.push('/managers_facility')
+        },
         previousState: function(e){
             this.facilities_before_checking = this.facilities
         },
@@ -120,7 +151,7 @@ Vue.component("sport_facility_display", {
             var copied_facilities = this.facilities
 
             axios
-            .get("rest/facilities/search",
+            .post("rest/facilities/search", this.facilities,
             { params : {
                 criteria : this.criteria,
                 searchInput : this.searchInput,

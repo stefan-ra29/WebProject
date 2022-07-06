@@ -7,6 +7,8 @@ const CreateFacility = {template: '<create_facility></create_facility>'}
 const RegisterManager = {template: '<register_manager></register_manager>'}
 const RegisterCoach = {template: '<register_coach></register_coach>'}
 const Memberships = {template: '<memberships></memberships>'}
+const ManagersSFDisplay = { template: '<managers_facility_display></managers_facility_display>' }
+const AddNewWorkout = { template: '<add_new_workout></add_new_workout>' }
 
 const router = new VueRouter({
 	mode: 'hash',
@@ -19,7 +21,9 @@ const router = new VueRouter({
 		{ path: '/createFacility', component: CreateFacility},
 		{ path: '/managerRegistration', component: RegisterManager},
 		{ path: '/coachRegistration', component: RegisterCoach},
-		{ path: '/memberships', component: Memberships}
+		{ path: '/memberships', component: Memberships},
+        { path: '/managers_facility', component: ManagersSFDisplay},
+        { path: '/add_new_workout', component: AddNewWorkout}
 	  ]
 });
 

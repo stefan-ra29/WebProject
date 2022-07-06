@@ -8,7 +8,7 @@
       },
       "sportFacilityID": "a8ffbc7c-cf81-4fe3-a9ab-9df625b43cb6",
       "duration": 30,
-      "coach": {},
+      "coachID": "",
       "description": "",
       "picture": "https://www.seekpng.com/png/full/86-867205_nastic-dumbbell-strength-weight-man-comments-strength-dumbbell.png",
       "supplement": 1000
@@ -24,20 +24,7 @@
       },
       "sportFacilityID": "a8ffbc7c-cf81-4fe3-a9ab-9df625b43cb6",
       "duration": 0,
-      "coach": {
-        "firstName": "Tina",
-        "lastName": "Tinic",
-        "email": "tina@gmail.com",
-        "username": "tina",
-        "password": "tina",
-        "gender": "female",
-        "dob": {
-          "year": 1992,
-          "month": 11,
-          "day": 13
-        },
-        "role": "Coach"
-      },
+      "coachID": "tina",
       "description": "Opustite svoje telo, produbite svoj um...",
       "picture": "data:image/png;base64,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",
       "supplement": 0
@@ -53,7 +40,7 @@
       },
       "sportFacilityID": "a8ffbc7c-cf81-4fe3-a9ab-9df625b43cb6",
       "duration": 60,
-      "coach": {},
+      "coachID": "",
       "description": "Preznojite se u 60 minuta!",
       "picture": "https://cdn-icons-png.flaticon.com/512/1546/1546175.png",
       "supplement": 500
@@ -69,7 +56,7 @@
       },
       "sportFacilityID": "a8ffbc7c-cf81-4fe3-a9ab-9df625b43cb6",
       "duration": 0,
-      "coach": {},
+      "coachID": "",
       "description": "",
       "picture": "https://play-lh.googleusercontent.com/Jh5OyhH5iuYjXdTW1-gRtIT_pARDJtI31KiHGD9yTaEiujKNBQbHv0oMJu2NkA196o8",
       "supplement": 0

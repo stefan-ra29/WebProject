@@ -47,7 +47,7 @@ public class WorkoutService {
         if(workout.getName().trim() == "" || workout.getPicture().trim() == "" || (workout.getDuration() < 0 && workout.getDuration() >120)
             || !doesWorkoutTypeExist(workout.getWorkoutType().getType()) ||
                 (workout.getSupplement() != 0 && workout.getSupplement() != 500 && workout.getSupplement() != 1000 &&
-                        workout.getSupplement() != 1500 && workout.getSupplement() != 2000) || !doesCoachExist(workout.getCoach()))
+                        workout.getSupplement() != 1500 && workout.getSupplement() != 2000) || !doesCoachExist(workout.getCoachID()))
             return false;
         return true;
     }
@@ -62,12 +62,12 @@ public class WorkoutService {
         }
         return exists;
     }
-    public boolean doesCoachExist(Coach coach){
-        if(coach.getUsername() == null)
+    public boolean doesCoachExist(String coachID){
+        if(coachID == "" || coachID == null)
             return true;
         else{
             for(Coach c : coachRepository.getAll()){
-                if(c.getUsername().equals(coach.getUsername()))
+                if(c.getUsername().equals(coachID))
                     return true;
             }
         }

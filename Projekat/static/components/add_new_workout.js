@@ -2,7 +2,7 @@ Vue.component("add_new_workout", {
 	data: function () {
 	    return {
 	      facility: {},
-	      workout: {name : '', workoutType : {}, coach: {}, description: '', picture : '', duration : null, sportFacilityID: '', supplement : null},
+	      workout: {name : '', workoutType : {}, coachID: "", description: '', picture : '', duration : null, sportFacilityID: '', supplement : null},
 	      types: {},
 	      coaches: {}
 	    }
@@ -25,7 +25,7 @@ Vue.component("add_new_workout", {
                     <tr>
                         <td>Trener</td>
                         <td v-if="this.coaches != undefined">
-                            <select v-model="workout.coach">
+                            <select @change = "addCoach($event)">
                                 <option v-bind:value="c" v-for="c in coaches">{{c.firstName}} {{c.lastName}}</option>
                             </select>
                         </td>
@@ -106,6 +106,11 @@ Vue.component("add_new_workout", {
             axios
             .get("rest/coaches/get_all")
             .then(response => {this.coaches = response.data});
+        },
+        addCoach(event){
+            event.preventDefault()
+
+            this.workout.coachID = event.target.value.username
         }
 	}
 });

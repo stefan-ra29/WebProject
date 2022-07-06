@@ -1,7 +1,8 @@
 Vue.component("single_facility_display", {
 	data: function () {
 	    return {
-	      facility : null
+	      facility : null,
+	      workouts: {}
 	    }
 	},
 	    template: `
@@ -33,6 +34,32 @@ Vue.component("single_facility_display", {
                  </tr>
                  <tr><td colspan="2" ></td></tr>
              </table>
+             <h2 class="managers_facility_header">Treninzi:</h2>
+             <div v-for="workout in workouts" class="facility_display_wrap">
+                 <table class="facility_table_wrap">
+                     <tr><th>{{workout.name}}</th>
+                         <th rowspan="6"><img :src="workout.picture" class= "managers_facility_workout_image_display"/></th>
+                     <tr>
+                     <tr>
+                         <td>Tip: {{workout.workoutType.type}}</td>
+                     </tr>
+                     <tr v-if="workout.duration == null || workout.duration == 0">
+                         <td>Trajanje trenutno nije definisano</td>
+                     </tr>
+                     <tr v-else>
+                         <td>Trajanje: {{workout.duration}} minuta</td>
+                     </tr>
+                     <tr v-if="workout.coachID == '' || workout.coachID == null">
+                         <td>Trenutno nije postavljen trener.</td>
+                     </tr>
+                     <tr v-else>
+                         <td>Trener: </td>
+                     </tr>
+                     <tr v-if="workout.description != ''">
+                         <td>Opis: {{workout.description}}</td>
+                     </tr>
+                 </table>
+             </div>
 
 
     	</div>
@@ -45,6 +72,12 @@ Vue.component("single_facility_display", {
                         id : id
                     }})
         .then(response => {this.facility = response.data});
+        axios
+        .get("rest/workouts/get_workouts_by_facility",
+        { params : {
+            id : id
+        }})
+        .then(response => {this.workouts = response.data});
 
     },
     methods: {

@@ -2,7 +2,8 @@ Vue.component("managers_facility_display", {
 	data: function () {
 	    return {
 	      facility: {},
-	      workouts: {}
+	      workouts: {},
+	      coachesName: ""
 	    }
 	},
 	    template: `
@@ -50,11 +51,11 @@ Vue.component("managers_facility_display", {
                         <tr v-else>
                             <td>Trajanje: {{workout.duration}} minuta</td>
                         </tr>
-                        <tr v-if="workout.coach.firstName == null || workout.coach.firstName == undefined">
+                        <tr v-if="workout.coachID == '' || workout.coachID == null">
                             <td>Trenutno nije postavljen trener.</td>
                         </tr>
                         <tr v-else>
-                            <td>Trener: {{workout.coach.firstName}} {{workout.coach.lastName}}</td>
+                            <td>Trener: {{this.coachesName}}</td>
                         </tr>
                         <tr v-if="workout.description != ''">
                             <td>Opis: {{workout.description}}</td>
@@ -96,20 +97,20 @@ Vue.component("managers_facility_display", {
         addNewWorkout : function(e){
             router.push('/add_new_workout')
         },
-
-        filterFacilities(event){
-            event.preventDefault()
-
-            axios
-            .get("rest/facilities/filter",
-            { params : {
-                filterBy : this.filter
-            }})
-
-            .then(response => {this.facilities = response.data});
-        },
         changeWorkout: function(e){
 
+        },
+        getCoachesName: function(coachID){
+            console.log(coachID)
+            axios
+            .get("rest/coaches/get_one",
+            { params : {
+                id : coachID
+            }})
+            .then(response => {var coach = response.data
+
+                console.log(coach)
+            });
         }
 	}
 });

@@ -45,7 +45,8 @@ Vue.component("memberships", {
         axios
         .get("rest/users/getLoggedUser",
                     { params : {
-                        jwt : this.jwt
+                        jwt : this.jwt,
+                        isUserManager : false
                     }})
         .then(response => {this.loadCustomer(response)});
 

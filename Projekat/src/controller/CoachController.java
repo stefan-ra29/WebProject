@@ -25,4 +25,11 @@ public class CoachController {
             return coachService.getAll();
         });
     }
+    public static void getCoach(){
+        get("rest/coaches/get_one", (req, res) -> {
+            res.type("application/json");
+            String id = req.queryParams("id");
+            return coachService.getCoach(id);
+        });
+    }
 }

@@ -5,10 +5,12 @@ import beans.Workout;
 import beans.WorkoutType;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import comparators.PriceComparator;
 import repository.CoachRepository;
 import repository.WorkoutRepository;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class WorkoutService {
@@ -108,7 +110,7 @@ public class WorkoutService {
         return true;
     }
 
-    public String searchWorkout(ArrayList<Workout> workouts, String criteria, String minPrice, String maxPrice){
+    public String searchWorkouts(ArrayList<Workout> workouts, String criteria, String minPrice, String maxPrice){
 
         ArrayList<Workout> filteredWorkouts = new ArrayList<Workout>();
 
@@ -126,8 +128,20 @@ public class WorkoutService {
                         filteredWorkouts.add(w);
                     break;
             }
-
         }
         return gson.toJson(filteredWorkouts);
+    }
+    public String sortWorkouts(String sortBy, ArrayList<Workout> workouts){
+
+        switch (sortBy) {
+            case "price_increasing":
+                Collections.sort(workouts, new PriceComparator());
+                break;
+
+            case "price_decreasing":
+                Collections.sort(workouts, new PriceComparator().reversed());
+                break;
+        }
+        return gson.toJson(workouts);
     }
 }

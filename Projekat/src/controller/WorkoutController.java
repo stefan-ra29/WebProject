@@ -63,7 +63,7 @@ public class WorkoutController {
             return workoutService.changeWorkout(workout);
         });
     }
-    public static void searchWorkout() {
+    public static void searchWorkouts() {
         post("rest/workouts/search", (req, res) -> {
             res.type("application/json");
 
@@ -72,7 +72,17 @@ public class WorkoutController {
             String minPrice = req.queryParams("minPrice");
             String maxPrice = req.queryParams("maxPrice");
 
-            return workoutService.searchWorkout(workouts, criteria, minPrice, maxPrice);
+            return workoutService.searchWorkouts(workouts, criteria, minPrice, maxPrice);
+        });
+    }
+    public static void sortWorkouts(){
+        post("rest/facilities/sort", (req, res) ->{
+            res.type("application/json");
+
+            ArrayList<Workout> workouts = gson.fromJson(req.body(), new TypeToken<ArrayList<Workout>>(){}.getType());
+            String sortBy = req.queryParams("sortBy");
+            return workoutService.sortWorkouts(sortBy, workouts);
+
         });
     }
 }

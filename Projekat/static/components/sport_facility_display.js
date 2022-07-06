@@ -160,7 +160,6 @@ Vue.component("sport_facility_display", {
 
             .then(response => {this.facilities = response.data});
         },
-
         sortFacilities(event){
             event.preventDefault()
 

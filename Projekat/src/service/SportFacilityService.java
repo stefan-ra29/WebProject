@@ -2,6 +2,9 @@ package service;
 
 import beans.SportFacility;
 import com.google.gson.Gson;
+import comparators.AverageGradeComparator;
+import comparators.LocationComparator;
+import comparators.NameComparator;
 import repository.SportFacilityRepository;
 
 import java.time.LocalTime;

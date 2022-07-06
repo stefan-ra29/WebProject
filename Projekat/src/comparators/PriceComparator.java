@@ -1,14 +1,14 @@
-package service;
+package comparators;
 
-import beans.SportFacility;
+import beans.Workout;
 
 import java.util.Comparator;
 
-public class AverageGradeComparator implements Comparator {
+public class PriceComparator implements Comparator {
     @Override
     public int compare(Object o1, Object o2) {
-        double g1 = ((SportFacility) o1).getAverageGrade();
-        double g2 = ((SportFacility) o2).getAverageGrade();
+        double g1 = ((Workout) o1).getSupplement();
+        double g2 = ((Workout) o2).getSupplement();
 
         if (g1 < g2) {
             return -1;

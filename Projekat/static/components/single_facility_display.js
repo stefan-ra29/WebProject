@@ -9,7 +9,8 @@ Vue.component("single_facility_display", {
 	      criteria : "",
 	      minPrice: null,
 	      maxPrice: null,
-	      searchHappened : false
+	      searchHappened : false,
+	      sort: ""
 	      }
 	},
 	    template: `
@@ -55,6 +56,12 @@ Vue.component("single_facility_display", {
                 </div>
                 <input type="submit" value="Pretrazi" v-on:click="searchSubmit" name="search_button">
             </form>
+
+            Sortiraj:
+            <select style="width: 195px; padding:1px" name="sort" id="sort" v-model = "sort" @change = "sortFacilities($event)" >
+                  <option value="price_increasing">Doplata (rastuce)</option>
+                  <option value="price_decreasing">Doplata (opadajuce)</option>
+            </select></br>
 
             <div v-for="(workout, index) in workouts" class="facility_display_wrap">
                  <table class="facility_table_wrap">
@@ -138,7 +145,7 @@ Vue.component("single_facility_display", {
         },
         searchSubmit : function(e){
             e.preventDefault()
-            console.log(this.workoutsBeforeSearch)
+            //console.log(this.workoutsBeforeSearch)
             if(this.criteria == "")
                 return;
 
@@ -161,9 +168,26 @@ Vue.component("single_facility_display", {
                 minPrice : this.minPrice,
                 maxPrice: this.maxPrice
             }})
-            .then(response => {this.workouts = response.data});
+            .then(response => {
+                this.workouts = response.data
+                if(sort != ""){
+                    this.sortFacilities(e)
+                }
+                });
 
             this.searchHappened = true
+
+        },
+        sortFacilities(event){
+            event.preventDefault()
+            console.log(this.workouts)
+            axios
+            .post("rest/facilities/sort", this.workouts,
+            { params : {
+                sortBy : this.sort
+            }})
+            .then(response => {this.workouts = response.data
+            console.log(this.workouts)});
         }
     }
 });

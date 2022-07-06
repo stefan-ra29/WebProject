@@ -1,4 +1,4 @@
-package service;
+package comparators;
 
 import beans.SportFacility;
 

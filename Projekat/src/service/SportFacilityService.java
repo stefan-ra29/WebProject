@@ -164,4 +164,18 @@ public class SportFacilityService {
         }
         return gson.toJson(currentlyOpenedFacilities);
     }
+
+    public boolean isFacilityCurrentlyWorking(String facilityId){
+        LocalTime now = LocalTime.now();
+        for(SportFacility sf : sportFacilityRepository.getAll()) {
+            if(sf.getId().equals(facilityId)){
+                if(sf.getStartHour().isBefore(now) && now.isBefore(sf.getClosingHour()))
+                    return true;
+                else
+                    return false;
+            }
+        }
+
+        return false;
+    }
 }

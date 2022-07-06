@@ -2,7 +2,11 @@ Vue.component("single_facility_display", {
 	data: function () {
 	    return {
 	      facility : null,
-	      workouts: {}
+	      workouts: {},
+	      isFacilityCurrentlyWorking: null,
+	      customer: {username:'', password: '', firstName: '', lastName: '', email: '', gender: '', dob: {} },
+          currentMembership: {type: '', availableVisits: '', expirationDate: {}},
+          jwt: localStorage.getItem('jwt')
 	    }
 	},
 	    template: `
@@ -58,6 +62,9 @@ Vue.component("single_facility_display", {
                      <tr v-if="workout.description != ''">
                          <td>Opis: {{workout.description}}</td>
                      </tr>
+                     <tr v-if="isFacilityCurrentlyWorking == true && currentMembership != null">
+                        <button>Prijavi se na trening</button>
+                     </tr>
                  </table>
              </div>
 
@@ -71,7 +78,12 @@ Vue.component("single_facility_display", {
         { params : {
                         id : id
                     }})
-        .then(response => {this.facility = response.data});
+        .then(response => {
+            this.facility = response.data
+            this.setIsFacilityCurrentlyWorking(id)
+
+        });
+
         axios
         .get("rest/workouts/get_workouts_by_facility",
         { params : {
@@ -79,10 +91,39 @@ Vue.component("single_facility_display", {
         }})
         .then(response => {this.workouts = response.data});
 
+        axios
+        .get("rest/users/getLoggedUser",
+        { params : {
+            jwt : this.jwt,
+            isUserManager : false
+        }})
+        .then(response => {this.loadCustomer(response)});
+
     },
     methods: {
+
+        loadCustomer: function(response){
+            this.customer = response.data
+            this.loadCurrentMembership()
+        },
+
+        loadCurrentMembership() {
+            axios
+            .post("rest/memberships/getCurrentMembership", this.customer)
+            .then(response => (this.currentMembership = response.data))
+        },
+
         previousState: function(e){
             this.facilities_before_checking = this.facilities
+        },
+
+        setIsFacilityCurrentlyWorking(id){
+            axios
+            .get("rest/facilities/getIsCurrentlyWorking",
+            { params : {
+                id : id
+            }})
+            .then(response => { this.isFacilityCurrentlyWorking = response.data });
         }
     }
 });

@@ -35,5 +35,7 @@ public class SparkMainApp {
         WorkoutController.getWorkoutsByFacility();
         CoachController.getCoach();
         WorkoutController.getCoachesNamesFromWorkoutList();
+        WorkoutController.getWorkoutByID();
+        WorkoutController.changeWorkout();
     }
 }

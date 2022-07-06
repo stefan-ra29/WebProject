@@ -107,7 +107,8 @@ Vue.component("managers_facility_display", {
             router.push('/add_new_workout')
         },
         changeWorkout: function(workoutID){
-
+            localStorage.setItem("workoutChangeID", workoutID)
+            router.push('/change_workout')
         }
 	}
 });

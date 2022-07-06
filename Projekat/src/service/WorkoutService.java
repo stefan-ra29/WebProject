@@ -27,17 +27,17 @@ public class WorkoutService {
         return gson.toJson(allTypes);
     }
     public boolean createWorkout(Workout workout){
-        if(!isWorkoutNameUnique(workout.getName()) || !validateWorkoutInput(workout))
+        if(!isWorkoutNameUnique(workout) || !validateWorkoutInput(workout))
             return false;
 
         workout.setId();
         workoutRepository.addOne(workout);
         return true;
     }
-    public boolean isWorkoutNameUnique(String name){
+    public boolean isWorkoutNameUnique(Workout workout){
 
         for(Workout w : workoutRepository.getAll()){
-            if(w.getName().equals(name))
+            if(w.getName().equals(workout.getName()) && !w.getId().equals(workout.getId()))
                 return false;
         }
         return true;
@@ -95,5 +95,17 @@ public class WorkoutService {
             }
         }
         return gson.toJson(coaches);
+    }
+
+    public String getWorkoutByID(String id){
+       return gson.toJson(workoutRepository.getOne(id));
+    }
+    public Boolean changeWorkout(Workout workout){
+
+        if(!isWorkoutNameUnique(workout) || !validateWorkoutInput(workout))
+            return false;
+
+        workoutRepository.update(workout.getId(), workout);
+        return true;
     }
 }

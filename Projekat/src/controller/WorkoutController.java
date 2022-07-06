@@ -47,4 +47,21 @@ public class WorkoutController {
             return workoutService.getCoachesNamesFromWorkoutList(workouts);
         });
     }
+    public static void getWorkoutByID() {
+        get("rest/workouts/get_workout_by_id", (req, res) -> {
+            res.type("application/json");
+
+            String workoutID = req.queryParams("id");
+            return workoutService.getWorkoutByID(workoutID);
+        });
+    }
+
+    public static void changeWorkout() {
+        post("rest/workouts/change_workout", (req, res) -> {
+            res.type("application/json");
+
+            Workout workout = gson.fromJson(req.body(), Workout.class);
+            return workoutService.changeWorkout(workout);
+        });
+    }
 }

@@ -1,15 +1,15 @@
-Vue.component("add_new_workout", {
+Vue.component("change_workout", {
 	data: function () {
 	    return {
-	      facility: {},
 	      workout: {name : '', workoutType : {}, coachID: '', description: '', picture : '', duration : null, sportFacilityID: '', supplement : null},
 	      types: {},
-	      coaches: {}
+	      coaches: {},
+	      selectedCoachName: {}
 	    }
 	},
 	    template: `
     	<div>
-            <h1 class="single_facility_header">Novi trening</h1>
+            <h1 class="single_facility_header">Izmeni trening</h1>
             <form id="form" class="registration_form">
                 <table>
                     <tr><td>*Naziv</td><td><input type="text" name="name" v-model = "workout.name"></td></tr>
@@ -42,15 +42,18 @@ Vue.component("add_new_workout", {
     	</div>
     	`,
     mounted () {
-        var id = localStorage.getItem("facilityID")
+        var id = localStorage.getItem("workoutChangeID")
         axios
-        .get("rest/facilities/get_one",
+        .get("rest/workouts/get_workout_by_id",
         { params : {
             id : id
         }})
         .then(response => {
-            this.facility = response.data
-            this.workout.sportFacilityID = this.facility.id
+            this.workout = response.data
+            if(this.workout.duration == 0){
+                this.workout.duration = null}
+            if(this.workout.supplement == 0){
+                this.workout.supplement = null}
         });
 
         this.addTypes()
@@ -59,7 +62,6 @@ Vue.component("add_new_workout", {
     methods: {
         receiveFormData: function(e){
             e.preventDefault()
-
             if(this.workout.duration == "")
                 this.workout.duration = null
 
@@ -81,7 +83,6 @@ Vue.component("add_new_workout", {
 
                 if( this.workout.supplement != null && (this.workout.supplement != 0 && this.workout.supplement !=500 && this.workout.supplement !=1000
                     && this.workout.supplement !=1500 && this.workout.supplement !=2000)){
-                    console.log(this.workout.supplement)
                     alert("Vrednost doplate nije validna!")
                     e.preventDefault()
                     return;
@@ -92,15 +93,15 @@ Vue.component("add_new_workout", {
                 this.workout.description = this.workout.description.trim()
 
                 axios
-                .post("rest/workouts/create_workout", this.workout)
+                .post("rest/workouts/change_workout", this.workout)
                 .then(response => {
                     var isAcceptable = response.data
 
                     if(isAcceptable == false){
-                        alert("Ovo ime je vec iskorisceno!")
+                        alert("Postoji greska!")
                     }
                     else{
-                        alert("Uspesno ste dodali trening!")
+                        alert("Uspesno ste promenili trening!")
                         router.push('/managers_facility')
                     }
                 });

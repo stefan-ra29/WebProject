@@ -12,8 +12,9 @@ public class Workout {
 	private Coach coach;
 	private String description;
 	private String picture;
+	private int supplement;
 	public Workout(String name, WorkoutType workoutType, String sportFacilityID, int duration, Coach coach,
-			String description, String picture) {
+			String description, String picture, int supplement) {
 		super();
 		this.id = UUID.randomUUID().toString();
 		this.name = name;
@@ -23,6 +24,7 @@ public class Workout {
 		this.coach = coach;
 		this.description = description;
 		this.picture = picture;
+		this.supplement = supplement;
 	}
 	public String getName() {
 		return name;
@@ -70,4 +72,12 @@ public class Workout {
 		return id;
 	}
 	public void setId() { this.id = UUID.randomUUID().toString();}
+
+	public int getSupplement() {
+		return supplement;
+	}
+
+	public void setSupplement(int supplement) {
+		this.supplement = supplement;
+	}
 }

@@ -2,7 +2,7 @@ Vue.component("add_new_workout", {
 	data: function () {
 	    return {
 	      facility: {},
-	      workout: {name : '', workoutType : {}, coach: {}, description: '', picture : '', duration : null, sportFacilityID: ''},
+	      workout: {name : '', workoutType : {}, coach: {}, description: '', picture : '', duration : null, sportFacilityID: '', supplement : null},
 	      types: {},
 	      coaches: {}
 	    }
@@ -31,6 +31,7 @@ Vue.component("add_new_workout", {
                         </td>
                     </tr>
                     <tr><td>Trajanje u minutima</td><td><input type="number" name="duration" v-model = "workout.duration" min="30" max="120"></td></tr>
+                    <tr><td>Doplata</td><td><input type="number" name="supplement" v-model = "workout.supplement" min="0" max="2000" step="500"></td></tr>
                     <tr><td>Opis</td><td><input type="text" name="description" v-model = "workout.description"></td></tr>
                     <tr><td></td><td><input type="submit" v-on:click = "receiveFormData" value="Dodaj"></td></tr>
                 </table>
@@ -61,6 +62,22 @@ Vue.component("add_new_workout", {
                 e.preventDefault()
             }
             else{
+
+                if(this.workout.duration != null && (this.workout.duration < 30 || this.workout.duration >120)){
+                    alert("Trajanje treninga mora biti u rasponu od 30 do 120 minuta!")
+                    e.preventDefault()
+                    return
+                }
+
+
+                if( this.workout.supplement != null && (this.workout.supplement != 0 && this.workout.supplement !=500 && this.workout.supplement !=1000
+                    && this.workout.supplement !=1500 && this.workout.supplement !=2000)){
+                    console.log(this.workout.supplement)
+                    alert("Vrednost doplate nije validna!")
+                    e.preventDefault()
+                    return;
+                }
+
                 this.workout.name = this.workout.name.trim()
                 this.workout.picture = this.workout.picture.trim()
                 this.workout.description = this.workout.description.trim()

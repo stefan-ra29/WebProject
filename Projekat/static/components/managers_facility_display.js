@@ -107,6 +107,9 @@ Vue.component("managers_facility_display", {
             }})
 
             .then(response => {this.facilities = response.data});
+        },
+        changeWorkout: function(e){
+
         }
 	}
 });

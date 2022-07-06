@@ -1,8 +1,11 @@
 package service;
 
+import beans.Coach;
 import beans.Workout;
 import beans.WorkoutType;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import repository.CoachRepository;
 import repository.WorkoutRepository;
 
 import java.util.ArrayList;
@@ -10,6 +13,7 @@ import java.util.List;
 
 public class WorkoutService {
     WorkoutRepository workoutRepository = new WorkoutRepository();
+    CoachRepository coachRepository = new CoachRepository();
     Gson gson = new Gson();
     public String getWorkoutTypes() {
 
@@ -23,8 +27,9 @@ public class WorkoutService {
         return gson.toJson(allTypes);
     }
     public boolean createWorkout(Workout workout){
-        if(!isWorkoutNameUnique(workout.getName()))
+        if(!isWorkoutNameUnique(workout.getName()) || !validateWorkoutInput(workout))
             return false;
+
         workout.setId();
         workoutRepository.addOne(workout);
         return true;
@@ -36,6 +41,37 @@ public class WorkoutService {
                 return false;
         }
         return true;
+    }
+    public boolean validateWorkoutInput(Workout workout){
+
+        if(workout.getName().trim() == "" || workout.getPicture().trim() == "" || (workout.getDuration() < 0 && workout.getDuration() >120)
+            || !doesWorkoutTypeExist(workout.getWorkoutType().getType()) ||
+                (workout.getSupplement() != 0 && workout.getSupplement() != 500 && workout.getSupplement() != 1000 &&
+                        workout.getSupplement() != 1500 && workout.getSupplement() != 2000) || !doesCoachExist(workout.getCoach()))
+            return false;
+        return true;
+    }
+    public boolean doesWorkoutTypeExist(String type){
+        ArrayList<WorkoutType> workoutTypes = gson.fromJson(getWorkoutTypes(), new TypeToken<ArrayList<WorkoutType>>(){}.getType());
+        Boolean exists = false;
+        for(WorkoutType w : workoutTypes) {
+            if (w.getType().equals(type)) {
+                exists = true;
+                return exists;
+            }
+        }
+        return exists;
+    }
+    public boolean doesCoachExist(Coach coach){
+        if(coach.getUsername() == null)
+            return true;
+        else{
+            for(Coach c : coachRepository.getAll()){
+                if(c.getUsername().equals(coach.getUsername()))
+                    return true;
+            }
+        }
+        return false;
     }
     public String getWorkoutsByFacility(String facilityID){
         ArrayList<Workout> facilityWorkouts = new ArrayList<>();

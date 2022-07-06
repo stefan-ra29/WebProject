@@ -6,6 +6,8 @@ import com.google.gson.Gson;
 import dto.CustomerDTO;
 import repository.CoachRepository;
 
+import java.util.ArrayList;
+
 public class CoachService {
     private CoachRepository coachRepository = new CoachRepository();
     Gson gson = new Gson();
@@ -30,5 +32,24 @@ public class CoachService {
     public String getCoach(String id){
 
         return gson.toJson(coachRepository.getOne(id));
+    }
+
+    public void addWorkoutToCoachesWorkoutHistory(String coachId, String wourkoutHistoryId){
+        Coach coach = coachRepository.getOne(coachId);
+
+        if(coach.getWorkoutHistory() != null)
+        {
+            ArrayList<String> newWorkoutHistory = coach.getWorkoutHistory();
+            newWorkoutHistory.add(wourkoutHistoryId);
+            coach.setWorkoutHistory(newWorkoutHistory);
+        }
+        else
+        {
+            ArrayList<String> newWorkoutHistory = new ArrayList<String>();
+            newWorkoutHistory.add(wourkoutHistoryId);
+            coach.setWorkoutHistory(newWorkoutHistory);
+        }
+
+        coachRepository.update(coachId, coach);
     }
 }

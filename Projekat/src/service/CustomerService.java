@@ -6,6 +6,7 @@ import dto.CustomerDTO;
 import repository.AdministratorRepository;
 import repository.CustomerRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerService {
@@ -31,5 +32,34 @@ public class CustomerService {
         return customerRepository.addOne(customer);
     }
 
+    public void logWorkoutToCustomer(String customerId, String facilityId){
+        Customer customer = customerRepository.getOne(customerId);
+
+        boolean flag = false;
+        if(customer.getVisitedFacilitiesIds() != null)
+        {
+            for(String facilityID : customer.getVisitedFacilitiesIds()){
+                if(facilityID.equals(facilityId)){
+                    flag = true;
+                    break;
+                }
+            }
+            if(flag == false) {
+                ArrayList<String> newVisitedFacilitiesIds = customer.getVisitedFacilitiesIds();
+                newVisitedFacilitiesIds.add(facilityId);
+                customer.setVisitedFacilities(newVisitedFacilitiesIds);
+            }
+
+            customerRepository.update(customerId, customer);
+        }
+        else
+        {
+            ArrayList<String> newVisitedFacilitiesIds = new ArrayList<String>();
+            newVisitedFacilitiesIds.add(facilityId);
+            customer.setVisitedFacilities(newVisitedFacilitiesIds);
+            customerRepository.update(customerId, customer);
+        }
+
+    }
 
 }

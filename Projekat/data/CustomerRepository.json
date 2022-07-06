@@ -1,6 +1,9 @@
 [
   {
     "entity": {
+      "visitedFacilitiesIds": [
+        "a8ffbc7c-cf81-4fe3-a9ab-9df625b43cb6"
+      ],
       "points": 0,
       "firstName": "Aleksandra",
       "lastName": "Vujovic",
@@ -19,6 +22,9 @@
   },
   {
     "entity": {
+      "visitedFacilitiesIds": [
+        "a8ffbc7c-cf81-4fe3-a9ab-9df625b43cb6"
+      ],
       "points": 0,
       "firstName": "Stefan",
       "lastName": "Tosic",

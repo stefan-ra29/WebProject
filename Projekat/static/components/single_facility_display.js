@@ -6,7 +6,8 @@ Vue.component("single_facility_display", {
 	      isFacilityCurrentlyWorking: null,
 	      customer: {username:'', password: '', firstName: '', lastName: '', email: '', gender: '', dob: {} },
           currentMembership: {type: '', availableVisits: '', expirationDate: {}},
-          jwt: localStorage.getItem('jwt')
+          jwt: localStorage.getItem('jwt'),
+          nn: ''
 	    }
 	},
 	    template: `
@@ -63,7 +64,7 @@ Vue.component("single_facility_display", {
                          <td>Opis: {{workout.description}}</td>
                      </tr>
                      <tr v-if="isFacilityCurrentlyWorking == true && currentMembership != null">
-                        <button>Prijavi se na trening</button>
+                        <button v-on:click="checkInToWorkout(customer.username, workout.id)">Prijavi se na trening</button>
                      </tr>
                  </table>
              </div>
@@ -124,6 +125,20 @@ Vue.component("single_facility_display", {
                 id : id
             }})
             .then(response => { this.isFacilityCurrentlyWorking = response.data });
+        },
+
+        checkInToWorkout: function(customerUsername, workoutId){
+
+            axios
+            .post("rest/workouts/checkInToWorkout",
+               {},
+               { params : {
+                   customerId : customerUsername,
+                   workoutID: workoutId
+               }})
+             .then(response => { });
+
+            alert("Uspjesno ste se prijavili na trening!")
         }
     }
 });

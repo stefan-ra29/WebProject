@@ -16,7 +16,7 @@
       "fee": 30,
       "customerId": "stefan",
       "isActive": true,
-      "availableVisits": 30
+      "availableVisits": 27
     },
     "deleted": false
   },
@@ -37,7 +37,7 @@
       "fee": 180,
       "customerId": "saska",
       "isActive": true,
-      "availableVisits": 365
+      "availableVisits": 364
     },
     "deleted": false
   }

@@ -5,11 +5,11 @@ import java.util.ArrayList;
 
 public class Coach extends User{
 	
-	private ArrayList<WorkoutHistory> workoutHistory;
+	private ArrayList<String> workoutHistoryIds;
 	
-	public Coach(ArrayList<WorkoutHistory> workoutHistory) {
+	public Coach(ArrayList<String> workoutHistoryIds) {
 		super();
-		this.workoutHistory = workoutHistory;
+		this.workoutHistoryIds = workoutHistoryIds;
 	}
 
 	public Coach() {
@@ -23,12 +23,12 @@ public class Coach extends User{
 		// TODO Auto-generated constructor stub
 	}
 
-	public ArrayList<WorkoutHistory> getWorkoutHistory() {
-		return workoutHistory;
+	public ArrayList<String> getWorkoutHistory() {
+		return workoutHistoryIds;
 	}
 
-	public void setWorkoutHistory(ArrayList<WorkoutHistory> workoutHistory) {
-		this.workoutHistory = workoutHistory;
+	public void setWorkoutHistory(ArrayList<String> workoutHistoryIds) {
+		this.workoutHistoryIds = workoutHistoryIds;
 	}
 	
 

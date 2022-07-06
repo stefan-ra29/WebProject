@@ -2,6 +2,7 @@ package controller;
 
 import beans.Workout;
 import com.google.gson.Gson;
+import service.WorkoutHistoryService;
 import service.WorkoutService;
 
 import static spark.Spark.get;
@@ -11,6 +12,7 @@ public class WorkoutController {
 
     private static Gson gson = new Gson();
     public static WorkoutService workoutService = new WorkoutService();
+    public static WorkoutHistoryService workoutHistoryService = new WorkoutHistoryService();
 
     public static void getWorkoutTypes() {
         get("rest/workouts/get_types", (req, res) -> {
@@ -34,6 +36,20 @@ public class WorkoutController {
 
             String facilityID = req.queryParams("id");
             return workoutService.getWorkoutsByFacility(facilityID);
+        });
+    }
+
+    public static void checkInToWorkout(){
+        post("rest/workouts/checkInToWorkout", (req, res) -> {
+            res.type("application/json");
+
+            String customerId = req.queryParams("customerId");
+            String workoutId = req.queryParams("workoutID");
+
+
+            workoutHistoryService.addWorkoutHistory(customerId, workoutId);
+
+            return null;
         });
     }
 }

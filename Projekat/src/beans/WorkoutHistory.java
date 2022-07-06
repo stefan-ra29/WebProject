@@ -1,20 +1,25 @@
 package beans;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class WorkoutHistory {
 	
 	private LocalDateTime startTime;
-	private Workout workout;
-	private Customer customer;
-	private Coach coach;
-	
-	public WorkoutHistory(LocalDateTime startTime, Workout workout, Customer customer, Coach coach) {
-		super();
+	private String workoutId;
+	private String customerId;
+	private String coachId;
+	private String id;
+
+	public WorkoutHistory(){
+	}
+
+	public WorkoutHistory(LocalDateTime startTime, String workoutId, String customerId, String coachId) {
 		this.startTime = startTime;
-		this.workout = workout;
-		this.customer = customer;
-		this.coach = coach;
+		this.workoutId = workoutId;
+		this.customerId = customerId;
+		this.coachId = coachId;
+		this.id = UUID.randomUUID().toString();
 	}
 
 	public LocalDateTime getStartTime() {
@@ -25,29 +30,35 @@ public class WorkoutHistory {
 		this.startTime = startTime;
 	}
 
-	public Workout getWorkout() {
-		return workout;
+	public String getWorkoutId() {
+		return workoutId;
 	}
 
-	public void setWorkout(Workout workout) {
-		this.workout = workout;
+	public void setWorkoutId(String workoutId) {
+		this.workoutId = workoutId;
 	}
 
-	public Customer getCustomer() {
-		return customer;
+	public String getCustomerId() {
+		return customerId;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
 	}
 
-	public Coach getCoach() {
-		return coach;
+	public String getCoachId() {
+		return coachId;
 	}
 
-	public void setCoach(Coach coach) {
-		this.coach = coach;
+	public void setCoachId(String coachId) {
+		this.coachId = coachId;
 	}
-	
-	
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 }

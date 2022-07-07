@@ -161,7 +161,6 @@ Vue.component("single_facility_display", {
         },
         searchWorkouts : function(e){
             e.preventDefault()
-            //console.log(this.workoutsBeforeSearch)
             if(this.criteria == "")
                 return;
 
@@ -174,16 +173,10 @@ Vue.component("single_facility_display", {
             }
             if(this.filterDone == true){
                 this.workouts = this.filteredWorkouts
-                console.log("  ")
-                console.log("Desio se filter pre searcha:")
-                console.log(this.workouts)
             }
             else{
                 if(this.searchHappened == true){
                     this.previousState(e)
-                    console.log("  ")
-                    console.log("Desio se search bez filtera:")
-                    console.log(this.workouts)
                 }
             }
 
@@ -196,9 +189,6 @@ Vue.component("single_facility_display", {
             }})
             .then(response => {
                 this.workouts = response.data
-                 console.log("  ")
-                 console.log("Posle searcha da li treba sort ili nesto ")
-                 console.log(this.workouts)
                 if(this.sort != ""){
                     this.sortWorkouts(e)
                 }
@@ -209,28 +199,18 @@ Vue.component("single_facility_display", {
         },
         sortWorkouts(e){
             e.preventDefault()
-            console.log("  ")
-            console.log("Pre sorta")
-            console.log(this.workouts)
             axios
             .post("rest/facilities/sort", this.workouts,
             { params : {
                 sortBy : this.sort
             }})
-            .then(response => {this.workouts = response.data
-            console.log("  ")
-            console.log("Posle sorta ")
-            console.log(this.workouts)});
+            .then(response => {this.workouts = response.data});
         },
          filterWorkouts(e){
              e.preventDefault()
 
-
             if(this.filterHappened == true){
                 this.previousState(e)
-                console.log("  ")
-                console.log("Filter ce se desiti:")
-                console.log(this.workouts)
             }
              axios
              .post("rest/workouts/filter", this.workouts,
@@ -239,8 +219,6 @@ Vue.component("single_facility_display", {
              }})
 
              .then(response => {this.workouts = response.data
-             console.log("Posle filtera:")
-             console.log(this.workouts)
 
              this.filteredWorkouts = this.workouts
 

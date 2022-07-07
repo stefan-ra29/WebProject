@@ -38,66 +38,104 @@ public class SportFacilityService {
     public void delete(String id) {
         sportFacilityRepository.delete(id);
     }
+    public String searchSportFacilities(String nameSearch, String typeSearch, String locationSearch,
+                                            String gradeCriteria, ArrayList<SportFacility> facilityList){
 
-//    private void save(List<LogicalEntity<Entity>> entites) {
-//        try {
-//            FileWriter fw = new FileWriter(filePath);
-//            gson.toJson(entites, fw);
-//            fw.close();
-//        } catch (JsonIOException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-    public String searchSportFacilities(String criteria, String searchInput, String gradeCriteria){
-
-        List<SportFacility> allFacilities = sportFacilityRepository.getAll();
         ArrayList<SportFacility> filteredList = new ArrayList<SportFacility>();
+        ArrayList<SportFacility> listForRemoving = new ArrayList<SportFacility>();
 
-//        Type facilitiesListType = new TypeToken<ArrayList<SportFacility>>(){}.getType();
-//
-//        ArrayList<SportFacility> facilitiesArray = gson.fromJson(facilities, facilitiesListType);
-
-        for( SportFacility facility : allFacilities){
-            switch (criteria) {
-                case "name":
-                    if(facility.getName().toLowerCase().contains(searchInput.toLowerCase().trim()))
-                        filteredList.add(facility);
-                    break;
-                case "type":
-                    if(facility.getType().getType().toLowerCase().contains(searchInput.toLowerCase().trim()))
-                        filteredList.add(facility);
-                    break;
-                case "location":
-                    if(facility.getLocation().getCity().toLowerCase().contains(searchInput.toLowerCase().trim()))
-                        filteredList.add(facility);
-                    break;
-
-                case "average_grade":
-                    switch(gradeCriteria){
-                        case "1-2":
-                            if(facility.getAverageGrade() > 1 && facility.getAverageGrade() <= 2)
-                                filteredList.add(facility);
-                            break;
-                        case "2-3":
-                            if(facility.getAverageGrade() > 2 && facility.getAverageGrade() <= 3)
-                                filteredList.add(facility);
-                            break;
-                        case "3-4":
-                            if(facility.getAverageGrade() > 3 && facility.getAverageGrade() <= 4)
-                                filteredList.add(facility);
-                            break;
-                        case "4-5":
-                            if(facility.getAverageGrade() > 4 && facility.getAverageGrade() <= 5)
-                                filteredList.add(facility);
-                            break;
-                    }
-                    break;
+        if (!gradeCriteria.equals("")) {
+            for (SportFacility facility : facilityList) {
+                switch (gradeCriteria) {
+                    case "1-2":
+                        if (facility.getAverageGrade() > 1 && facility.getAverageGrade() <= 2)
+                            filteredList.add(facility);
+                        break;
+                    case "2-3":
+                        if (facility.getAverageGrade() > 2 && facility.getAverageGrade() <= 3)
+                            filteredList.add(facility);
+                        break;
+                    case "3-4":
+                        if (facility.getAverageGrade() > 3 && facility.getAverageGrade() <= 4)
+                            filteredList.add(facility);
+                        break;
+                    case "4-5":
+                        if (facility.getAverageGrade() > 4 && facility.getAverageGrade() <= 5)
+                            filteredList.add(facility);
+                        break;
+                }
             }
+            //ako nikog nije ubacio za grade, znaci ne postuje niko taj kriterijum, vrati praznu listu
+            if(filteredList.size() == 0)
+                return gson.toJson(filteredList);
         }
 
+        //ako ne postoji grade i postoji name
+        if (gradeCriteria.equals("") && !nameSearch.equals("")) {
+            for (SportFacility facility : facilityList) {
+                if (facility.getName().toLowerCase().contains(nameSearch.toLowerCase().trim()))
+                    filteredList.add(facility);
+            }
+            //ako nikog nije ubacio za name, znaci ne postuje niko taj kriterijum, vrati praznu listu
+            if(filteredList.size() == 0)
+                return gson.toJson(filteredList);
+        }
+        //ako grade postoji i postoji i name
+        else if(!gradeCriteria.equals("") && !nameSearch.equals("")){
+            for (SportFacility facility : filteredList) {
+                if (!facility.getName().toLowerCase().contains(nameSearch.toLowerCase().trim()))
+                    listForRemoving.add(facility);
+            }
+            filteredList.removeAll(listForRemoving);
+            listForRemoving.clear();
+            //ako je lista sada prazna, znaci da name nije ispostovan iako je grade bio i vrati prazno
+            if(filteredList.size() == 0)
+                return gson.toJson(filteredList);
+        }
+
+        //ako ne postoji grade i name, a postoji type
+        if (gradeCriteria.equals("") && nameSearch.equals("") && !typeSearch.equals("")) {
+            for (SportFacility facility : facilityList) {
+                if (facility.getType().getType().toLowerCase().contains(typeSearch.toLowerCase().trim()))
+                    filteredList.add(facility);
+            }
+            //ako nikog nije ubacio za type, znaci ne postuje niko taj kriterijum, vrati praznu listu
+            if(filteredList.size() == 0)
+                return gson.toJson(filteredList);
+        }
+        //ako grade ILI name postoji i postoji i type
+        else if((!gradeCriteria.equals("") || !nameSearch.equals("")) && !typeSearch.equals("")){
+            for (SportFacility facility : filteredList) {
+                if (!facility.getType().getType().toLowerCase().contains(typeSearch.toLowerCase().trim()))
+                    listForRemoving.add(facility);
+            }
+            filteredList.removeAll(listForRemoving);
+            listForRemoving.clear();
+            //ako je lista sada prazna, znaci da type nije ispostovan iako je grade ili name bio i vrati prazno
+            if(filteredList.size() == 0)
+                return gson.toJson(filteredList);
+        }
+
+        //ako ne postoji grade i name i type, a postoji location
+        if (gradeCriteria.equals("") && nameSearch.equals("") && typeSearch.equals("") && !locationSearch.equals("")) {
+            for (SportFacility facility : facilityList) {
+                if (facility.getLocation().getCity().toLowerCase().contains(locationSearch.toLowerCase().trim()))
+                    filteredList.add(facility);
+            }
+            //ako nikog nije ubacio za locatoin, znaci ne postuje niko taj kriterijum, vrati praznu listu
+            if(filteredList.size() == 0)
+                return gson.toJson(filteredList);
+        }
+        //ako grade ILI name ILI type postoji i postoji i location
+        else if((!gradeCriteria.equals("") || !nameSearch.equals("") || !typeSearch.equals("")) && !locationSearch.equals("")) {
+            for (SportFacility facility : filteredList) {
+                if (!facility.getLocation().getCity().toLowerCase().contains(locationSearch.toLowerCase().trim()))
+                    listForRemoving.add(facility);
+            }
+            filteredList.removeAll(listForRemoving);
+            listForRemoving.clear();
+            //svakako prodje i posalje praznu listu
+        }
         return gson.toJson(filteredList);
     }
 

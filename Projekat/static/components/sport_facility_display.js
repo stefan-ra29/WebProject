@@ -2,11 +2,14 @@ Vue.component("sport_facility_display", {
 	data: function () {
 	    return {
 	      facilities: null,
-	      facilities_before_checking: {},
+	      facilitiesBeforeSearch: {},
 	      facility_types: {},
-	      criteria : "",
-	      searchInput : "",
+	      nameSearch: "",
+          typeSearch: "",
+          locationSearch: "",
 	      grade_criteria: "",
+          searchHappened: false,
+
 	      filter : "",
 	      sort : "",
 	      currently_open: true,
@@ -35,21 +38,23 @@ Vue.component("sport_facility_display", {
             </div>
 
     	    <form class="sport_facility_search_display">
-    	        <select style="width: 125px; padding:1px" name="search_criteria" id="search_criteria" v-model = "criteria">
-                      <option value="name">Naziv</option>
-                      <option value="type">Tip</option>
-                      <option value="location">Lokacija</option>
-                      <option value="average_grade">Prosecna ocena</option>
-                </select>
-    	        <input v-if="criteria != 'average_grade'" type="text" name="search" v-model = "searchInput">
-    	        <select v-else v-model = "grade_criteria" name="grade_select" style="width: 100px; padding:1px">
+                Naziv: <input type="text" name="nameSearch" v-model="nameSearch">
+                Tip: <input type="text" name="typeSearch" v-model="typeSearch">
+                Lokacija: <input type="text" name="locationSearch" v-model="locationSearch">
+                Ocena:
+    	        <select v-model = "grade_criteria" name="grade_select" style="width: 100px; padding:1px">
                         <option value="1-2">1-2</option>
                         <option value="2-3">2-3</option>
                         <option value="3-4">3-4</option>
                         <option value="4-5">4-5</option>
+                        <option value="">Sve</option>
                 </select>
+    	        <input type="submit" value="Pretrazi" v-on:click="searchFacilities" name="search_button">
+    	        <button class= "button_icon_style" v-on:click="removeSearch"
+    	        v-if=" nameSearch != '' || locationSearch != '' || typeSearch != '' || grade_criteria != ''" >
+    	            <i class="fa-solid fa-x"></i>
+                </button></br>
 
-    	        <input type="submit" value="Pretrazi" v-on:click="searchSubmit" name="search_button">
     	    </form>
 
             Sortiraj:
@@ -106,7 +111,11 @@ Vue.component("sport_facility_display", {
     mounted () {
         axios
         .get("rest/facilities/get_all")
-        .then(response => {this.facilities = response.data});
+        .then(response => {
+            this.facilities = response.data
+            this.facilities.sort((a,b) => b.isOpen - a.isOpen)
+            this.facilitiesBeforeSearch = this.facilities
+        });
 
         axios
         .get("rest/facilities/get_facility_types")
@@ -140,39 +149,54 @@ Vue.component("sport_facility_display", {
             router.push('/single_facility')
         },
         previousState: function(e){
-            this.facilities_before_checking = this.facilities
+            this.facilities = this.facilitiesBeforeSearch
         },
-        searchSubmit : function(e){
+        searchFacilities : function(e){
             e.preventDefault()
 
-            if(this.criteria == "")
+            if(this.nameSearch.trim() == "" && this.typeSearch.trim() == "" && this.locationSearch.trim() == "" && this.grade_criteria.trim() == ""){
                 return;
+            }
+//            if(this.filterDone == true){
+//                this.workouts = this.filteredWorkouts
+//            }
+//            else{
+//                if(this.searchHappened == true){
+//                    this.previousState(e)
+//                }
+//            }
 
-            var copied_facilities = this.facilities
-
+            if(this.searchHappened == true){
+                this.previousState(e)
+            }
+            this.nameSearch = this.nameSearch.trim()
+            this.typeSearch = this.typeSearch.trim()
+            this.locationSearch = this.locationSearch.trim()
             axios
             .post("rest/facilities/search", this.facilities,
             { params : {
-                criteria : this.criteria,
-                searchInput : this.searchInput,
+                nameSearch : this.nameSearch,
+                typeSearch : this.typeSearch,
+                locationSearch : this.locationSearch,
                 gradeCriteria: this.grade_criteria
             }})
-
             .then(response => {this.facilities = response.data});
+
+            this.searchHappened = true
         },
-        sortFacilities(event){
-            event.preventDefault()
+        sortFacilities(e){
+            e.preventDefault()
 
             axios
             .get("rest/facilities/sort",
             { params : {
-                sortBy : event.target.value
+                sortBy : e.target.value
             }})
 
             .then(response => {this.facilities = response.data});
         },
-        filterFacilities(event){
-            event.preventDefault()
+        filterFacilities(e){
+            e.preventDefault()
 
             axios
             .get("rest/facilities/filter",
@@ -182,10 +206,10 @@ Vue.component("sport_facility_display", {
 
             .then(response => {this.facilities = response.data});
         },
-        getOpenFacilities(event){
-            event.preventDefault()
+        getOpenFacilities(e){
+            e.preventDefault()
 
-            if(event.target.checked == true){
+            if(e.target.checked == true){
                 axios
                 .get("rest/facilities/get_currently_opened_facilities")
 
@@ -202,6 +226,17 @@ Vue.component("sport_facility_display", {
             localStorage.setItem("jwt", '-1');
             window.location.reload();
 
+        },
+        removeSearch: function(e){
+            e.preventDefault()
+            this.previousState()
+            this.nameSearch = ""
+            this.locationSearch = ""
+            this.typeSearch = ""
+            this.grade_criteria = ""
+//            if(this.filter != ""){
+//                this.filterWorkouts(e)
+//            }
         }
 	}
 

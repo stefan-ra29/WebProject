@@ -42,10 +42,11 @@ public class SportFacilityController {
             res.type("application/json");
 
             ArrayList<SportFacility> facilityList = gson.fromJson(req.body(),  new TypeToken<ArrayList<SportFacility>>(){}.getType());
-            String criteria = req.queryParams("criteria");
-            String searchInput = req.queryParams("searchInput");
+            String nameSearch = req.queryParams("nameSearch");
+            String typeSearch = req.queryParams("typeSearch");
+            String locationSearch = req.queryParams("locationSearch");
             String gradeCriteria = req.queryParams("gradeCriteria");
-            return sportFacilityService.searchSportFacilities(criteria, searchInput, gradeCriteria);
+            return sportFacilityService.searchSportFacilities(nameSearch, typeSearch, locationSearch, gradeCriteria, facilityList);
         });
     }
 

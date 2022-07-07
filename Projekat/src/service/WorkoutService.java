@@ -144,4 +144,14 @@ public class WorkoutService {
         }
         return gson.toJson(workouts);
     }
+    public String filterWorkouts(String filterBy, ArrayList<Workout> workouts){
+
+        ArrayList<Workout> filteredWorkouts = new ArrayList<Workout>();
+
+        for(Workout w : workouts){
+            if(w.getWorkoutType().getType().equals(filterBy))
+                filteredWorkouts.add(w);
+        }
+        return gson.toJson(filteredWorkouts);
+    }
 }

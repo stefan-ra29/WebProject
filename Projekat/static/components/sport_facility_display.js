@@ -64,7 +64,7 @@ Vue.component("sport_facility_display", {
 
             Filtriraj:
                 <select style="width: 195px; padding:1px" name="filter" id="filter"
-                    @change = "filterFacilities($event)" v-model=filter >
+                    @change = "filterFacilities($event)" v-model="filter" >
                       <option v-for="type in facility_types" >{{type}}</option>
                 </select></br>
 

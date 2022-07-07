@@ -39,5 +39,6 @@ public class SparkMainApp {
         WorkoutController.changeWorkout();
         WorkoutController.searchWorkouts();
         WorkoutController.sortWorkouts();
+        WorkoutController.filterWorkouts();
     }
 }

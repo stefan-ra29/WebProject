@@ -128,3 +128,25 @@ table{
 .yearly_membership{
     background-color: #f4a261;
 }
+
+.icon_style{
+    height: 10px;
+    width: 10px;
+    margin: 0px,0px,0px,0px;
+    padding: 0px;
+}
+
+.button_icon_style{
+    height: 20px;
+    width: 20px;
+    margin: 0px,0px,0px,0px;
+    padding: 0px;
+    background-color: transparent;
+    border: none;
+}
+.button_icon_style:hover{
+    background-color: yellow;
+}
+.button_icon_style:click{
+    background-color: orange;
+}

@@ -85,4 +85,14 @@ public class WorkoutController {
 
         });
     }
+    public static void filterWorkouts(){
+        post("rest/workouts/filter", (req, res) ->{
+            res.type("application/json");
+
+            ArrayList<Workout> workouts = gson.fromJson(req.body(), new TypeToken<ArrayList<Workout>>(){}.getType());
+            String filterBy = req.queryParams("filterBy");
+            return workoutService.filterWorkouts(filterBy, workouts);
+
+        });
+    }
 }

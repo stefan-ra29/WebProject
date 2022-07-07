@@ -10,7 +10,12 @@ Vue.component("single_facility_display", {
 	      minPrice: null,
 	      maxPrice: null,
 	      searchHappened : false,
-	      sort: ""
+	      sort: "",
+	      types: {},
+	      filter: "",
+	      filterHappened: false,
+	      filteredWorkouts: {},
+	      filterDone: false
 	      }
 	},
 	    template: `
@@ -45,7 +50,7 @@ Vue.component("single_facility_display", {
              </table>
              <h2 class="managers_facility_header">Treninzi:</h2>
 
-            <form v-if="workouts.length != 0" class="sport_facility_search_display">
+            <form v-if="workouts.length != null" class="sport_facility_search_display">
                 <select style="width: 125px; padding:1px" name="search_criteria" id="search_criteria" v-model = "criteria">
                       <option value="withoutSupplement">Bez doplate</option>
                       <option value="withSupplement">Sa doplatom</option>
@@ -54,14 +59,24 @@ Vue.component("single_facility_display", {
                     Od: <input  type="number" name="price" min="0" max="2000" v-model = "minPrice">
                     Do: <input  type="number" name="price" min="0" max="2000" v-model = "maxPrice">
                 </div>
-                <input type="submit" value="Pretrazi" v-on:click="searchSubmit" name="search_button">
+                <input type="submit" value="Pretrazi" v-on:click="searchWorkouts" name="search_button">
+                <button class= "button_icon_style" v-if=" criteria != ''" v-on:click="removeSearch"><i class="fa-solid fa-x"></i></button></br>
+
             </form>
 
             Sortiraj:
-            <select style="width: 195px; padding:1px" name="sort" id="sort" v-model = "sort" @change = "sortFacilities($event)" >
+            <select style="width: 195px; padding:1px" name="sort" id="sort" v-model = "sort" @change = "sortWorkouts($event)" >
                   <option value="price_increasing">Doplata (rastuce)</option>
                   <option value="price_decreasing">Doplata (opadajuce)</option>
-            </select></br>
+            </select>
+            <button class= "button_icon_style" v-if=" sort != ''" v-on:click="removeSort"><i class="fa-solid fa-x"></i></button></br>
+
+            Filtriraj:
+            <select style="width: 195px; padding:1px" name="filter" id="filter"
+                @change = "filterWorkouts($event)" v-model="filter" >
+                  <option v-for="type in types" >{{type.type}}</option>
+            </select>
+            <button class= "button_icon_style" v-if=" filter != ''" v-on:click="removeFilter"><i class="fa-solid fa-x"></i></button></br>
 
             <div v-for="(workout, index) in workouts" class="facility_display_wrap">
                  <table class="facility_table_wrap">
@@ -130,6 +145,7 @@ Vue.component("single_facility_display", {
             .post("rest/workouts/get_coaches_names", this.workouts)
             .then(response => {this.coaches = response.data});
         });
+        this.addTypes()
 
     },
     methods: {
@@ -143,7 +159,7 @@ Vue.component("single_facility_display", {
             localStorage.setItem("workoutChangeID", workoutID)
             router.push('/change_workout')
         },
-        searchSubmit : function(e){
+        searchWorkouts : function(e){
             e.preventDefault()
             //console.log(this.workoutsBeforeSearch)
             if(this.criteria == "")
@@ -156,9 +172,19 @@ Vue.component("single_facility_display", {
                     alert("Maksimalna vrednost mora biti veca od minimalne!")
                 }
             }
-            if(this.searchHappened == true){
-                this.previousState()
+            if(this.filterDone == true){
+                this.workouts = this.filteredWorkouts
+                console.log("  ")
+                console.log("Desio se filter pre searcha:")
                 console.log(this.workouts)
+            }
+            else{
+                if(this.searchHappened == true){
+                    this.previousState(e)
+                    console.log("  ")
+                    console.log("Desio se search bez filtera:")
+                    console.log(this.workouts)
+                }
             }
 
             axios
@@ -170,16 +196,21 @@ Vue.component("single_facility_display", {
             }})
             .then(response => {
                 this.workouts = response.data
-                if(sort != ""){
-                    this.sortFacilities(e)
+                 console.log("  ")
+                 console.log("Posle searcha da li treba sort ili nesto ")
+                 console.log(this.workouts)
+                if(this.sort != ""){
+                    this.sortWorkouts(e)
                 }
                 });
 
             this.searchHappened = true
 
         },
-        sortFacilities(event){
-            event.preventDefault()
+        sortWorkouts(e){
+            e.preventDefault()
+            console.log("  ")
+            console.log("Pre sorta")
             console.log(this.workouts)
             axios
             .post("rest/facilities/sort", this.workouts,
@@ -187,7 +218,70 @@ Vue.component("single_facility_display", {
                 sortBy : this.sort
             }})
             .then(response => {this.workouts = response.data
+            console.log("  ")
+            console.log("Posle sorta ")
             console.log(this.workouts)});
-        }
+        },
+         filterWorkouts(e){
+             e.preventDefault()
+
+
+            if(this.filterHappened == true){
+                this.previousState(e)
+                console.log("  ")
+                console.log("Filter ce se desiti:")
+                console.log(this.workouts)
+            }
+             axios
+             .post("rest/workouts/filter", this.workouts,
+             { params : {
+                 filterBy : this.filter
+             }})
+
+             .then(response => {this.workouts = response.data
+             console.log("Posle filtera:")
+             console.log(this.workouts)
+
+             this.filteredWorkouts = this.workouts
+
+             if(this.criteria != ""){
+                 this.filterDone = true;
+                 this.searchWorkouts(e)
+             }
+             else{
+                this.filterDone = true;
+                if(this.sort != ""){
+                     this.sortWorkouts(e)
+                 }
+             }
+             });
+             this.filterHappened = true
+         },
+          addTypes : function(e){
+              axios
+              .get("rest/workouts/get_types")
+              .then(response => {this.types = response.data});
+          },
+          removeSort: function(e){
+            e.preventDefault()
+            this.sort = ""
+          },
+          removeSearch: function(e){
+            e.preventDefault()
+            this.previousState()
+            this.criteria = ""
+            if(this.filter != ""){
+                this.filterWorkouts(e)
+            }
+          },
+            removeFilter: function(e){
+              e.preventDefault()
+              this.previousState()
+              this.filter = ""
+              this.filterDone = false;
+              if(this.criteria != ""){
+                  this.searchWorkouts(e)
+              }
+            }
     }
 });

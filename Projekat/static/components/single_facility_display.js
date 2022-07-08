@@ -192,15 +192,17 @@ Vue.component("single_facility_display", {
                 if(this.sort != ""){
                     this.sortWorkouts(e)
                 }
+                if(this.workouts.length == 0){
+                     alert("Nijedan trening se ne podudara sa pretragom")
+                 }
                 });
 
             this.searchHappened = true
-
         },
         sortWorkouts(e){
             e.preventDefault()
             axios
-            .post("rest/facilities/sort", this.workouts,
+            .post("rest/workouts/sort", this.workouts,
             { params : {
                 sortBy : this.sort
             }})
@@ -232,6 +234,9 @@ Vue.component("single_facility_display", {
                      this.sortWorkouts(e)
                  }
              }
+             if(this.workouts.length == 0){
+                  alert("Nijedan trening se ne podudara sa pretragom")
+              }
              });
              this.filterHappened = true
          },
@@ -251,6 +256,11 @@ Vue.component("single_facility_display", {
             if(this.filter != ""){
                 this.filterWorkouts(e)
             }
+            else{
+                if(this.sort != ""){
+                     this.sortWorkouts(e)
+                 }
+            }
           },
             removeFilter: function(e){
               e.preventDefault()
@@ -259,6 +269,10 @@ Vue.component("single_facility_display", {
               this.filterDone = false;
               if(this.criteria != ""){
                   this.searchWorkouts(e)
+              }else{
+                    if(this.sort != ""){
+                       this.sortWorkouts(e)
+                   }
               }
             }
     }

@@ -51,11 +51,12 @@ public class SportFacilityController {
     }
 
     public static void sortSportFacilities(){
-        get("rest/facilities/sort", (req, res) ->{
+        post("rest/facilities/sort", (req, res) ->{
             res.type("application/json");
 
+            ArrayList<SportFacility> facilityList = gson.fromJson(req.body(),  new TypeToken<ArrayList<SportFacility>>(){}.getType());
             String sortBy = req.queryParams("sortBy");
-            return sportFacilityService.sortSportFacilities(sortBy);
+            return sportFacilityService.sortSportFacilities(sortBy, facilityList);
 
         });
     }
@@ -69,21 +70,22 @@ public class SportFacilityController {
         });
     }
     public static void filterSportFacilities(){
-        get("rest/facilities/filter", (req, res) ->{
+        post("rest/facilities/filter", (req, res) ->{
             res.type("application/json");
+            ArrayList<SportFacility> facilityList = gson.fromJson(req.body(),  new TypeToken<ArrayList<SportFacility>>(){}.getType());
 
             String filterBy = req.queryParams("filterBy");
-            return sportFacilityService.filterSportFacilities(filterBy);
+            return sportFacilityService.filterSportFacilities(filterBy, facilityList);
 
         });
     }
 
     public static void getCurrentlyOpenedSportFacilities(){
-        get("rest/facilities/get_currently_opened_facilities", (req, res) ->{
+        post("rest/facilities/get_currently_opened_facilities", (req, res) ->{
             res.type("application/json");
 
-            return sportFacilityService.getCurrentlyOpenedSportFacilities();
-
+            ArrayList<SportFacility> facilityList = gson.fromJson(req.body(),  new TypeToken<ArrayList<SportFacility>>(){}.getType());
+            return sportFacilityService.getCurrentlyOpenedSportFacilities(facilityList);
         });
     }
 

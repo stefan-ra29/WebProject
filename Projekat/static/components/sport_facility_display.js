@@ -9,7 +9,9 @@ Vue.component("sport_facility_display", {
           locationSearch: "",
 	      grade_criteria: "",
           searchHappened: false,
-
+          filterHappened: false,
+          filterDone: false,
+          filteredFacilities: {},
 	      filter : "",
 	      sort : "",
 	      currently_open: true,
@@ -17,7 +19,8 @@ Vue.component("sport_facility_display", {
 	      role : window.localStorage.getItem('role'),
 	      jwt: window.localStorage.getItem('jwt'),
 	      manager : {sportFacilityId: '', username:'', password: '', firstName: '', lastName: '', email: '', gender: '', dob : {} },
-	      managersFacility : {}
+	      managersFacility : {},
+	      openFacilities: false
 	    }
 	},
 	    template: `
@@ -54,7 +57,6 @@ Vue.component("sport_facility_display", {
     	        v-if=" nameSearch != '' || locationSearch != '' || typeSearch != '' || grade_criteria != ''" >
     	            <i class="fa-solid fa-x"></i>
                 </button></br>
-
     	    </form>
 
             Sortiraj:
@@ -65,18 +67,19 @@ Vue.component("sport_facility_display", {
                       <option value="location_decreasing">Lokacija (Z-A)</option>
                       <option value="average_grade_increasing">Prosecna ocena (rastuce)</option>
                       <option value="average_grade_decreasing">Prosecna ocena (opadajuce)</option>
-                </select></br>
+                </select>
+                <button class= "button_icon_style" v-if=" sort != ''" v-on:click="removeSort"><i class="fa-solid fa-x"></i></button></br>
 
             Filtriraj:
                 <select style="width: 195px; padding:1px" name="filter" id="filter"
                     @change = "filterFacilities($event)" v-model="filter" >
                       <option v-for="type in facility_types" >{{type}}</option>
-                </select></br>
+                </select>
+            <button class= "button_icon_style" v-if=" filter != ''" v-on:click="removeFilter"><i class="fa-solid fa-x"></i></button></br>
 
             <input type="checkbox" id="openFacilities" name="openFacilities" value="openFacilities"
-             @change = "getOpenFacilities($event)">
+             @change = "getOpenFacilities($event)" v-model="openFacilities" >
             <label for="openFacilities">Trenutno otvoreni objekti</label>
-
 
     	    <h1 class="facility_heading">Objekti</h1>
 
@@ -157,18 +160,15 @@ Vue.component("sport_facility_display", {
             if(this.nameSearch.trim() == "" && this.typeSearch.trim() == "" && this.locationSearch.trim() == "" && this.grade_criteria.trim() == ""){
                 return;
             }
-//            if(this.filterDone == true){
-//                this.workouts = this.filteredWorkouts
-//            }
-//            else{
-//                if(this.searchHappened == true){
-//                    this.previousState(e)
-//                }
-//            }
-
-            if(this.searchHappened == true){
-                this.previousState(e)
+            if(this.filterDone == true){
+                this.facilities = this.filteredFacilities
             }
+            else{
+                if(this.searchHappened == true){
+                    this.previousState(e)
+                }
+            }
+
             this.nameSearch = this.nameSearch.trim()
             this.typeSearch = this.typeSearch.trim()
             this.locationSearch = this.locationSearch.trim()
@@ -180,40 +180,85 @@ Vue.component("sport_facility_display", {
                 locationSearch : this.locationSearch,
                 gradeCriteria: this.grade_criteria
             }})
-            .then(response => {this.facilities = response.data});
+            .then(response => {
+                this.facilities = response.data
+                if(this.openFacilities == true){
+                  this.getOpenFacilities(e)
+                }
+                if(this.sort != ""){
+                    this.sortFacilities(e)
+                }
+                if(this.facilities.length == 0){
+                    alert("Nijedan objekat se ne podudara sa pretragom")
+                }
+                });
 
             this.searchHappened = true
         },
         sortFacilities(e){
             e.preventDefault()
-
             axios
-            .get("rest/facilities/sort",
+            .post("rest/facilities/sort", this.facilities,
             { params : {
-                sortBy : e.target.value
+                sortBy : this.sort
             }})
-
             .then(response => {this.facilities = response.data});
         },
         filterFacilities(e){
             e.preventDefault()
-
+            if(this.filterHappened == true){
+                this.previousState(e)
+            }
             axios
-            .get("rest/facilities/filter",
+            .post("rest/facilities/filter", this.facilities,
             { params : {
                 filterBy : this.filter
             }})
 
-            .then(response => {this.facilities = response.data});
+            .then(response => {this.facilities = response.data
+                this.filteredFacilities = this.facilities
+                if(this.openFacilities == true){
+                    this.getOpenFacilities(e)
+                }
+                 if(this.nameSearch.trim() != "" || this.typeSearch.trim() != "" || this.locationSearch.trim() != "" || this.grade_criteria.trim() != ""){
+                     this.filterDone = true;
+                     this.searchFacilities(e)
+                 }
+                 else{
+                    this.filterDone = true;
+
+                    if(this.sort != ""){
+                         this.sortFacilities(e)
+                     }
+                 }
+                 if(this.facilities.length == 0){
+                     alert("Nijedan objekat se ne podudara sa pretragom")
+                 }
+             });
+             this.filterHappened = true
         },
         getOpenFacilities(e){
             e.preventDefault()
 
-            if(e.target.checked == true){
+            if(this.openFacilities == true){
                 axios
-                .get("rest/facilities/get_currently_opened_facilities")
-
-                .then(response => {this.facilities = response.data});
+                .post("rest/facilities/get_currently_opened_facilities", this.facilities)
+                .then(response => {
+                    this.facilities = response.data
+                    if(this.facilities.length == 0){
+                         alert("Nijedan objekat se ne podudara sa pretragom")
+                     }});
+            }else{
+                this.previousState()
+                if(this.nameSearch.trim() != "" || this.typeSearch.trim() != "" || this.locationSearch.trim() != "" || this.grade_criteria.trim() != ""){
+                    this.searchFacilities(e)
+                }
+                else if(this.filter != ""){
+                    this.filterFacilities(e)
+                }
+                else if(this.sort != ""){
+                    this.sortFacilities(e)
+                }
             }
         },
         details : function(facility){
@@ -234,10 +279,41 @@ Vue.component("sport_facility_display", {
             this.locationSearch = ""
             this.typeSearch = ""
             this.grade_criteria = ""
-//            if(this.filter != ""){
-//                this.filterWorkouts(e)
-//            }
-        }
+
+            if(this.filter != ""){
+                this.filterFacilities(e)
+            }
+            else{
+                if(this.sort != ""){
+                     this.sortFacilities(e)
+                 }
+                 if(this.openFacilities == true){
+                     this.getOpenFacilities(e)
+                 }
+            }
+        },
+       removeSort: function(e){
+         e.preventDefault()
+         this.sort = ""
+       },
+       removeFilter: function(e){
+          e.preventDefault()
+          this.previousState()
+          this.filter = ""
+          this.filterDone = false;
+
+          if(this.nameSearch.trim() != "" || this.typeSearch.trim() != "" || this.locationSearch.trim() != "" || this.grade_criteria.trim() != ""){
+              this.searchFacilities(e)
+          }
+          else{
+            if(this.openFacilities == true){
+              this.getOpenFacilities(e)
+            }
+              if(this.sort != ""){
+                   this.sortFacilities(e)
+               }
+          }
+       }
 	}
 
 });

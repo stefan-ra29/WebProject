@@ -139,35 +139,32 @@ public class SportFacilityService {
         return gson.toJson(filteredList);
     }
 
-    public String sortSportFacilities(String sortBy ){
-
-        List<SportFacility> allFacilities = sportFacilityRepository.getAll();
-        ArrayList<SportFacility> filteredList = new ArrayList<SportFacility>();
+    public String sortSportFacilities(String sortBy, ArrayList<SportFacility> facilityList ){
 
         switch (sortBy) {
             case "name_increasing":
-                Collections.sort(allFacilities, new NameComparator());
+                Collections.sort(facilityList, new NameComparator());
                 break;
             case "name_decreasing":
-                Collections.sort(allFacilities, new NameComparator().reversed());
+                Collections.sort(facilityList, new NameComparator().reversed());
             case "location_increasing":
-                Collections.sort(allFacilities, new LocationComparator());
+                Collections.sort(facilityList, new LocationComparator());
                 break;
 
             case "location_decreasing":
-                Collections.sort(allFacilities, new LocationComparator().reversed());
+                Collections.sort(facilityList, new LocationComparator().reversed());
                 break;
 
             case "average_grade_increasing":
-                Collections.sort(allFacilities, new AverageGradeComparator());
+                Collections.sort(facilityList, new AverageGradeComparator());
                 break;
 
             case "average_grade_decreasing":
-                Collections.sort(allFacilities, new AverageGradeComparator().reversed());
+                Collections.sort(facilityList, new AverageGradeComparator().reversed());
                 break;
         }
 
-        return gson.toJson(allFacilities);
+        return gson.toJson(facilityList);
     }
     public String getSportFacilityTypes(){
 
@@ -181,25 +178,23 @@ public class SportFacilityService {
 
         return gson.toJson(types);
     }
-    public String filterSportFacilities(String filter){
+    public String filterSportFacilities(String filter, ArrayList<SportFacility> facilityList){
 
-        List<SportFacility> allFacilities = sportFacilityRepository.getAll();
         ArrayList<SportFacility> filteredFacilities = new ArrayList<SportFacility>();
 
-        for(SportFacility sf : allFacilities){
+        for(SportFacility sf : facilityList){
             if(sf.getType().getType().equals(filter))
                 filteredFacilities.add(sf);
         }
         return gson.toJson(filteredFacilities);
     }
 
-    public String getCurrentlyOpenedSportFacilities(){
+    public String getCurrentlyOpenedSportFacilities(ArrayList<SportFacility> facilityList){
 
-        List<SportFacility> allFacilities = sportFacilityRepository.getAll();
         ArrayList<SportFacility> currentlyOpenedFacilities = new ArrayList<SportFacility>();
 
         LocalTime now = LocalTime.now();
-        for(SportFacility sf : allFacilities){
+        for(SportFacility sf : facilityList){
             if(sf.getStartHour().isBefore(now) && now.isBefore(sf.getClosingHour()))
                 currentlyOpenedFacilities.add(sf);
         }

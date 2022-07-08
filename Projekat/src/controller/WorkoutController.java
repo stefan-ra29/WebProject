@@ -79,7 +79,7 @@ public class WorkoutController {
         });
     }
     public static void sortWorkouts(){
-        post("rest/facilities/sort", (req, res) ->{
+        post("rest/workouts/sort", (req, res) ->{
             res.type("application/json");
 
             ArrayList<Workout> workouts = gson.fromJson(req.body(), new TypeToken<ArrayList<Workout>>(){}.getType());

@@ -13,17 +13,17 @@ public class LocationComparator implements Comparator {
 
         //prvo po gradu, pa po ulicii pa broju
 
-        if(	l1.getCity().strip().compareTo(l2.getCity().strip()) < 0 ) {
+        if(	l1.getCity().strip().toLowerCase().compareTo(l2.getCity().strip().toLowerCase()) < 0 ) {
             return -1;
         }
-        else if( l1.getCity().strip().compareTo(l2.getCity().strip()) > 0){
+        else if( l1.getCity().strip().toLowerCase().compareTo(l2.getCity().strip().toLowerCase()) > 0){
             return 1;
         }
         //ako su iz istog grada, gledamo ulicu
         else {
-            if (l1.getStreet().strip().compareTo(l2.getStreet().strip()) < 0) {
+            if (l1.getStreet().strip().toLowerCase().compareTo(l2.getStreet().strip().toLowerCase()) < 0) {
                 return -1;
-            } else if (l1.getStreet().strip().compareTo(l2.getStreet().strip()) > 0) {
+            } else if (l1.getStreet().strip().toLowerCase().compareTo(l2.getStreet().strip().toLowerCase()) > 0) {
                 return 1;
             }
             //ako su iz iste ulice, gledamo broj

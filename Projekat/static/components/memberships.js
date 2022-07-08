@@ -23,7 +23,7 @@ Vue.component("memberships", {
                         <div class="monthly_membership_light">
                             <h2>Mjesecna light</h2>
                             <p>Tip: mjesecna</p>
-                            <p>Cijena: 30 eura</p>
+                            <p>Cijena: 3600 dinara</p>
                             <p>1 ulazak dnevno</p>
                             <p>Ukupno 30 ulazaka</p>
                             <button v-on:click="monthlyLightSubscribe">Uplati</button>
@@ -33,7 +33,7 @@ Vue.component("memberships", {
                         <div class="monthly_membership_premium">
                             <h2>Mjesecna premium</h2>
                             <p>Tip: mjesecna</p>
-                            <p>Cijena: 45 eura</p>
+                            <p>Cijena: 5400 dinara</p>
                             <p>2 ulaska dnevno</p>
                             <p>Ukupno 60 ulazaka</p>
                             <button v-on:click="monthlyPremiumSubscribe">Uplati</button>
@@ -43,7 +43,7 @@ Vue.component("memberships", {
                         <div class="yearly_membership">
                             <h2>Godisnja</h2>
                             <p>Tip: godisnja</p>
-                            <p>Cijena: 180 eura</p>
+                            <p>Cijena: 22000 dinara</p>
                             <p>1 ulazak dnevno</p>
                             <p>Ukupno 365 ulazaka</p>
                             <button v-on:click="yearlySubscribe">Uplati</button>

@@ -21,7 +21,7 @@ public class MembershipController {
 
             String customerId = customer.getUsername();
 
-            Membership membership = new Membership("Mjesecna light", LocalDate.now(), LocalDate.now().plusMonths(1), 30, customerId, true, 30);
+            Membership membership = new Membership("Mjesecna light", LocalDate.now(), LocalDate.now().plusMonths(1), 3600, customerId, true, 30);
 
             membershipService.deactivatePreviousMemberships(customerId);
 
@@ -35,7 +35,7 @@ public class MembershipController {
 
             String customerId = customer.getUsername();
 
-            Membership membership = new Membership("Mjesecna premium", LocalDate.now(), LocalDate.now().plusMonths(1), 45, customerId, true, 60);
+            Membership membership = new Membership("Mjesecna premium", LocalDate.now(), LocalDate.now().plusMonths(1), 5400, customerId, true, 60);
 
             membershipService.deactivatePreviousMemberships(customerId);
 
@@ -49,7 +49,7 @@ public class MembershipController {
 
             String customerId = customer.getUsername();
 
-            Membership membership = new Membership("Godisnja", LocalDate.now(), LocalDate.now().plusMonths(12), 180, customerId, true, 365);
+            Membership membership = new Membership("Godisnja", LocalDate.now(), LocalDate.now().plusMonths(12), 22000, customerId, true, 365);
 
             membershipService.deactivatePreviousMemberships(customerId);
 
@@ -67,6 +67,16 @@ public class MembershipController {
             Membership currentMembership = membershipService.getActiveMembershipIfExists(customerId);
 
             return gson.toJson(currentMembership);
+        });
+
+        post("rest/memberships/checkMembershipExpiration", (req, res) -> {
+            res.type("application/json");
+
+            String customerId = req.queryParams("customerId");
+
+            membershipService.checkMembershipExpiration(customerId);
+
+            return null;
         });
     }
 }

@@ -1,0 +1,26 @@
+[
+  {
+    "entity": {
+      "typeName": "Bronzani",
+      "discount": 8,
+      "neededPoints": 800
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "typeName": "Srebrni",
+      "discount": 12,
+      "neededPoints": 1000
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "typeName": "Zlatni",
+      "discount": 15,
+      "neededPoints": 1300
+    },
+    "deleted": false
+  }
+]

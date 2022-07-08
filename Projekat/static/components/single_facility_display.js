@@ -327,9 +327,15 @@ Vue.component("single_facility_display", {
                    customerId : customerUsername,
                    workoutID: workoutId
                }})
-             .then(response => { });
+             .then(response => {
+              console.log(response.data)
+              if(response.data == true)
+                alert("Uspjesno ste se prijavili na trening!")
+              else
+                alert("Nemate vise preostalih posjeta u okviru clanarine! Uplatite novu.")
+              });
 
-            alert("Uspjesno ste se prijavili na trening!")
+
         }
     }
 });

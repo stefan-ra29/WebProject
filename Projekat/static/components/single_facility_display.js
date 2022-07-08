@@ -15,8 +15,13 @@ Vue.component("single_facility_display", {
 	      filter: "",
 	      filterHappened: false,
 	      filteredWorkouts: {},
-	      filterDone: false
-	      }
+	      filterDone: false,
+	      workouts: {},
+	      isFacilityCurrentlyWorking: null,
+	      customer: {username:'', password: '', firstName: '', lastName: '', email: '', gender: '', dob: {} },
+          currentMembership: {type: '', availableVisits: '', expirationDate: {}},
+          jwt: localStorage.getItem('jwt')
+	    }
 	},
 	    template: `
     	<div v-if="facility != null" >
@@ -105,6 +110,11 @@ Vue.component("single_facility_display", {
                          <td>Postoji mogucnost doplate u iznosu od {{workout.supplement}} dinara.</td>
                      </tr>
                      <tr><td><button v-if="isManager == true" v-on:click = "changeWorkout(workout.id)">Izmeni</button></td></tr>
+
+                     <tr v-if="isFacilityCurrentlyWorking == true && currentMembership != null && customer.username != ''">
+                        <button v-on:click="checkInToWorkout(customer.username, workout.id)">Prijavi se na trening</button>
+                     </tr>
+
                  </table>
              </div>
 
@@ -132,7 +142,12 @@ Vue.component("single_facility_display", {
         { params : {
                         id : id
                     }})
-        .then(response => {this.facility = response.data});
+        .then(response => {
+            this.facility = response.data
+            this.setIsFacilityCurrentlyWorking(id)
+
+        });
+
         axios
         .get("rest/workouts/get_workouts_by_facility",
         { params : {
@@ -147,18 +162,44 @@ Vue.component("single_facility_display", {
         });
         this.addTypes()
 
+        if(localStorage.getItem('role') == "Customer"){
+            axios
+            .get("rest/users/getLoggedUser",
+            { params : {
+                jwt : this.jwt,
+                isUserManager : false
+            }})
+            .then(response => {this.loadCustomer(response)});
+        }
+
+
     },
     methods: {
+
+        loadCustomer: function(response){
+            this.customer = response.data
+            this.loadCurrentMembership()
+        },
+
+        loadCurrentMembership() {
+            axios
+            .post("rest/memberships/getCurrentMembership", this.customer)
+            .then(response => (this.currentMembership = response.data))
+        },
+
         previousState: function(e){
             this.workouts = this.workoutsBeforeSearch
         },
+
         addNewWorkout : function(e){
                     router.push('/add_new_workout')
         },
+
         changeWorkout: function(workoutID){
             localStorage.setItem("workoutChangeID", workoutID)
             router.push('/change_workout')
         },
+
         searchWorkouts : function(e){
             e.preventDefault()
             if(this.criteria == "")
@@ -197,6 +238,7 @@ Vue.component("single_facility_display", {
             this.searchHappened = true
 
         },
+
         sortWorkouts(e){
             e.preventDefault()
             axios
@@ -206,6 +248,7 @@ Vue.component("single_facility_display", {
             }})
             .then(response => {this.workouts = response.data});
         },
+
          filterWorkouts(e){
              e.preventDefault()
 
@@ -235,15 +278,18 @@ Vue.component("single_facility_display", {
              });
              this.filterHappened = true
          },
+
           addTypes : function(e){
               axios
               .get("rest/workouts/get_types")
               .then(response => {this.types = response.data});
           },
+
           removeSort: function(e){
             e.preventDefault()
             this.sort = ""
           },
+
           removeSearch: function(e){
             e.preventDefault()
             this.previousState()
@@ -252,14 +298,38 @@ Vue.component("single_facility_display", {
                 this.filterWorkouts(e)
             }
           },
-            removeFilter: function(e){
-              e.preventDefault()
-              this.previousState()
-              this.filter = ""
-              this.filterDone = false;
-              if(this.criteria != ""){
-                  this.searchWorkouts(e)
-              }
+
+          removeFilter: function(e){
+            e.preventDefault()
+            this.previousState()
+            this.filter = ""
+            this.filterDone = false;
+            if(this.criteria != ""){
+                this.searchWorkouts(e)
             }
+          },
+
+        setIsFacilityCurrentlyWorking(id){
+            axios
+            .get("rest/facilities/getIsCurrentlyWorking",
+            { params : {
+                id : id
+            }})
+            .then(response => { this.isFacilityCurrentlyWorking = response.data });
+        },
+
+        checkInToWorkout: function(customerUsername, workoutId){
+
+            axios
+            .post("rest/workouts/checkInToWorkout",
+               {},
+               { params : {
+                   customerId : customerUsername,
+                   workoutID: workoutId
+               }})
+             .then(response => { });
+
+            alert("Uspjesno ste se prijavili na trening!")
+        }
     }
 });

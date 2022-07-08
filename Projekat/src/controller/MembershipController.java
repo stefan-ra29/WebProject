@@ -21,7 +21,7 @@ public class MembershipController {
 
             String customerId = customer.getUsername();
 
-            Membership membership = new Membership("monthlyLight", LocalDate.now(), LocalDate.now().plusMonths(1), 30, customerId, true, 30);
+            Membership membership = new Membership("Mjesecna light", LocalDate.now(), LocalDate.now().plusMonths(1), 30, customerId, true, 30);
 
             membershipService.deactivatePreviousMemberships(customerId);
 
@@ -35,7 +35,7 @@ public class MembershipController {
 
             String customerId = customer.getUsername();
 
-            Membership membership = new Membership("monthlyPremium", LocalDate.now(), LocalDate.now().plusMonths(1), 45, customerId, true, 60);
+            Membership membership = new Membership("Mjesecna premium", LocalDate.now(), LocalDate.now().plusMonths(1), 45, customerId, true, 60);
 
             membershipService.deactivatePreviousMemberships(customerId);
 
@@ -49,11 +49,24 @@ public class MembershipController {
 
             String customerId = customer.getUsername();
 
-            Membership membership = new Membership("yearly", LocalDate.now(), LocalDate.now().plusMonths(12), 180, customerId, true, 365);
+            Membership membership = new Membership("Godisnja", LocalDate.now(), LocalDate.now().plusMonths(12), 180, customerId, true, 365);
 
             membershipService.deactivatePreviousMemberships(customerId);
 
             return membershipService.addOne(membership);
+        });
+
+        post("rest/memberships/getCurrentMembership", (req, res) -> {
+            res.type("application/json");
+
+            User customer = gson.fromJson(req.body(), User.class);
+
+            String customerId = customer.getUsername();
+
+
+            Membership currentMembership = membershipService.getActiveMembershipIfExists(customerId);
+
+            return gson.toJson(currentMembership);
         });
     }
 }

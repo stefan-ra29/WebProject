@@ -6,15 +6,15 @@ import java.util.ArrayList;
 public class Customer extends User {
 	
 	private Membership membership;
-	private ArrayList<SportFacility> visitedFacilities;
+	private ArrayList<String> visitedFacilitiesIds;
 	private int points;
 	private CustomerType customerType;
 	
-	public Customer(Membership membership, ArrayList<SportFacility> visitedFacilities, int points,
+	public Customer(Membership membership, ArrayList<String> visitedFacilities, int points,
 			CustomerType customerType) {
 		super();
 		this.membership = membership;
-		this.visitedFacilities = visitedFacilities;
+		this.visitedFacilitiesIds = visitedFacilities;
 		this.points = points;
 		this.customerType = customerType;
 	}
@@ -42,12 +42,12 @@ public class Customer extends User {
 		this.membership = membership;
 	}
 
-	public ArrayList<SportFacility> getVisitedFacilities() {
-		return visitedFacilities;
+	public ArrayList<String> getVisitedFacilitiesIds() {
+		return visitedFacilitiesIds;
 	}
 
-	public void setVisitedFacilities(ArrayList<SportFacility> visitedFacilities) {
-		this.visitedFacilities = visitedFacilities;
+	public void setVisitedFacilities(ArrayList<String> visitedFacilitiesIds) {
+		this.visitedFacilitiesIds = visitedFacilitiesIds;
 	}
 
 	public int getPoints() {

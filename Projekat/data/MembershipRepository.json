@@ -1,8 +1,8 @@
 [
   {
     "entity": {
-      "id": "c0a1bb23-9f1b-4036-ba95-ab889b52cfe0",
-      "type": "monthly",
+      "id": "696b5a5d-225c-4594-899e-35aba22a0aa2",
+      "type": "Mjesecna light",
       "paymentDate": {
         "year": 2022,
         "month": 7,
@@ -14,79 +14,16 @@
         "day": 6
       },
       "fee": 30,
-      "customerId": "stefan",
-      "isActive": false,
-      "availableVisits": 30
-    },
-    "deleted": false
-  },
-  {
-    "entity": {
-      "id": "4fb15efa-9722-4ef7-b02e-8cc3589e417b",
-      "type": "monthlyPremium",
-      "paymentDate": {
-        "year": 2022,
-        "month": 7,
-        "day": 6
-      },
-      "expirationDate": {
-        "year": 2022,
-        "month": 8,
-        "day": 6
-      },
-      "fee": 45,
-      "customerId": "stefan",
-      "isActive": false,
-      "availableVisits": 60
-    },
-    "deleted": false
-  },
-  {
-    "entity": {
-      "id": "cf565a56-4995-43cb-8772-7e01e99e46ab",
-      "type": "yearly",
-      "paymentDate": {
-        "year": 2022,
-        "month": 7,
-        "day": 6
-      },
-      "expirationDate": {
-        "year": 2023,
-        "month": 7,
-        "day": 6
-      },
-      "fee": 180,
       "customerId": "stefan",
       "isActive": true,
-      "availableVisits": 365
+      "availableVisits": 27
     },
     "deleted": false
   },
   {
     "entity": {
-      "id": "742239ed-dbb7-4e56-8b5f-a6a0f5a8424e",
-      "type": "monthlyLight",
-      "paymentDate": {
-        "year": 2022,
-        "month": 7,
-        "day": 6
-      },
-      "expirationDate": {
-        "year": 2022,
-        "month": 8,
-        "day": 6
-      },
-      "fee": 30,
-      "customerId": "saska",
-      "isActive": false,
-      "availableVisits": 30
-    },
-    "deleted": false
-  },
-  {
-    "entity": {
-      "id": "db4a5b98-3da4-4fa9-8797-e500540bae7c",
-      "type": "yearly",
+      "id": "0afb36ec-b385-4a58-8800-8dcffd0c46fa",
+      "type": "Godisnja",
       "paymentDate": {
         "year": 2022,
         "month": 7,
@@ -100,7 +37,7 @@
       "fee": 180,
       "customerId": "saska",
       "isActive": true,
-      "availableVisits": 365
+      "availableVisits": 364
     },
     "deleted": false
   }

@@ -3,6 +3,7 @@ package controller;
 import beans.Workout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import service.WorkoutHistoryService;
 import service.WorkoutService;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ public class WorkoutController {
 
     private static Gson gson = new Gson();
     public static WorkoutService workoutService = new WorkoutService();
+    public static WorkoutHistoryService workoutHistoryService = new WorkoutHistoryService();
 
     public static void getWorkoutTypes() {
         get("rest/workouts/get_types", (req, res) -> {
@@ -38,6 +40,7 @@ public class WorkoutController {
             return workoutService.getWorkoutsByFacility(facilityID);
         });
     }
+
     public static void getCoachesNamesFromWorkoutList() {
         post("rest/workouts/get_coaches_names", (req, res) -> {
             res.type("application/json");
@@ -85,14 +88,29 @@ public class WorkoutController {
 
         });
     }
+
     public static void filterWorkouts(){
-        post("rest/workouts/filter", (req, res) ->{
+        post("rest/workouts/filter", (req, res) -> {
             res.type("application/json");
 
-            ArrayList<Workout> workouts = gson.fromJson(req.body(), new TypeToken<ArrayList<Workout>>(){}.getType());
+            ArrayList<Workout> workouts = gson.fromJson(req.body(), new TypeToken<ArrayList<Workout>>() {
+            }.getType());
             String filterBy = req.queryParams("filterBy");
             return workoutService.filterWorkouts(filterBy, workouts);
+        });
+    }
 
+    public static void checkInToWorkout(){
+        post("rest/workouts/checkInToWorkout", (req, res) -> {
+            res.type("application/json");
+
+            String customerId = req.queryParams("customerId");
+            String workoutId = req.queryParams("workoutID");
+
+
+            workoutHistoryService.addWorkoutHistory(customerId, workoutId);
+
+            return null;
         });
     }
 }

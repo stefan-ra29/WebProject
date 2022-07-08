@@ -107,4 +107,16 @@ public class SportFacilityController {
         });
     }
 
+    public static void getIsFacilityCurrentlyWorking(){
+        get("rest/facilities/getIsCurrentlyWorking", (req, res) ->{
+            res.type("application/json");
+
+            String facilityId = req.queryParams("id");
+
+            boolean flag = sportFacilityService.isFacilityCurrentlyWorking(facilityId);
+
+            return gson.toJson(sportFacilityService.isFacilityCurrentlyWorking(facilityId));
+        });
+    }
+
 }

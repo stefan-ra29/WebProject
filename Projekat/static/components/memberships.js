@@ -2,10 +2,21 @@ Vue.component("memberships", {
 	data: function () {
 	    return {
 	      customer: {username:'', password: '', firstName: '', lastName: '', email: '', gender: '', dob: {} },
+	      currentMembership: {type: '', availableVisits: '', expirationDate: {}},
 	      jwt: localStorage.getItem('jwt')
 	    }
 	},
 	    template: `
+	    <div style="text-align: center">
+	        <h1>Clanarine</h1>
+	        <div v-if="currentMembership.type != ''">
+	            <p>Trenutno imate aktivnu {{currentMembership.type}} clanarinu i ostalo Vam je {{currentMembership.availableVisits}} ulazaka</p>
+                <p>Clanarina Vam istice {{currentMembership.expirationDate.day}}.{{currentMembership.expirationDate.month}}.{{currentMembership.expirationDate.year}}.</p>
+	        </div>
+	        <div v-else>
+	            <p>Trenutno nemate aktivnu clanarinu</p>
+	        </div>
+
              <table class="membership_table">
                 <tr>
                     <td>
@@ -40,6 +51,8 @@ Vue.component("memberships", {
                     </td>
                 </tr>
              </table>
+	    </div>
+
     	`,
     mounted () {
         axios
@@ -55,6 +68,13 @@ Vue.component("memberships", {
 
         loadCustomer: function(response){
             this.customer = response.data
+            this.loadCurrentMembership()
+        },
+
+        loadCurrentMembership() {
+            axios
+            .post("rest/memberships/getCurrentMembership", this.customer)
+            .then(response => (this.currentMembership = response.data))
         },
 
         monthlyLightSubscribe: function(e){

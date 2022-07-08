@@ -35,6 +35,9 @@
   },
   {
     "entity": {
+      "workoutHistoryIds": [
+        "f4e81119-238b-431e-8e19-7046c490cfa4"
+      ],
       "firstName": "Tina",
       "lastName": "Tinic",
       "email": "tina@gmail.com",

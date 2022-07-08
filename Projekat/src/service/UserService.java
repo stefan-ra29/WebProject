@@ -17,6 +17,7 @@ import repository.ManagerRepository;
 import java.security.Key;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class UserService {
 
@@ -86,7 +87,6 @@ public class UserService {
         Jws<Claims> claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt);
         return claims.getBody().getSubject();
     }
-
     public void Update(User user) {
         switch (user.getRole()) {
             case  Administrator:
@@ -100,6 +100,14 @@ public class UserService {
             default:
                 break;
         }
+    }
+    public String getCoachesAndManagers() {
+        ArrayList<User> users = new ArrayList<User>();
+
+        users = (ArrayList<User>) (List<? extends User>)coachRepository.getAll();
+        users.addAll((ArrayList<User>) (List<? extends User>)managerRepository.getAll());
+
+        return gson.toJson(users);
     }
 
 }

@@ -59,4 +59,11 @@ public class UserController {
             return true;
         });
     }
+
+    public static void getCoachesAndManagers(){
+        get("rest/users/get_coaches_and_managers", (req, res) ->{
+
+            return userService.getCoachesAndManagers();
+        });
+    }
 }

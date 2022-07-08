@@ -39,6 +39,9 @@ Vue.component("sport_facility_display", {
             <div v-if="this.manager != null && this.manager.sportFacilityId != '' && this.manager.sportFacilityId != null">
                 <button v-on:click="goToManagersFacility()">{{this.managersFacility.name}}</button>
             </div>
+            <div v-if="this.role == 'Administrator'">
+                <button v-on:click="goToUserDisplay()">Korisnici</button>
+            </div>
 
     	    <form class="sport_facility_search_display">
                 Naziv: <input type="text" name="nameSearch" v-model="nameSearch">
@@ -313,6 +316,9 @@ Vue.component("sport_facility_display", {
                    this.sortFacilities(e)
                }
           }
+       },
+       goToUserDisplay: function(e){
+            router.push('/users_display')
        }
 	}
 

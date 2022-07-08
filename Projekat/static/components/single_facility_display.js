@@ -28,7 +28,7 @@ Vue.component("single_facility_display", {
             <h1 class="single_facility_header">{{facility.name}}</h1>
             <button v-if="isManager == true" style="margin-left : 10px" v-on:click="addNewWorkout()" >Dodaj novi trening</button>
             <table class="facility_table_wrap">
-                 <tr><th><th>
+                 <tr><th></th>
                      <th rowspan="7"><img :src="facility.logo" class= "single_facility_image_display"/></th>
                  <tr>
                  <tr>

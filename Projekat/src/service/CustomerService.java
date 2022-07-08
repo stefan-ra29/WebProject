@@ -2,19 +2,19 @@ package service;
 
 import beans.Customer;
 import beans.Role;
+import com.google.gson.Gson;
 import dto.CustomerDTO;
 import repository.AdministratorRepository;
 import repository.CustomerRepository;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CustomerService {
     private CustomerRepository customerRepository = new CustomerRepository();
     private AdministratorRepository administratorRepository = new AdministratorRepository();
-
-    public List<Customer> getAll(){
-        return customerRepository.getAll();
+    private static Gson gson = new Gson();
+    public String getAll(){
+        return gson.toJson(customerRepository.getAll());
     }
 
     public boolean registerCustomer(CustomerDTO customerDTO){
@@ -61,5 +61,4 @@ public class CustomerService {
         }
 
     }
-
 }

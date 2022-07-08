@@ -53,22 +53,5 @@
       "role": "Manager"
     },
     "deleted": false
-  },
-  {
-    "entity": {
-      "firstName": "qdfl;lbm",
-      "lastName": "df;l;bmdflk",
-      "email": ";dlfmbkm",
-      "username": "test",
-      "password": "gdksggm",
-      "gender": "female",
-      "dob": {
-        "year": 2022,
-        "month": 6,
-        "day": 28
-      },
-      "role": "Manager"
-    },
-    "deleted": false
   }
 ]

@@ -147,18 +147,16 @@ public class SportFacilityService {
                 break;
             case "name_decreasing":
                 Collections.sort(facilityList, new NameComparator().reversed());
+                break;
             case "location_increasing":
                 Collections.sort(facilityList, new LocationComparator());
                 break;
-
             case "location_decreasing":
                 Collections.sort(facilityList, new LocationComparator().reversed());
                 break;
-
             case "average_grade_increasing":
                 Collections.sort(facilityList, new AverageGradeComparator());
                 break;
-
             case "average_grade_decreasing":
                 Collections.sort(facilityList, new AverageGradeComparator().reversed());
                 break;

@@ -4,6 +4,9 @@ import beans.Customer;
 import beans.Manager;
 import beans.User;
 import com.google.gson.Gson;
+import comparators.FirstNameComparator;
+import comparators.LastNameComparator;
+import comparators.UsernameComparator;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -16,7 +19,9 @@ import repository.ManagerRepository;
 
 import java.security.Key;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 public class UserService {
 
@@ -86,7 +91,6 @@ public class UserService {
         Jws<Claims> claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt);
         return claims.getBody().getSubject();
     }
-
     public void Update(User user) {
         switch (user.getRole()) {
             case  Administrator:
@@ -101,5 +105,106 @@ public class UserService {
                 break;
         }
     }
+    public String getCoachesAndManagers() {
+        ArrayList<User> users = new ArrayList<User>();
 
+        users = (ArrayList<User>) (List<? extends User>)coachRepository.getAll();
+        users.addAll((ArrayList<User>) (List<? extends User>)managerRepository.getAll());
+
+        return gson.toJson(users);
+    }
+    public String searchUsers(ArrayList<User> users, String firstNameSearch, String lastNameSearch, String usernameSearch) {
+
+        ArrayList<User> filteredList = new ArrayList<User>();
+        ArrayList<User> listForRemoving = new ArrayList<User>();
+
+        if (!firstNameSearch.equals("")) {
+            for (User user : users) {
+                if (user.getFirstName().toLowerCase().contains(firstNameSearch.toLowerCase().trim()))
+                    filteredList.add(user);
+            }
+            //ako nikog nije ubacio za name, znaci ne postuje niko taj kriterijum, vrati praznu listu
+            if(filteredList.size() == 0)
+                return gson.toJson(filteredList);
+        }
+
+        //ako ne postoji firstname, a postoji last
+        if (firstNameSearch.equals("") && !lastNameSearch.equals("")) {
+            for (User user : users) {
+                if (user.getLastName().toLowerCase().contains(lastNameSearch.toLowerCase().trim()))
+                    filteredList.add(user);
+            }
+            //ako nikog nije ubacio za lastName, znaci ne postuje niko taj kriterijum, vrati praznu listu
+            if(filteredList.size() == 0)
+                return gson.toJson(filteredList);
+        }
+        //ako firstname postoji i postoji i lastName
+        else if(!firstNameSearch.equals("") && !lastNameSearch.equals("")){
+            for (User user : users) {
+                if (!user.getLastName().toLowerCase().contains(lastNameSearch.toLowerCase().trim()))
+                    listForRemoving.add(user);
+            }
+            filteredList.removeAll(listForRemoving);
+            listForRemoving.clear();
+            //ako je lista sada prazna, znaci da lastName nije ispostovan iako je firstname bio i vrati prazno
+            if(filteredList.size() == 0)
+                return gson.toJson(filteredList);
+        }
+
+        //ako ne postoji first i lastname, a postoji username
+        if (firstNameSearch.equals("") && lastNameSearch.equals("") && !usernameSearch.equals("")) {
+            for (User user : users) {
+                if (user.getUsername().toLowerCase().contains(usernameSearch.toLowerCase().trim()))
+                    filteredList.add(user);
+            }
+            //ako nikog nije ubacio za locatoin, znaci ne postuje niko taj kriterijum, vrati praznu listu
+            if(filteredList.size() == 0)
+                return gson.toJson(filteredList);
+        }
+        //ako firstName ILI lastname postoji i postoji i username
+        else if((!firstNameSearch.equals("") || !lastNameSearch.equals("")) && !usernameSearch.equals("")) {
+            for (User user : users) {
+                if (!user.getUsername().toLowerCase().contains(usernameSearch.toLowerCase().trim()))
+                    listForRemoving.add(user);
+            }
+            filteredList.removeAll(listForRemoving);
+            listForRemoving.clear();
+            //svakako prodje i posalje praznu listu
+        }
+        return gson.toJson(filteredList);
+    }
+    public String sortUsers(ArrayList<User> usersList, String sortBy ){
+
+        switch (sortBy) {
+            case "firstName_increasing":
+                Collections.sort(usersList, new FirstNameComparator());
+                break;
+            case "firstName_decreasing":
+                Collections.sort(usersList, new FirstNameComparator().reversed());
+                break;
+            case "lastName_increasing":
+                Collections.sort(usersList, new LastNameComparator());
+                break;
+            case "lastName_decreasing":
+                Collections.sort(usersList, new LastNameComparator().reversed());
+                break;
+            case "username_increasing":
+                Collections.sort(usersList, new UsernameComparator());
+                break;
+            case "username_decreasing":
+                Collections.sort(usersList, new UsernameComparator().reversed());
+                break;
+        }
+        return gson.toJson(usersList);
+    }
+    public String filterUsers(ArrayList<User> usersList, String filter ){
+
+        ArrayList<User> filteredUsers = new ArrayList<User>();
+
+        for(User u : usersList){
+            if(u.getRole().toString().equals(filter))
+                filteredUsers.add(u);
+        }
+        return gson.toJson(filteredUsers);
+    }
 }

@@ -42,5 +42,12 @@ public class SparkMainApp {
         WorkoutController.filterWorkouts();
         SportFacilityController.getIsFacilityCurrentlyWorking();
         WorkoutController.checkInToWorkout();
+        UserController.getCoachesAndManagers();
+        CustomerController.getAll();
+        UserController.searchUsers();
+        UserController.sortUsers();
+        CustomerController.sortCustomers();
+        CustomerController.filterCustomers();
+        UserController.filterUsers();
     }
 }

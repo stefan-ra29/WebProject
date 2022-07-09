@@ -109,5 +109,65 @@ public class UserService {
 
         return gson.toJson(users);
     }
+    public String searchUsers(ArrayList<User> users, String firstNameSearch, String lastNameSearch, String usernameSearch) {
+
+        ArrayList<User> filteredList = new ArrayList<User>();
+        ArrayList<User> listForRemoving = new ArrayList<User>();
+
+        if (!firstNameSearch.equals("")) {
+            for (User user : users) {
+                if (user.getFirstName().toLowerCase().contains(firstNameSearch.toLowerCase().trim()))
+                    filteredList.add(user);
+            }
+            //ako nikog nije ubacio za name, znaci ne postuje niko taj kriterijum, vrati praznu listu
+            if(filteredList.size() == 0)
+                return gson.toJson(filteredList);
+        }
+
+        //ako ne postoji firstname, a postoji last
+        if (firstNameSearch.equals("") && !lastNameSearch.equals("")) {
+            for (User user : users) {
+                if (user.getLastName().toLowerCase().contains(lastNameSearch.toLowerCase().trim()))
+                    filteredList.add(user);
+            }
+            //ako nikog nije ubacio za lastName, znaci ne postuje niko taj kriterijum, vrati praznu listu
+            if(filteredList.size() == 0)
+                return gson.toJson(filteredList);
+        }
+        //ako firstname postoji i postoji i lastName
+        else if(!firstNameSearch.equals("") && !lastNameSearch.equals("")){
+            for (User user : users) {
+                if (!user.getLastName().toLowerCase().contains(lastNameSearch.toLowerCase().trim()))
+                    listForRemoving.add(user);
+            }
+            filteredList.removeAll(listForRemoving);
+            listForRemoving.clear();
+            //ako je lista sada prazna, znaci da lastName nije ispostovan iako je firstname bio i vrati prazno
+            if(filteredList.size() == 0)
+                return gson.toJson(filteredList);
+        }
+
+        //ako ne postoji first i lastname, a postoji username
+        if (firstNameSearch.equals("") && lastNameSearch.equals("") && !usernameSearch.equals("")) {
+            for (User user : users) {
+                if (user.getUsername().toLowerCase().contains(usernameSearch.toLowerCase().trim()))
+                    filteredList.add(user);
+            }
+            //ako nikog nije ubacio za locatoin, znaci ne postuje niko taj kriterijum, vrati praznu listu
+            if(filteredList.size() == 0)
+                return gson.toJson(filteredList);
+        }
+        //ako firstName ILI lastname postoji i postoji i username
+        else if((!firstNameSearch.equals("") || !lastNameSearch.equals("")) && !usernameSearch.equals("")) {
+            for (User user : users) {
+                if (!user.getUsername().toLowerCase().contains(usernameSearch.toLowerCase().trim()))
+                    listForRemoving.add(user);
+            }
+            filteredList.removeAll(listForRemoving);
+            listForRemoving.clear();
+            //svakako prodje i posalje praznu listu
+        }
+        return gson.toJson(filteredList);
+    }
 
 }

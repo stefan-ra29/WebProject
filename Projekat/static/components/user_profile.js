@@ -72,7 +72,7 @@ Vue.component("user_profile", {
              this.customer.dob = obj;
 
              axios
-                 .post('rest/users/update/', this.customer)
+                 .put('rest/users/update/', this.customer)
                  .then(response => (this.checkResponse(response, e) ))
 
              this.editMode = false

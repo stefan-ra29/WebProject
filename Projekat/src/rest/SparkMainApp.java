@@ -44,5 +44,6 @@ public class SparkMainApp {
         WorkoutController.checkInToWorkout();
         UserController.getCoachesAndManagers();
         CustomerController.getAll();
+        UserController.searchUsers();
     }
 }

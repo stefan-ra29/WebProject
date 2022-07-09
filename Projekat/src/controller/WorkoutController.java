@@ -111,4 +111,13 @@ public class WorkoutController {
             return gson.toJson(workoutHistoryService.addWorkoutHistory(customerId, workoutId));
         });
     }
+
+    public static void getPastMonthWorkoutHistoryForCustomer() {
+        get("rest/workouts/getPastMonthWorkoutHistoryForCustomer", (req, res) -> {
+            res.type("application/json");
+
+            String customerId = req.queryParams("customerId");
+            return gson.toJson(workoutHistoryService.getPastMonthWorkoutHistoryForCustomer(customerId));
+        });
+    }
 }

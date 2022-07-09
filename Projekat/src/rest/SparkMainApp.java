@@ -42,5 +42,6 @@ public class SparkMainApp {
         WorkoutController.filterWorkouts();
         SportFacilityController.getIsFacilityCurrentlyWorking();
         WorkoutController.checkInToWorkout();
+        WorkoutController.getPastMonthWorkoutHistoryForCustomer();
     }
 }

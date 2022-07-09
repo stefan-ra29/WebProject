@@ -39,4 +39,12 @@ public class CustomerController {
             return customerService.sortUsers(users, sortBy);
         });
     }
+    public static void filterCustomers(){
+        post("rest/customers/filter", (req, res) ->{
+
+            ArrayList<Customer> users = gson.fromJson(req.body(), new TypeToken<ArrayList<Customer>>(){}.getType());
+            String filter = req.queryParams("filterBy");
+            return customerService.filterCustomers(users, filter);
+        });
+    }
 }

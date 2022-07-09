@@ -74,4 +74,16 @@ public class CustomerService {
         }
         return gson.toJson(usersList);
     }
+    public String filterCustomers(ArrayList<Customer> usersList, String filter ){
+
+//        switch (filter) {
+//            case "points_increasing":
+//                Collections.sort(usersList, new PointsComparator());
+//                break;
+//            case "points_decreasing":
+//                Collections.sort(usersList, new PointsComparator().reversed());
+//                break;
+//        }
+        return gson.toJson(usersList);
+    }
 }

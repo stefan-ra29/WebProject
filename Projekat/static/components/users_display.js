@@ -10,22 +10,12 @@ Vue.component("users_display", {
 	      usersBeforeSearch: {},
           searchHappened : false,
           sort: "",
-          sortPoints: false,
           pointSortHappened: false,
-
-	      coaches: {},
-	      criteria : "",
-	      minPrice: null,
-	      maxPrice: null,
-
-
-	      types: {},
-	      filter: "",
+          filterCustomers: '',
+          filter: "",
 	      filterHappened: false,
-	      filteredWorkouts: {},
-	      filterDone: false,
-	      workouts: {},
-	      isFacilityCurrentlyWorking: null,
+	      filteredUsers: {},
+          filterDone: false,
           jwt: localStorage.getItem('jwt')
 	    }
 	},
@@ -58,7 +48,25 @@ Vue.component("users_display", {
             </select>
             <button class= "button_icon_style" v-if=" sort != ''" v-on:click="removeSort"><i class="fa-solid fa-x"></i></button></br>
 
+            Filtriraj:
+            <select style="width: 195px; padding:1px" name="filter" id="filter"
+                @change = "filterUsers($event)" v-model="filter" >
+                  <option value="Customer" >Kupci</option>
+                  <option value="Manager" >Menadzeri</option>
+                  <option value="Coach" >Treneri</option>
+            </select>
+            <button class= "button_icon_style" v-if=" filter != ''" v-on:click="removeFilter"><i class="fa-solid fa-x"></i></button></br>
 
+            <div v-if="filter == 'Customer'">
+                Tip kupca:
+                <select style="width: 195px; padding:1px" name="filter_customers" id="filter_customers"
+                    @change = "filterCustomerType($event)" v-model="filterCustomers" >
+                      <option value="bronze_customer" >Bronzani kupac</option>
+                      <option value="silver_customer" >Srebrni kupac</option>
+                      <option value="gold_customer" >Zlatni kupac</option>
+                </select>
+                <button class= "button_icon_style" v-if=" filterCustomers != ''" v-on:click="removeCustomerFilter"><i class="fa-solid fa-x"></i></button></br>
+            </div>
 
             <table>
                  <tr>
@@ -111,18 +119,18 @@ Vue.component("users_display", {
                 return;
             }
 
-//            if(this.filterDone == true){
-//                this.facilities = this.filteredFacilities
-//            }
-//            else{
-//                if(this.searchHappened == true){
-//                    this.previousState(e)
-//                }
-//            }
-
-            if(this.searchHappened == true && this.pointSortHappened != true){
-                this.previousState(e)
+            if(this.filterDone == true){
+                this.users = this.filteredUsers
             }
+            else{
+                if(this.searchHappened == true && this.pointSortHappened != true){
+                    this.previousState(e)
+                }
+            }
+
+//            if(this.searchHappened == true && this.pointSortHappened != true){
+//                this.previousState(e)
+//            }
 
             if(this.sort != "" && this.pointSortHappened != true){
 //                if(this.sort == "points_increasing" || this.sort == "points_decreasing"){
@@ -149,7 +157,7 @@ Vue.component("users_display", {
                 }
                 this.givebackCustomerAttributes(e)
                 this.pointSortHappened = false
-                });
+            });
 
             this.searchHappened = true
             this.pointSortHappened = false
@@ -162,39 +170,49 @@ Vue.component("users_display", {
             this.lastNameSearch = ""
             this.usernameSearch = ""
             this.searchHappened = false
-//            if(this.filter != ""){
-//                this.filterFacilities(e)
-//            }
-//            else{
+            if(this.filter != ""){
+                this.filterUsers(e)
+            }
+            else{
                 if(this.sort != ""){
                      this.sortUsers(e)
                  }
-//            }
+            }
         },
 
         sortUsers(e){
             e.preventDefault()
             if(this.sort == "points_increasing" || this.sort == "points_decreasing"){
-                this.sortPoints = true
-//                if(this.searchHappened = true && this.pointSortHappened == false){
-//                    this.searchUsers(e)
-//                }
+                if(this.filterHappened == true && this.filter == "Customer"){
+                    axios
+                    .post("rest/customers/sort", this.users,
+                    { params : {
+                        sortBy : this.sort
+                    }})
+                    .then(response => {
+                        this.users = response.data
+                    });
+                }
+                else if(this.filterHappened == true && (this.filter == "Manager" || this.filter == "Coach")){
+                    return
+                }
+                else{
+                    axios
+                    .post("rest/customers/sort", this.customers,
+                    { params : {
+                        sortBy : this.sort
+                    }})
+                    .then(response => {
+                        this.customers = response.data
+                        this.users = this.customers.concat(this.coachesAndManagers)
+                        if(this.searchHappened = true){
+                            this.pointSortHappened = true
+                            this.searchUsers(e)
+                        }
+                    });
+                }
 
-                axios
-                .post("rest/customers/sort", this.customers,
-                { params : {
-                    sortBy : this.sort
-                }})
-                .then(response => {
-                    this.customers = response.data
-                    this.users = this.customers.concat(this.coachesAndManagers)
-                    if(this.searchHappened = true){
-                        this.pointSortHappened = true
-                        this.searchUsers(e)
-                    }
-                });
             }else{
-                this.sortPoints = false
                 axios
                 .post("rest/users/sort", this.users,
                 { params : {
@@ -210,7 +228,6 @@ Vue.component("users_display", {
         removeSort: function(e){
             e.preventDefault()
             this.sort = ""
-            this.sortPoints = false
         },
         givebackCustomerAttributes: function(e){
             e.preventDefault()
@@ -220,6 +237,62 @@ Vue.component("users_display", {
                     user.points = customer.points
                 }
             }
-        }
+        },
+        filterUsers(e){
+           e.preventDefault()
+
+          if(this.filterHappened == true){
+              this.previousState(e)
+          }
+           axios
+           .post("rest/users/filter", this.users,
+           { params : {
+               filterBy : this.filter
+           }})
+
+           .then(response => {this.users = response.data
+
+                this.filteredUsers = this.users
+                this.givebackCustomerAttributes(e)
+                this.filterDone = true;
+
+               if(this.searchHappened == true){
+                   this.searchUsers(e)
+               }
+               else{
+                  if(this.sort != ""){
+                       this.sortUsers(e)
+                   }
+               }
+           if(this.users.length == 0){
+                alert("Nijedan trening se ne podudara sa pretragom")
+            }
+           });
+           this.filterHappened = true
+           this.filterDone = false
+       },
+
+       removeFilter: function(e){
+           e.preventDefault()
+           this.previousState()
+           this.filter = ""
+           this.filterCustomers = ""
+           this.filterHappened = false
+           this.filterDone = false
+           if(this.searchHappened == true){
+               this.searchUsers(e)
+           }else{
+               if(this.sort != ""){
+                  this.sortUsers(e)
+               }
+           }
+      },
+
+      filterCustomerType: function(e){},
+      removeCustomerFilter: function(e){
+           e.preventDefault()
+           this.previousState()
+           this.filterCustomers = ""
+      }
     }
 });

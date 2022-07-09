@@ -197,4 +197,14 @@ public class UserService {
         }
         return gson.toJson(usersList);
     }
+    public String filterUsers(ArrayList<User> usersList, String filter ){
+
+        ArrayList<User> filteredUsers = new ArrayList<User>();
+
+        for(User u : usersList){
+            if(u.getRole().toString().equals(filter))
+                filteredUsers.add(u);
+        }
+        return gson.toJson(filteredUsers);
+    }
 }

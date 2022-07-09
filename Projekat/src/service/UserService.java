@@ -4,6 +4,9 @@ import beans.Customer;
 import beans.Manager;
 import beans.User;
 import com.google.gson.Gson;
+import comparators.FirstNameComparator;
+import comparators.LastNameComparator;
+import comparators.UsernameComparator;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -16,6 +19,7 @@ import repository.ManagerRepository;
 
 import java.security.Key;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -169,5 +173,28 @@ public class UserService {
         }
         return gson.toJson(filteredList);
     }
+    public String sortUsers(ArrayList<User> usersList, String sortBy ){
 
+        switch (sortBy) {
+            case "firstName_increasing":
+                Collections.sort(usersList, new FirstNameComparator());
+                break;
+            case "firstName_decreasing":
+                Collections.sort(usersList, new FirstNameComparator().reversed());
+                break;
+            case "lastName_increasing":
+                Collections.sort(usersList, new LastNameComparator());
+                break;
+            case "lastName_decreasing":
+                Collections.sort(usersList, new LastNameComparator().reversed());
+                break;
+            case "username_increasing":
+                Collections.sort(usersList, new UsernameComparator());
+                break;
+            case "username_decreasing":
+                Collections.sort(usersList, new UsernameComparator().reversed());
+                break;
+        }
+        return gson.toJson(usersList);
+    }
 }

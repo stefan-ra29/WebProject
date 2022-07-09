@@ -10,6 +10,8 @@ Vue.component("users_display", {
 	      usersBeforeSearch: {},
           searchHappened : false,
           sort: "",
+          sortPoints: false,
+          pointSortHappened: false,
 
 	      coaches: {},
 	      criteria : "",
@@ -43,7 +45,20 @@ Vue.component("users_display", {
                 </button></br>
             </form>
 
-           
+             Sortiraj:
+            <select style="width: 195px; padding:1px" name="sort" id="sort" v-model = "sort" @change = "sortUsers($event)" >
+                  <option value="firstName_increasing">Ime (A-Z)</option>
+                  <option value="firstName_decreasing">Ime (Z-A)</option>
+                  <option value="lastName_increasing">Prezime (A-Z)</option>
+                  <option value="lastName_decreasing">Prezime (Z-A)</option>
+                  <option value="username_increasing">Korisnicko ime (A-Z)</option>
+                  <option value="username_decreasing">Korisnicko ime (Z-A))</option>
+                  <option value="points_increasing">Broj poena (rastuce)</option>
+                  <option value="points_decreasing">Broj poena (opadajuce)</option>
+            </select>
+            <button class= "button_icon_style" v-if=" sort != ''" v-on:click="removeSort"><i class="fa-solid fa-x"></i></button></br>
+
+
 
             <table>
                  <tr>
@@ -105,8 +120,15 @@ Vue.component("users_display", {
 //                }
 //            }
 
-            if(this.searchHappened == true){
+            if(this.searchHappened == true && this.pointSortHappened != true){
                 this.previousState(e)
+            }
+
+            if(this.sort != "" && this.pointSortHappened != true){
+//                if(this.sort == "points_increasing" || this.sort == "points_decreasing"){
+//                    this.pointSortHappened = true;
+//                }
+                this.sortUsers(e)
             }
 
             this.firstNameSearch = this.firstNameSearch.trim()
@@ -122,35 +144,82 @@ Vue.component("users_display", {
             .then(response => {
                 this.users = response.data
 
-//                if(this.sort != ""){
-//                    this.sortFacilities(e)
-//                }
                 if(this.users.length == 0){
                     alert("Nijedan objekat se ne podudara sa pretragom")
                 }
+                this.givebackCustomerAttributes(e)
+                this.pointSortHappened = false
                 });
 
             this.searchHappened = true
+            this.pointSortHappened = false
         },
+
         removeSearch: function(e){
             e.preventDefault()
             this.previousState()
             this.firstNameSearch = ""
             this.lastNameSearch = ""
             this.usernameSearch = ""
-
+            this.searchHappened = false
 //            if(this.filter != ""){
 //                this.filterFacilities(e)
 //            }
 //            else{
-//                if(this.sort != ""){
-//                     this.sortFacilities(e)
-//                 }
-//                 if(this.openFacilities == true){
-//                     this.getOpenFacilities(e)
-//                 }
+                if(this.sort != ""){
+                     this.sortUsers(e)
+                 }
 //            }
-        }
+        },
 
+        sortUsers(e){
+            e.preventDefault()
+            if(this.sort == "points_increasing" || this.sort == "points_decreasing"){
+                this.sortPoints = true
+//                if(this.searchHappened = true && this.pointSortHappened == false){
+//                    this.searchUsers(e)
+//                }
+
+                axios
+                .post("rest/customers/sort", this.customers,
+                { params : {
+                    sortBy : this.sort
+                }})
+                .then(response => {
+                    this.customers = response.data
+                    this.users = this.customers.concat(this.coachesAndManagers)
+                    if(this.searchHappened = true){
+                        this.pointSortHappened = true
+                        this.searchUsers(e)
+                    }
+                });
+            }else{
+                this.sortPoints = false
+                axios
+                .post("rest/users/sort", this.users,
+                { params : {
+                    sortBy : this.sort
+                }})
+                .then(response => {
+                    this.users = response.data
+                    this.givebackCustomerAttributes(e)
+                });
+            }
+        },
+
+        removeSort: function(e){
+            e.preventDefault()
+            this.sort = ""
+            this.sortPoints = false
+        },
+        givebackCustomerAttributes: function(e){
+            e.preventDefault()
+            for (const user of this.users) {
+                if(user.role == "Customer"){
+                    var customer = this.customers.find(element => element.username == user.username);
+                    user.points = customer.points
+                }
+            }
+        }
     }
 });

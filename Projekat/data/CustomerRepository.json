@@ -4,7 +4,7 @@
       "visitedFacilitiesIds": [
         "a8ffbc7c-cf81-4fe3-a9ab-9df625b43cb6"
       ],
-      "points": 0,
+      "points": 50,
       "firstName": "Aleksandra",
       "lastName": "Vujovic",
       "email": "saskavaska@gmail.com",
@@ -25,7 +25,7 @@
       "visitedFacilitiesIds": [
         "a8ffbc7c-cf81-4fe3-a9ab-9df625b43cb6"
       ],
-      "points": 0,
+      "points": 100,
       "firstName": "Stefan",
       "lastName": "Tosic",
       "email": "stefantosic23@gmail.com",
@@ -43,7 +43,7 @@
   },
   {
     "entity": {
-      "points": 0,
+      "points": 49,
       "firstName": "Marko",
       "lastName": "Markovic",
       "username": "marko",
@@ -60,7 +60,7 @@
   },
   {
     "entity": {
-      "points": 0,
+      "points": 50,
       "firstName": "Ognjen",
       "lastName": "Gogi",
       "username": "ogi",

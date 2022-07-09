@@ -3,11 +3,13 @@ package service;
 import beans.Customer;
 import beans.Role;
 import com.google.gson.Gson;
+import comparators.PointsComparator;
 import dto.CustomerDTO;
 import repository.AdministratorRepository;
 import repository.CustomerRepository;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class CustomerService {
     private CustomerRepository customerRepository = new CustomerRepository();
@@ -59,6 +61,17 @@ public class CustomerService {
             customer.setVisitedFacilities(newVisitedFacilitiesIds);
             customerRepository.update(customerId, customer);
         }
+    }
+    public String sortUsers(ArrayList<Customer> usersList, String sortBy ){
 
+        switch (sortBy) {
+            case "points_increasing":
+                Collections.sort(usersList, new PointsComparator());
+                break;
+            case "points_decreasing":
+                Collections.sort(usersList, new PointsComparator().reversed());
+                break;
+        }
+        return gson.toJson(usersList);
     }
 }

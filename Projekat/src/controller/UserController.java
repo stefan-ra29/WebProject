@@ -77,4 +77,12 @@ public class UserController {
             return userService.searchUsers(users, firstNameSearch, lastNameSearch, usernameSearch);
         });
     }
+    public static void sortUsers(){
+        post("rest/users/sort", (req, res) ->{
+
+            ArrayList<User> users = gson.fromJson(req.body(), new TypeToken<ArrayList<User>>(){}.getType());
+            String sortBy = req.queryParams("sortBy");
+            return userService.sortUsers(users, sortBy);
+        });
+    }
 }

@@ -45,5 +45,7 @@ public class SparkMainApp {
         UserController.getCoachesAndManagers();
         CustomerController.getAll();
         UserController.searchUsers();
+        UserController.sortUsers();
+        CustomerController.sortCustomers();
     }
 }

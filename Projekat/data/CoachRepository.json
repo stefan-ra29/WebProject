@@ -1,6 +1,10 @@
 [
   {
     "entity": {
+      "workoutHistoryIds": [
+        "86475d45-8f06-4c9b-a808-62636fdf038b",
+        "d23d0c44-bcbb-4a0d-9f82-0f24277b90ec"
+      ],
       "firstName": "Mina",
       "lastName": "Minic",
       "email": "mina@gmail.com",
@@ -18,6 +22,9 @@
   },
   {
     "entity": {
+      "workoutHistoryIds": [
+        "a9fae20c-ef59-4db2-8de9-bdd21236acf9"
+      ],
       "firstName": "David",
       "lastName": "Davidovic",
       "email": "david@gmail.com",

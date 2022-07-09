@@ -1,5 +1,6 @@
 package service;
 
+import beans.Membership;
 import beans.Workout;
 import beans.WorkoutHistory;
 import com.google.gson.Gson;
@@ -18,17 +19,24 @@ public class WorkoutHistoryService {
     private MembershipService membershipService = new MembershipService();
     private CoachService coachService = new CoachService();
 
-    public void addWorkoutHistory(String customerId, String workoutId){
+    public boolean addWorkoutHistory(String customerId, String workoutId){
 
         Workout workout = workoutRepository.getOne(workoutId);
         String facilityId = workout.getSportFacilityID();
 
         String coachId = workout.getCoachID();
 
+        Membership membership = membershipService.getActiveMembershipIfExists(customerId);
+
+        if(membership.getAvailableVisits() == 0)
+            return false;
+
         WorkoutHistory workoutHistory = new WorkoutHistory(LocalDateTime.now(), workoutId, customerId, coachId);
 
 
         workoutHistoryRepository.addOne(workoutHistory);
+
+
 
         customerService.logWorkoutToCustomer(customerId, facilityId);
 
@@ -37,6 +45,8 @@ public class WorkoutHistoryService {
         if(!coachId.equals("")){
             coachService.addWorkoutToCoachesWorkoutHistory(coachId, workoutHistory.getId());
         }
+
+        return true;
     }
 
 }

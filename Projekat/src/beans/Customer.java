@@ -7,16 +7,16 @@ public class Customer extends User {
 	
 	private Membership membership;
 	private ArrayList<String> visitedFacilitiesIds;
-	private int points;
-	private CustomerType customerType;
+	private double points;
+	private String customerTypeName;
 	
-	public Customer(Membership membership, ArrayList<String> visitedFacilities, int points,
-			CustomerType customerType) {
+	public Customer(Membership membership, ArrayList<String> visitedFacilities, double points,
+			String customerTypeName) {
 		super();
 		this.membership = membership;
 		this.visitedFacilitiesIds = visitedFacilities;
 		this.points = points;
-		this.customerType = customerType;
+		this.customerTypeName = customerTypeName;
 	}
 
 	public Customer() {
@@ -50,21 +50,19 @@ public class Customer extends User {
 		this.visitedFacilitiesIds = visitedFacilitiesIds;
 	}
 
-	public int getPoints() {
+	public double getPoints() {
 		return points;
 	}
 
-	public void setPoints(int points) {
+	public void setPoints(double points) {
 		this.points = points;
 	}
 
-	public CustomerType getCustomerType() {
-		return customerType;
+	public String getCustomerTypeName() {
+		return customerTypeName;
 	}
 
-	public void setCustomerType(CustomerType customerType) {
-		this.customerType = customerType;
+	public void setCustomerTypeName(String customerTypeName) {
+		this.customerTypeName = customerTypeName;
 	}
-	
-	
 }

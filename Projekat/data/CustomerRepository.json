@@ -4,7 +4,7 @@
       "visitedFacilitiesIds": [
         "a8ffbc7c-cf81-4fe3-a9ab-9df625b43cb6"
       ],
-      "points": 0,
+      "points": 0.0,
       "firstName": "Aleksandra",
       "lastName": "Vujovic",
       "email": "saskavaska@gmail.com",
@@ -25,7 +25,8 @@
       "visitedFacilitiesIds": [
         "a8ffbc7c-cf81-4fe3-a9ab-9df625b43cb6"
       ],
-      "points": 0,
+      "points": 1250.9999999999998,
+      "customerTypeName": "Srebrni",
       "firstName": "Stefan",
       "lastName": "Tosic",
       "email": "stefantosic23@gmail.com",
@@ -43,7 +44,7 @@
   },
   {
     "entity": {
-      "points": 0,
+      "points": 0.0,
       "firstName": "Marko",
       "lastName": "Markovic",
       "username": "marko",
@@ -60,7 +61,7 @@
   },
   {
     "entity": {
-      "points": 0,
+      "points": 0.0,
       "firstName": "Ognjen",
       "lastName": "Gogi",
       "username": "ogi",
@@ -77,7 +78,7 @@
   },
   {
     "entity": {
-      "points": 0,
+      "points": 0.0,
       "firstName": "Zlatko",
       "lastName": "Ivanovic",
       "username": "zlaja",
@@ -94,7 +95,7 @@
   },
   {
     "entity": {
-      "points": 0,
+      "points": 0.0,
       "firstName": "Vladanka",
       "lastName": "Tosic",
       "email": "tvladanka@gmail.com",
@@ -112,7 +113,7 @@
   },
   {
     "entity": {
-      "points": 0,
+      "points": 0.0,
       "firstName": "Nebojsa",
       "lastName": "Tosic",
       "email": "neso@gmail.com",

@@ -39,6 +39,12 @@ Vue.component("login", {
             	localStorage.setItem('jwt', JSON.parse(JSON.stringify(response.data))[0]);
             	localStorage.setItem("role", JSON.parse(JSON.stringify(response.data))[1]);
             	alert("Uspjesna prijava!")
+            	if(localStorage.getItem("role") == "Customer") {
+            	    axios
+            	    .post('rest/memberships/checkMembershipExpiration',
+            	    {},
+            	    { params: {customerId: this.username }})
+            	}
                 router.push('/')
             }
 

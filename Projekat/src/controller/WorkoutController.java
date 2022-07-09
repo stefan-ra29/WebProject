@@ -108,9 +108,7 @@ public class WorkoutController {
             String workoutId = req.queryParams("workoutID");
 
 
-            workoutHistoryService.addWorkoutHistory(customerId, workoutId);
-
-            return null;
+            return gson.toJson(workoutHistoryService.addWorkoutHistory(customerId, workoutId));
         });
     }
 }

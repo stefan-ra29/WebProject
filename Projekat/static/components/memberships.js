@@ -1,7 +1,7 @@
 Vue.component("memberships", {
 	data: function () {
 	    return {
-	      customer: {username:'', password: '', firstName: '', lastName: '', email: '', gender: '', dob: {} },
+	      customer: {username:'', password: '', firstName: '', lastName: '', email: '', gender: '', dob: {}, customerTypeName: ''},
 	      currentMembership: {type: '', availableVisits: '', expirationDate: {}},
 	      jwt: localStorage.getItem('jwt')
 	    }
@@ -9,7 +9,10 @@ Vue.component("memberships", {
 	    template: `
 	    <div style="text-align: center">
 	        <h1>Clanarine</h1>
-	        <div v-if="currentMembership.type != ''">
+	        <p v-if="customer.customerTypeName == 'Bronzani'">Bronzani ste korisnik, imate popust od 8%</p>
+            <p v-else-if="customer.customerTypeName == 'Srebrni'">Srebrni ste korisnik, imate popust od 12%</p>
+            <p v-else-if="customer.customerTypeName == 'Zlatni'">Zlatni ste korisnik, imate popust od 15%</p>
+	        <div v-if="currentMembership != null">
 	            <p>Trenutno imate aktivnu {{currentMembership.type}} clanarinu i ostalo Vam je {{currentMembership.availableVisits}} ulazaka</p>
                 <p>Clanarina Vam istice {{currentMembership.expirationDate.day}}.{{currentMembership.expirationDate.month}}.{{currentMembership.expirationDate.year}}.</p>
 	        </div>
@@ -24,6 +27,9 @@ Vue.component("memberships", {
                             <h2>Mjesecna light</h2>
                             <p>Tip: mjesecna</p>
                             <p>Cijena: 3600 dinara</p>
+                            <p v-if="customer.customerTypeName == 'Bronzani'">Imate popust od 8%, cijena za Vas je 3312 dinara</p>
+                            <p v-else-if="customer.customerTypeName == 'Srebrni'">Imate popust od 12%, cijena za Vas je 3168 dinara</p>
+                            <p v-else-if="customer.customerTypeName == 'Zlatni'">Imate popust od 15%, cijena za Vas je 3060 dinara</p>
                             <p>1 ulazak dnevno</p>
                             <p>Ukupno 30 ulazaka</p>
                             <button v-on:click="monthlyLightSubscribe">Uplati</button>
@@ -34,6 +40,9 @@ Vue.component("memberships", {
                             <h2>Mjesecna premium</h2>
                             <p>Tip: mjesecna</p>
                             <p>Cijena: 5400 dinara</p>
+                            <p v-if="customer.customerTypeName == 'Bronzani'">Imate popust od 8%, cijena za Vas je 4968 dinara</p>
+                            <p v-else-if="customer.customerTypeName == 'Srebrni'">Imate popust od 12%, cijena za Vas je 4752 dinara</p>
+                            <p v-else-if="customer.customerTypeName == 'Zlatni'">Imate popust od 15%, cijena za Vas je 4590 dinara</p>
                             <p>2 ulaska dnevno</p>
                             <p>Ukupno 60 ulazaka</p>
                             <button v-on:click="monthlyPremiumSubscribe">Uplati</button>
@@ -44,6 +53,9 @@ Vue.component("memberships", {
                             <h2>Godisnja</h2>
                             <p>Tip: godisnja</p>
                             <p>Cijena: 22000 dinara</p>
+                            <p v-if="customer.customerTypeName == 'Bronzani'">Imate popust od 8%, cijena za Vas je 20240 dinara</p>
+                            <p v-else-if="customer.customerTypeName == 'Srebrni'">Imate popust od 12%, cijena za Vas je 19360 dinara</p>
+                            <p v-else-if="customer.customerTypeName == 'Zlatni'">Imate popust od 15%, cijena za Vas je 18700 dinara</p>
                             <p>1 ulazak dnevno</p>
                             <p>Ukupno 365 ulazaka</p>
                             <button v-on:click="yearlySubscribe">Uplati</button>
@@ -68,6 +80,7 @@ Vue.component("memberships", {
 
         loadCustomer: function(response){
             this.customer = response.data
+            console.log(this.customer)
             this.loadCurrentMembership()
         },
 

@@ -76,7 +76,7 @@ public class MembershipController {
 
             membershipService.checkMembershipExpiration(customerId);
 
-            return null;
+            return true;
         });
     }
 }

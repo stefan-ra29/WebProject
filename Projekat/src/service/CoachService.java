@@ -2,14 +2,17 @@ package service;
 
 import beans.Coach;
 import beans.Role;
+import beans.Workout;
 import com.google.gson.Gson;
 import dto.CustomerDTO;
 import repository.CoachRepository;
+import repository.WorkoutRepository;
 
 import java.util.ArrayList;
 
 public class CoachService {
     private CoachRepository coachRepository = new CoachRepository();
+    private WorkoutRepository workoutRepository = new WorkoutRepository();
     Gson gson = new Gson();
 
     public boolean registerCoach(CustomerDTO customerDTO){
@@ -49,7 +52,26 @@ public class CoachService {
             newWorkoutHistory.add(wourkoutHistoryId);
             coach.setWorkoutHistory(newWorkoutHistory);
         }
-
         coachRepository.update(coachId, coach);
+    }
+    public String getCoachesFromFacility(String facilityId){
+        ArrayList<Coach> coaches = new ArrayList<Coach>();
+
+        for(Workout w : workoutRepository.getAll())
+        {
+            if(w.getSportFacilityID().equals(facilityId) && !w.getCoachID().equals("")) {
+                boolean exists = false;
+                if (coaches.size() != 0){
+                    for(Coach c: coaches){
+                        if(c.getUsername().equals(coachRepository.getOne(w.getCoachID()).getUsername()))
+                            exists = true;
+                    }
+                }
+                if(!exists)
+                    coaches.add(coachRepository.getOne(w.getCoachID()));
+            }
+        }
+
+        return gson.toJson(coaches);
     }
 }

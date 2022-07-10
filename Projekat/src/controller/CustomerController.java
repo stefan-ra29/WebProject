@@ -47,4 +47,11 @@ public class CustomerController {
             return customerService.filterCustomers(users, filter);
         });
     }
+    public static void getCustomersWhoVisitedFacitily(){
+        get("rest/customers/get_customers_from_facility", (req, res) ->{
+
+            String id = req.queryParams("id");
+            return customerService.getCustomersWhoVisitedFacitily(id);
+        });
+    }
 }

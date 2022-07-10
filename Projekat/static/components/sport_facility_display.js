@@ -36,8 +36,10 @@ Vue.component("sport_facility_display", {
     	        <a href="http://localhost:8081/#/registration">Registracija</a>
     	    </div>
 
-            <div v-if="this.manager != null && this.manager.sportFacilityId != '' && this.manager.sportFacilityId != null">
-                <button v-on:click="goToManagersFacility()">{{this.managersFacility.name}}</button>
+            <div v-if="this.manager != null && this.manager.sportFacilityId != '' && this.manager.sportFacilityId != null"">
+                <button  v-on:click="goToManagersFacility()">{{this.managersFacility.name}}</button>
+                <button v-on:click="goToCustomersPage()">Pregled kupaca</button>
+                <button v-on:click="goToCoachesPage()">Pregled trenera</button>
             </div>
             <div v-if="this.role == 'Administrator'">
                 <button v-on:click="goToUserDisplay()">Korisnici</button>
@@ -319,7 +321,19 @@ Vue.component("sport_facility_display", {
        },
        goToUserDisplay: function(e){
             router.push('/users_display')
-       }
+       },
+       goToCustomersPage: function(e){
+            localStorage.setItem("facilityID", this.managersFacility.id)
+            var sending = false
+            localStorage.setItem("managerViewsCoaches", sending)
+            router.push('/view_users')
+       },
+       goToCoachesPage: function(e){
+           localStorage.setItem("facilityID", this.managersFacility.id)
+           var sending = true
+           localStorage.setItem("managerViewsCoaches", sending)
+           router.push('/view_users')
+      }
 	}
 
 });

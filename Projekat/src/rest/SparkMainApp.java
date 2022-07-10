@@ -49,5 +49,7 @@ public class SparkMainApp {
         CustomerController.sortCustomers();
         CustomerController.filterCustomers();
         UserController.filterUsers();
+        CoachController.getCoachesFromFacility();
+        CustomerController.getCustomersWhoVisitedFacitily();
     }
 }

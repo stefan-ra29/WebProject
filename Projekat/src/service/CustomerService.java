@@ -86,4 +86,13 @@ public class CustomerService {
 //        }
         return gson.toJson(usersList);
     }
+    public String getCustomersWhoVisitedFacitily(String facilityID){
+
+        ArrayList<Customer> customers = new ArrayList<Customer>();
+        for(Customer c: customerRepository.getAll()){
+            if(c.getVisitedFacilitiesIds()!= null && c.getVisitedFacilitiesIds().contains(facilityID))
+                customers.add(c);
+        }
+        return gson.toJson(customers);
+    }
 }

@@ -11,8 +11,8 @@ Vue.component("schedule_workout", {
             facilityName: localStorage.getItem("schedulingFacilityName"),
             facilityId: localStorage.getItem("schedulingFacilityId"),
             scheduleDate: {},
-            scheduleHours: null,
-            scheduleMinutes: null,
+            scheduleHours: '',
+            scheduleMinutes: '',
             minDate: '',
             jwt: localStorage.getItem('jwt')
 
@@ -22,12 +22,12 @@ Vue.component("schedule_workout", {
             <div class="login_wrap">
                 <h1>Zakazivanje treninga {{workoutName}} u {{facilityName}}</h1>
 
-                    <table>
+                    <table v-if="facility.startHour != null" class="workout_schedule_table">
                         <tr></tr>
                         <tr><td>Datum</td><td><input type="date" name="date" :min="minDate" v-model = "scheduleDate"></td></tr>
                         <tr><td>Sati</td><td><input type="number" :min="facility.startHour.hour" :max="facility.closingHour.hour - hoursToSubtract"  name="hours" v-model = "scheduleHours"></td></tr>
                         <tr v-if="scheduleHours == facility.closingHour.hour - hoursToSubtract"><td>Minuta</td><td><input type="number" :min="0" :max="59 - minutesToSubtract" name="hours" v-model = "scheduleMinutes"></td></tr>
-                        <tr v-else><td>Minuta</td><td><input type="number" :min="0" :max="59" name="hours" v-model = "scheduleMinutes"></td></tr>
+                        <tr v-else><td>Minute</td><td><input type="number" :min="0" :max="59" name="hours" v-model = "scheduleMinutes"></td></tr>
                         <tr> <td></td> <td> <button  v-on:click="scheduleWorkout"> Zakazi trening </button> </td> </tr>
                     </table>
 
@@ -99,19 +99,32 @@ Vue.component("schedule_workout", {
 
         scheduleWorkout: function(e){
             e.preventDefault()
-            axios
-                .post("rest/workouts/scheduleWorkout",
-                   {},
-                   { params : {
-                       customerId : this.customer.username,
-                       workoutId: this.workoutId,
-                       scheduleDate: this.scheduleDate,
-                       scheduleHours: this.scheduleHours,
-                       scheduleMinutes: this.scheduleMinutes
-                   }})
-                 .then(response => {
-                  alert("Uspjesno ste zakazali trening!")
-                  });
+
+            if(!this.scheduleDate || this.scheduleHours == '' || this.scheduleMinutes == '') {
+                alert("Morate popuiti sva polja!")
+            }
+
+            else{
+                axios
+                    .post("rest/workouts/scheduleWorkout",
+                       {},
+                       { params : {
+                           customerId : this.customer.username,
+                           workoutId: this.workoutId,
+                           scheduleDate: this.scheduleDate,
+                           scheduleHours: this.scheduleHours,
+                           scheduleMinutes: this.scheduleMinutes
+                       }})
+                     .then(response => {
+                      if(response.data == "membershipExpired")
+                        alert("Clanarina Vam ne vazi u odabranom datumu!")
+                      else if(response.data == "noVisitsLeft")
+                        alert("Nemate preostalih posjeta u okviru clanarine!")
+                      else
+                        alert("Uspjesno ste zakazali trening!")
+                      });
+            }
+
         }
 
 	}

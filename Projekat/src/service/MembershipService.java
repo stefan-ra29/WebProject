@@ -8,6 +8,7 @@ import repository.CustomerTypeRepository;
 import repository.MembershipRepository;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class MembershipService {
     MembershipRepository membershipRepository = new MembershipRepository();
@@ -60,7 +61,7 @@ public class MembershipService {
         Membership membership = getActiveExpiredMembership(customerId);
         if(membership != null) {
             addPointsToCustomer(customerId, membership);
-            //setMembershipToInactive(membership);
+            setMembershipToInactive(membership);
             changeCustomerTypeIfNeeded(customerId);
         }
 
@@ -131,6 +132,24 @@ public class MembershipService {
         }
 
         customerRepository.update(customer.getUsername(), customer);
+    }
+
+    public boolean isMembershipActiveOnScheduledDate(LocalDateTime date, String customerId){
+        Membership membership = getActiveMembershipIfExists(customerId);
+
+        if(date.toLocalDate().isAfter(membership.getExpirationDate())){
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean isAvailableVisitLeft(String customerId) {
+        Membership membership = getActiveMembershipIfExists(customerId);
+        if(membership.getAvailableVisits() == 0)
+            return false;
+
+        return true;
     }
 
 }

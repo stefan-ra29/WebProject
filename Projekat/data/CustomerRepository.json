@@ -1,9 +1,7 @@
 [
   {
     "entity": {
-      "visitedFacilitiesIds": [
-        "a8ffbc7c-cf81-4fe3-a9ab-9df625b43cb6"
-      ],
+      "visitedFacilitiesIds": [],
       "points": 0.0,
       "firstName": "Aleksandra",
       "lastName": "Vujovic",
@@ -25,8 +23,7 @@
       "visitedFacilitiesIds": [
         "a8ffbc7c-cf81-4fe3-a9ab-9df625b43cb6"
       ],
-      "points": 1250.9999999999998,
-      "customerTypeName": "Srebrni",
+      "points": 0.0,
       "firstName": "Stefan",
       "lastName": "Tosic",
       "email": "stefantosic23@gmail.com",

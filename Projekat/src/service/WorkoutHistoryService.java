@@ -1,21 +1,16 @@
 package service;
 
-import beans.Membership;
-import beans.SportFacility;
-import beans.Workout;
-import beans.WorkoutHistory;
+import beans.*;
 import com.google.gson.Gson;
 import dto.CustomerWorkoutHistoryDTO;
-import repository.CoachRepository;
-import repository.SportFacilityRepository;
-import repository.WorkoutHistoryRepository;
-import repository.WorkoutRepository;
+import repository.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class WorkoutHistoryService {
     private WorkoutHistoryRepository workoutHistoryRepository = new WorkoutHistoryRepository();
+    private ScheduledPersonalWorkoutRepository scheduledPersonalWorkoutRepository = new ScheduledPersonalWorkoutRepository();
     private Gson gson = new Gson();
     private CoachRepository coachRepository = new CoachRepository();
     private CustomerService customerService = new CustomerService();
@@ -67,6 +62,28 @@ public class WorkoutHistoryService {
         }
 
         return history;
+    }
+
+    public void logPastScheduledWorkouts() {
+        for (ScheduledPersonalWorkout scheduledPersonalWorkout : scheduledPersonalWorkoutRepository.getAll()) {
+            if(scheduledPersonalWorkout.getScheduledTime().isBefore(LocalDateTime.now())) {
+                WorkoutHistory workoutHistory = new WorkoutHistory(scheduledPersonalWorkout);
+
+                workoutHistoryRepository.addOne(workoutHistory);
+                scheduledPersonalWorkoutRepository.delete(scheduledPersonalWorkout.getId());
+
+                Workout workout = workoutRepository.getOne(workoutHistory.getWorkoutId());
+
+                customerService.logWorkoutToCustomer(workoutHistory.getCustomerId(), workout.getSportFacilityID());
+
+                membershipService.subtractOneVisitFromMembership(workoutHistory.getCustomerId());
+
+                if(!workoutHistory.getCoachId().equals("")){
+                    coachService.addWorkoutToCoachesWorkoutHistory(workoutHistory.getCoachId(), workoutHistory.getId());
+                }
+
+            }
+        }
     }
 
 }

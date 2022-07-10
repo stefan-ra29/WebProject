@@ -44,5 +44,10 @@ public class SparkMainApp {
         WorkoutController.checkInToWorkout();
         WorkoutController.getPastMonthWorkoutHistoryForCustomer();
         WorkoutController.scheduleWorkout();
+        WorkoutController.checkPastScheduledWorkouts();
+        WorkoutController.getCoachesGroupWorkouts();
+        WorkoutController.getCoachesOtherWorkouts();
+        WorkoutController.getCoachesScheduledWorkouts();
+        WorkoutController.cancelScheduledWorkout();
     }
 }

@@ -1,29 +1,74 @@
-Vue.component("customer_workout_history", {
+Vue.component("coach_workout_display", {
 	data: function () {
 	    return {
 	      id: '-1',
 	      coach: {username:'', password: '', firstName: '', lastName: '', email: '', gender: '', dob: {} },
-	      coachesWorkoutDTOs: null,
+	      coachesGroupWorkouts: {},
+	      coachesScheduledWorkouts: {},
+	      coachesOtherWorkouts: {},
 	      jwt: localStorage.getItem('jwt')
 	    }
 	},
 	    template: `
 	    <div class="workout_history_wrap">
-            <h1>Istorija Vasih treninga u posljednjih mjesec dana</h1>
-            <table v-if="coachesWorkoutDTOs != null">
+            <h1>Vasi treninzi</h1>
+
+            <h2>Zakazani personalni treninzi</h2>
+                <table v-if="coachesScheduledWorkouts != null">
+                <tr>
+                    <th> Naziv treninga </th>
+                    <th> Naziv objekta </th>
+                    <th> Datum treninga </th>
+                    <th> Kupac </th>
+                    <th> Otkazi </th>
+                </tr>
+                <tr v-for="workout in coachesScheduledWorkouts">
+                    <td>{{workout.name}}</td>
+                    <td>{{workout.facilityName}}</td>
+                    <td> {{workout.scheduledTime.date.day}}.{{workout.scheduledTime.date.month}}.{{workout.scheduledTime.date.year}}. u
+                        {{workout.scheduledTime.time.hour}}:{{workout.scheduledTime.time.minute}}
+                    </td>
+                    <td>{{workout.customer}}</td>
+                    <td> <button v-on:click="cancelScheduledWorkout(workout.id)"> Otkazi </button> </td>
+                </tr>
+                <tr v-if="coachesScheduledWorkouts == null || coachesScheduledWorkouts.length == 0">
+                    <td colspan='3'> Trenutno nemate zakazanih personalnih treninga </td>
+                </tr>
+            </table>
+
+            <h2>Grupni treninzi</h2>
+            <table v-if="coachesGroupWorkouts != null">
                 <tr>
                     <th>Naziv treninga</th>
                     <th>Naziv objekta</th>
-                    <th>Datum treninga</th>
                 </tr>
-                <tr v-for="workout in coachesWorkoutDTOs">
-                    <td>{{workout.workoutName}}</td>
+                <tr v-for="workout in coachesGroupWorkouts">
+                    <td>{{workout.name}}</td>
                     <td>{{workout.facilityName}}</td>
                 </tr>
-                <tr v-if="pastMonthWorkoutHistoryDTOs.length == 0">
-                    <td colspan='3'> Trenutno niste trener ni na jednom treningu </td>
+                <tr v-if="coachesGroupWorkouts == null || coachesGroupWorkouts.length == 0">
+                    <td colspan='3'> Trenutno niste trener ni na jednom grupnom treningu </td>
                 </tr>
             </table>
+
+            <h2>Ostali treninzi</h2>
+            <table v-if="coachesOtherWorkouts != null">
+                <tr>
+                    <th>Naziv treninga</th>
+                    <th>Naziv objekta</th>
+                    <th>Tip treninga</th>
+                </tr>
+                <tr v-for="workout in coachesOtherWorkouts">
+                    <td>{{workout.name}}</td>
+                    <td>{{workout.facilityName}}</td>
+                    <td>{{workout.type}}</td>
+                </tr>
+                <tr v-if="coachesGroupWorkouts == null || coachesGroupWorkouts.length == 0">
+                    <td colspan='3'> Trenutno niste trener ni na jednom ostalom treningu </td>
+                </tr>
+            </table>
+
+
     	</div>
     	`,
     mounted () {
@@ -34,24 +79,58 @@ Vue.component("customer_workout_history", {
                             isUserManager : false
                         }})
            .then(response => {
-                this.customer = response.data
-                this.getPastMonthWorkoutHistoryForCustomer()
+                this.coach = response.data
+                this.getCoachesScheduledWorkouts()
+                this.getCoachesGroupWorkouts()
+                this.getCoachesOtherWorkouts()
            });
     },
 
     methods: {
 
-        getPastMonthWorkoutHistoryForCustomer: function(){
+        cancelScheduledWorkout: function(id){
+
             axios
-               .get("rest/workouts/getPastMonthWorkoutHistoryForCustomer",
+                .post("rest/workouts/cancelScheduledWorkout",
+                {},
+                { params : {
+                    id: id
+                }})
+                .then(response => {
+                    if(response.data == true)
+                        alert("Uspjesno ste otkazali trening!")
+                    else
+                        alert("Trening mozete otkazate minimalno dva dana unaprijed!")
+                });
+
+        },
+
+        getCoachesScheduledWorkouts: function(){
+            axios
+               .get("rest/workouts/getCoachesScheduledWorkouts",
                            { params : {
-                               customerId: this.customer.username
+                               coachId: this.coach.username
                            }})
-              .then(response => {
-              this.pastMonthWorkoutHistoryDTOs = response.data
-              console.log(this.pastMonthWorkoutHistoryDTOs)
-              });
-        }
+              .then(response => { this.coachesScheduledWorkouts = response.data });
+        },
+
+        getCoachesGroupWorkouts: function(){
+            axios
+               .get("rest/workouts/getCoachesGroupWorkouts",
+                           { params : {
+                               coachId: this.coach.username
+                           }})
+              .then(response => { this.coachesGroupWorkouts = response.data });
+        },
+
+        getCoachesOtherWorkouts: function(){
+            axios
+               .get("rest/workouts/getCoachesOtherWorkouts",
+                           { params : {
+                               coachId: this.coach.username
+                           }})
+              .then(response => { this.coachesOtherWorkouts = response.data });
+        },
 
     }
 

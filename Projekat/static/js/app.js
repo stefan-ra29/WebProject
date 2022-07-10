@@ -10,6 +10,7 @@ const Memberships = {template: '<memberships></memberships>'}
 const AddNewWorkout = { template: '<add_new_workout></add_new_workout>' }
 const ChangeWorkout = { template: '<change_workout></change_workout>' }
 const CustomerWorkoutHistory = { template: '<customer_workout_history></customer_workout_history>' }
+const ScheduleWorkout = { template: '<schedule_workout></schedule_workout>' }
 
 const router = new VueRouter({
 	mode: 'hash',
@@ -25,7 +26,8 @@ const router = new VueRouter({
 		{ path: '/memberships', component: Memberships},
         { path: '/add_new_workout', component: AddNewWorkout},
         { path: '/change_workout', component: ChangeWorkout},
-        { path: '/customer_workout_history', component: CustomerWorkoutHistory}
+        { path: '/customer_workout_history', component: CustomerWorkoutHistory},
+        { path: '/schedule_workout', component: ScheduleWorkout}
 	  ]
 });
 

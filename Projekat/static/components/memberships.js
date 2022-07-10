@@ -80,7 +80,6 @@ Vue.component("memberships", {
 
         loadCustomer: function(response){
             this.customer = response.data
-            console.log(this.customer)
             this.loadCurrentMembership()
         },
 

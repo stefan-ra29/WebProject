@@ -1,14 +1,17 @@
 package service;
 
 import beans.Coach;
+import beans.ScheduledPersonalWorkout;
 import beans.Workout;
 import beans.WorkoutType;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import comparators.PriceComparator;
 import repository.CoachRepository;
+import repository.ScheduledPersonalWorkoutRepository;
 import repository.WorkoutRepository;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,6 +19,7 @@ import java.util.List;
 public class WorkoutService {
     WorkoutRepository workoutRepository = new WorkoutRepository();
     CoachRepository coachRepository = new CoachRepository();
+    ScheduledPersonalWorkoutRepository scheduledPersonalWorkoutRepository = new ScheduledPersonalWorkoutRepository();
     Gson gson = new Gson();
     public String getWorkoutTypes() {
 
@@ -153,5 +157,14 @@ public class WorkoutService {
                 filteredWorkouts.add(w);
         }
         return gson.toJson(filteredWorkouts);
+    }
+
+    public void scheduleWorkout(String customerId, String workoutId, LocalDateTime scheduledTime){
+
+        Workout workout = workoutRepository.getOne(workoutId);
+
+        ScheduledPersonalWorkout scheduledWorkout = new ScheduledPersonalWorkout(workoutId, customerId, workout.getCoachID(), LocalDateTime.now(), scheduledTime);
+
+        scheduledPersonalWorkoutRepository.addOne(scheduledWorkout);
     }
 }

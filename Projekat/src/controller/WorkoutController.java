@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import service.WorkoutHistoryService;
 import service.WorkoutService;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import static spark.Spark.*;
@@ -118,6 +119,28 @@ public class WorkoutController {
 
             String customerId = req.queryParams("customerId");
             return gson.toJson(workoutHistoryService.getPastMonthWorkoutHistoryForCustomer(customerId));
+        });
+    }
+
+    public static void scheduleWorkout(){
+        post("rest/workouts/scheduleWorkout", (req, res) -> {
+            res.type("application/json");
+
+            String customerId = req.queryParams("customerId");
+            String workoutId = req.queryParams("workoutId");
+            String scheduleDate = req.queryParams("scheduleDate");
+            int scheduleHours = Integer.parseInt(req.queryParams("scheduleHours"));
+            int scheduleMinutes = Integer.parseInt(req.queryParams("scheduleMinutes"));
+
+            int year = Integer.parseInt(scheduleDate.substring(0,4));
+            int month = Integer.parseInt(scheduleDate.substring(5,7));
+            int day = Integer.parseInt(scheduleDate.substring(8,10));
+
+            LocalDateTime dateTime = LocalDateTime.of(year, month, day, scheduleHours, scheduleMinutes);
+
+            workoutService.scheduleWorkout(customerId, workoutId, dateTime);
+
+            return true;
         });
     }
 }

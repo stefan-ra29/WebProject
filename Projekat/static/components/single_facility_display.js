@@ -111,8 +111,11 @@ Vue.component("single_facility_display", {
                      </tr>
                      <tr><td><button v-if="isManager == true" v-on:click = "changeWorkout(workout.id)">Izmeni</button></td></tr>
 
-                     <tr v-if="isFacilityCurrentlyWorking == true && currentMembership != null && customer.username != ''">
+                     <tr v-if="isFacilityCurrentlyWorking == true && currentMembership != null && customer.username != '' && workout.workoutType.type != 'Personalni trening'">
                         <button v-on:click="checkInToWorkout(customer.username, workout.id)">Prijavi se na trening</button>
+                     </tr>
+                     <tr v-if="currentMembership != null && customer.username != '' && workout.workoutType.type == 'Personalni trening' && workout.coachID != ''">
+                        <button v-on:click="SchedulePersonalWorkout(workout.id, workout.name, facility.name, facility.id)">Zakazi personalni trening</button>
                      </tr>
 
                  </table>
@@ -350,6 +353,16 @@ Vue.component("single_facility_display", {
               });
 
 
+        },
+
+        SchedulePersonalWorkout: function(workoutId, workoutName, facilityName, facilityId){
+            localStorage.setItem("schedulingWorkoutId", workoutId)
+            localStorage.setItem("schedulingWorkoutName", workoutName)
+            localStorage.setItem("schedulingFacilityName", facilityName)
+            localStorage.setItem("schedulingFacilityId", facilityId)
+
+            router.push('/schedule_workout')
         }
+
     }
 });

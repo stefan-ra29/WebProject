@@ -203,9 +203,10 @@ public class WorkoutController {
             String id = req.queryParams("id");
 
             if(workoutService.isNowTwoDaysBeforeWorkoutTime(id))
+            {
+                workoutService.cancelScheduledWorkout(id);
                 return true;
-
-
+            }
 
             return false;
         });

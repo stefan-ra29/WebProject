@@ -19,6 +19,7 @@ public class WorkoutService {
     ScheduledPersonalWorkoutRepository scheduledPersonalWorkoutRepository = new ScheduledPersonalWorkoutRepository();
     SportFacilityRepository sportFacilityRepository = new SportFacilityRepository();
     CustomerRepository customerRepository = new CustomerRepository();
+    MembershipService membershipService = new MembershipService();
     Gson gson = new Gson();
     public String getWorkoutTypes() {
 
@@ -228,6 +229,10 @@ public class WorkoutService {
 
     public void cancelScheduledWorkout(String scheduledWorkoutId){
         ScheduledPersonalWorkout workout = scheduledPersonalWorkoutRepository.getOne(scheduledWorkoutId);
+
+        membershipService.addOneVisitToMembership(workout.getCustomerId());
+
+        scheduledPersonalWorkoutRepository.delete(scheduledWorkoutId);
     }
 
 }

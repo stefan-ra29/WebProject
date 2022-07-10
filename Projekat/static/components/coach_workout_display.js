@@ -98,7 +98,11 @@ Vue.component("coach_workout_display", {
                 }})
                 .then(response => {
                     if(response.data == true)
+                    {
                         alert("Uspjesno ste otkazali trening!")
+                        window.location.reload()
+                    }
+
                     else
                         alert("Trening mozete otkazate minimalno dva dana unaprijed!")
                 });

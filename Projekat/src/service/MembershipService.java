@@ -152,4 +152,12 @@ public class MembershipService {
         return true;
     }
 
+    public void addOneVisitToMembership(String customerId){
+        Membership membership = this.getActiveMembershipIfExists(customerId);
+
+        membership.setAvailableVisits( membership.getAvailableVisits() + 1 );
+
+        membershipRepository.update(membership.getId(), membership);
+    }
+
 }

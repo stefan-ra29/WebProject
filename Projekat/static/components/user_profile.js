@@ -10,6 +10,8 @@ Vue.component("user_profile", {
 	},
 	    template: `
     	<div class="registration_wrap">
+    	    <navbar/>
+
     	    <h1>VAŠ PROFIL</h1>
     		<form class="registration_form">
 				<table>

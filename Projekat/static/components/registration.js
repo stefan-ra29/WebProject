@@ -9,6 +9,8 @@ Vue.component("register", {
 	},
 	    template: ` 
     	<div class="registration_wrap">
+    	    <navbar/>
+
     	    <h1>REGISTRACIJA</h1>
     		<form id="form" class="registration_form">
 				<table>

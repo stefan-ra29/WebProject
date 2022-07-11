@@ -2,8 +2,7 @@
   {
     "entity": {
       "workoutHistoryIds": [
-        "86475d45-8f06-4c9b-a808-62636fdf038b",
-        "d23d0c44-bcbb-4a0d-9f82-0f24277b90ec"
+        "e0f8edf3-3f4d-4438-8ebb-ffc8ba5c61c9"
       ],
       "firstName": "Mina",
       "lastName": "Minic",
@@ -22,9 +21,7 @@
   },
   {
     "entity": {
-      "workoutHistoryIds": [
-        "a9fae20c-ef59-4db2-8de9-bdd21236acf9"
-      ],
+      "workoutHistoryIds": [],
       "firstName": "David",
       "lastName": "Davidovic",
       "email": "david@gmail.com",
@@ -43,7 +40,7 @@
   {
     "entity": {
       "workoutHistoryIds": [
-        "f4e81119-238b-431e-8e19-7046c490cfa4"
+        "954dee27-0ed6-401a-94e9-0be4c9fe47e7"
       ],
       "firstName": "Tina",
       "lastName": "Tinic",

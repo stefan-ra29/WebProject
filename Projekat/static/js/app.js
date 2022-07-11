@@ -11,6 +11,10 @@ const AddNewWorkout = { template: '<add_new_workout></add_new_workout>' }
 const ChangeWorkout = { template: '<change_workout></change_workout>' }
 const AdminUserDisplay = { template: '<users_display></users_display>'}
 const ManagerUserDisplay = { template: '<manager_users_display></manager_users_display>'}
+const CustomerWorkoutHistory = { template: '<customer_workout_history></customer_workout_history>' }
+const ScheduleWorkout = { template: '<schedule_workout></schedule_workout>' }
+const CoachWorkoutDisplay = { template: '<coach_workout_display></coach_workout_display>' }
+const Navbar = {template: '<navbar></navbar>'}
 
 const router = new VueRouter({
 	mode: 'hash',
@@ -27,7 +31,10 @@ const router = new VueRouter({
         { path: '/add_new_workout', component: AddNewWorkout},
         { path: '/change_workout', component: ChangeWorkout},
         { path: '/users_display', component: AdminUserDisplay},
-        { path: '/view_users', component: ManagerUserDisplay}
+        { path: '/view_users', component: ManagerUserDisplay},
+        { path: '/customer_workout_history', component: CustomerWorkoutHistory},
+        { path: '/schedule_workout', component: ScheduleWorkout},
+        { path: '/coach_workout_display', component: CoachWorkoutDisplay}
 	  ]
 });
 

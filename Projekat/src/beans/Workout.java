@@ -13,6 +13,10 @@ public class Workout {
 	private String description;
 	private String picture;
 	private int supplement;
+
+	public Workout(){
+
+	}
 	public Workout(String name, WorkoutType workoutType, String sportFacilityID, int duration, String coachID,
 			String description, String picture, int supplement) {
 		super();

@@ -150,3 +150,15 @@ table{
 .button_icon_style:click{
     background-color: orange;
 }
+
+.workout_history_wrap{
+    text-align: center;
+}
+
+.workout_history_wrap table {
+    margin: 0 auto;
+}
+
+.workout_schedule_table{
+    margin: 0 auto;
+}

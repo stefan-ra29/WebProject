@@ -25,6 +25,8 @@ Vue.component("users_display", {
 	},
 	    template: `
     	<div v-if="users != null" >
+    	    <navbar/>
+
             <h1 class="single_facility_header">Korisnici</h1>
 
             <form class="sport_facility_search_display">

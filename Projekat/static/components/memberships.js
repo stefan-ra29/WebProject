@@ -8,6 +8,8 @@ Vue.component("memberships", {
 	},
 	    template: `
 	    <div style="text-align: center">
+	        <navbar/>
+
 	        <h1>Clanarine</h1>
 	        <p v-if="customer.customerTypeName == 'Bronzani'">Bronzani ste korisnik, imate popust od 8%</p>
             <p v-else-if="customer.customerTypeName == 'Srebrni'">Srebrni ste korisnik, imate popust od 12%</p>
@@ -80,7 +82,6 @@ Vue.component("memberships", {
 
         loadCustomer: function(response){
             this.customer = response.data
-            console.log(this.customer)
             this.loadCurrentMembership()
         },
 

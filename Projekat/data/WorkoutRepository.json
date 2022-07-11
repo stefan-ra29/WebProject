@@ -94,5 +94,21 @@
       "supplement": 1700
     },
     "deleted": false
+  },
+  {
+    "entity": {
+      "name": "Trening disanja",
+      "id": "29d67334-266f-49b9-b1f9-ba2f50562359",
+      "workoutType": {
+        "type": "Personalni trening"
+      },
+      "sportFacilityID": "a8ffbc7c-cf81-4fe3-a9ab-9df625b43cb6",
+      "duration": 50,
+      "coachID": "tina",
+      "description": "Naucite pravilno disati",
+      "picture": "https://external-content.duckduckgo.com/iu/?u\u003dhttps%3A%2F%2Fclipartspub.com%2Fimages%2Fmeditation-clipart-guru-5.png\u0026f\u003d1\u0026nofb\u003d1",
+      "supplement": 300
+    },
+    "deleted": false
   }
 ]

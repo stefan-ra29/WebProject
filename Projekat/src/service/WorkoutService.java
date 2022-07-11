@@ -1,14 +1,14 @@
 package service;
 
-import beans.Coach;
-import beans.Workout;
-import beans.WorkoutType;
+import beans.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import comparators.PriceComparator;
-import repository.CoachRepository;
-import repository.WorkoutRepository;
+import dto.ScheduledWorkoutDTO;
+import dto.WorkoutDTO;
+import repository.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,6 +16,10 @@ import java.util.List;
 public class WorkoutService {
     WorkoutRepository workoutRepository = new WorkoutRepository();
     CoachRepository coachRepository = new CoachRepository();
+    ScheduledPersonalWorkoutRepository scheduledPersonalWorkoutRepository = new ScheduledPersonalWorkoutRepository();
+    SportFacilityRepository sportFacilityRepository = new SportFacilityRepository();
+    CustomerRepository customerRepository = new CustomerRepository();
+    MembershipService membershipService = new MembershipService();
     Gson gson = new Gson();
     public String getWorkoutTypes() {
 
@@ -154,4 +158,81 @@ public class WorkoutService {
         }
         return gson.toJson(filteredWorkouts);
     }
+
+    public void scheduleWorkout(String customerId, String workoutId, LocalDateTime scheduledTime){
+
+        Workout workout = workoutRepository.getOne(workoutId);
+
+        ScheduledPersonalWorkout scheduledWorkout = new ScheduledPersonalWorkout(workoutId, customerId, workout.getCoachID(), LocalDateTime.now(), scheduledTime);
+
+        scheduledPersonalWorkoutRepository.addOne(scheduledWorkout);
+    }
+
+    public ArrayList<ScheduledWorkoutDTO> getCoachesScheduledWorkouts(String coachId){
+        ArrayList<ScheduledWorkoutDTO> workouts = new ArrayList<ScheduledWorkoutDTO>();
+        SportFacility facility = new SportFacility();
+        Workout workout = new Workout();
+
+        for(ScheduledPersonalWorkout scheduledPersonalWorkout : scheduledPersonalWorkoutRepository.getAll()){
+            if(scheduledPersonalWorkout.getCoachId().equals(coachId)){
+                workout = workoutRepository.getOne(scheduledPersonalWorkout.getWorkoutId());
+                facility = sportFacilityRepository.getOne(workout.getSportFacilityID());
+                Customer customer = customerRepository.getOne(scheduledPersonalWorkout.getCustomerId());
+                workouts.add(new ScheduledWorkoutDTO(workout.getName(), facility.getName(), customer.getFirstName() + " " + customer.getLastName() ,scheduledPersonalWorkout.getScheduledTime(), scheduledPersonalWorkout.getId() ));
+            }
+        }
+
+        return workouts;
+    }
+
+    public ArrayList<WorkoutDTO> getCoachesGroupWorkouts(String coachId){
+        ArrayList<WorkoutDTO> workouts = new ArrayList<WorkoutDTO>();
+        SportFacility facility = new SportFacility();
+
+        for(Workout workout : workoutRepository.getAll()){
+            if(workout.getWorkoutType().getType().equals("Grupni trening") && workout.getCoachID().equals(coachId))
+            {
+                facility = sportFacilityRepository.getOne(workout.getSportFacilityID());
+                workouts.add(new WorkoutDTO(workout.getName(), facility.getName(), workout.getWorkoutType().getType()));
+            }
+
+        }
+
+        return workouts;
+    }
+
+    public ArrayList<WorkoutDTO> getCoachesOtherWorkouts(String coachId){
+        ArrayList<WorkoutDTO> workouts = new ArrayList<WorkoutDTO>();
+        SportFacility facility = new SportFacility();
+
+        for(Workout workout : workoutRepository.getAll()){
+            if(!workout.getWorkoutType().getType().equals("Grupni trening") && workout.getCoachID().equals(coachId))
+            {
+                facility = sportFacilityRepository.getOne(workout.getSportFacilityID());
+                workouts.add(new WorkoutDTO(workout.getName(), facility.getName(), workout.getWorkoutType().getType()));
+            }
+
+        }
+
+        return workouts;
+    }
+
+    public boolean isNowTwoDaysBeforeWorkoutTime(String scheduledWorkoutId){
+        ScheduledPersonalWorkout workout = scheduledPersonalWorkoutRepository.getOne(scheduledWorkoutId);
+
+        if(LocalDateTime.now().plusDays(2).isBefore(workout.getScheduledTime()))
+            return true;
+
+        return false;
+
+    }
+
+    public void cancelScheduledWorkout(String scheduledWorkoutId){
+        ScheduledPersonalWorkout workout = scheduledPersonalWorkoutRepository.getOne(scheduledWorkoutId);
+
+        membershipService.addOneVisitToMembership(workout.getCustomerId());
+
+        scheduledPersonalWorkoutRepository.delete(scheduledWorkoutId);
+    }
+
 }

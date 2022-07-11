@@ -3,9 +3,11 @@ package controller;
 import beans.Workout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import service.MembershipService;
 import service.WorkoutHistoryService;
 import service.WorkoutService;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import static spark.Spark.*;
@@ -15,6 +17,7 @@ public class WorkoutController {
     private static Gson gson = new Gson();
     public static WorkoutService workoutService = new WorkoutService();
     public static WorkoutHistoryService workoutHistoryService = new WorkoutHistoryService();
+    public static MembershipService membershipService = new MembershipService();
 
     public static void getWorkoutTypes() {
         get("rest/workouts/get_types", (req, res) -> {
@@ -110,5 +113,103 @@ public class WorkoutController {
 
             return gson.toJson(workoutHistoryService.addWorkoutHistory(customerId, workoutId));
         });
+    }
+
+    public static void getPastMonthWorkoutHistoryForCustomer() {
+        get("rest/workouts/getPastMonthWorkoutHistoryForCustomer", (req, res) -> {
+            res.type("application/json");
+
+            String customerId = req.queryParams("customerId");
+            return gson.toJson(workoutHistoryService.getPastMonthWorkoutHistoryForCustomer(customerId));
+        });
+    }
+
+    public static void scheduleWorkout(){
+        post("rest/workouts/scheduleWorkout", (req, res) -> {
+            res.type("application/json");
+
+            String customerId = req.queryParams("customerId");
+            String workoutId = req.queryParams("workoutId");
+            String scheduleDate = req.queryParams("scheduleDate");
+            int scheduleHours = Integer.parseInt(req.queryParams("scheduleHours"));
+            int scheduleMinutes = Integer.parseInt(req.queryParams("scheduleMinutes"));
+
+            int year = Integer.parseInt(scheduleDate.substring(0,4));
+            int month = Integer.parseInt(scheduleDate.substring(5,7));
+            int day = Integer.parseInt(scheduleDate.substring(8,10));
+
+            LocalDateTime dateTime = LocalDateTime.of(year, month, day, scheduleHours, scheduleMinutes);
+
+            boolean isMembershipActiveOnScheduledDate = membershipService.isMembershipActiveOnScheduledDate(dateTime, customerId);
+
+            boolean isVisitLeft = membershipService.isAvailableVisitLeft(customerId);
+
+            if(!isMembershipActiveOnScheduledDate)
+                return "membershipExpired";
+
+            else if(!isVisitLeft)
+                return "noVisitsLeft";
+
+            workoutService.scheduleWorkout(customerId, workoutId, dateTime);
+
+            return "true";
+        });
+    }
+
+    public static void checkPastScheduledWorkouts(){
+        post("rest/workouts/checkPastScheduledWorkouts", (req, res) -> {
+            res.type("application/json");
+
+            workoutHistoryService.logPastScheduledWorkouts();
+
+            return true;
+        });
+    }
+
+    public static void getCoachesScheduledWorkouts(){
+        get("rest/workouts/getCoachesScheduledWorkouts", (req, res) -> {
+            res.type("application/json");
+
+            String coachId = req.queryParams("coachId");
+
+            return gson.toJson(workoutService.getCoachesScheduledWorkouts(coachId));
+        });
+    }
+
+    public static void getCoachesGroupWorkouts(){
+        get("rest/workouts/getCoachesGroupWorkouts", (req, res) -> {
+            res.type("application/json");
+
+            String coachId = req.queryParams("coachId");
+
+            return gson.toJson(workoutService.getCoachesGroupWorkouts(coachId));
+        });
+    }
+
+    public static void getCoachesOtherWorkouts(){
+        get("rest/workouts/getCoachesOtherWorkouts", (req, res) -> {
+            res.type("application/json");
+
+            String coachId = req.queryParams("coachId");
+
+            return gson.toJson(workoutService.getCoachesOtherWorkouts(coachId));
+        });
+    }
+
+    public static void cancelScheduledWorkout(){
+        post("rest/workouts/cancelScheduledWorkout", (req, res) -> {
+            res.type("application/json");
+
+            String id = req.queryParams("id");
+
+            if(workoutService.isNowTwoDaysBeforeWorkoutTime(id))
+            {
+                workoutService.cancelScheduledWorkout(id);
+                return true;
+            }
+
+            return false;
+        });
+
     }
 }

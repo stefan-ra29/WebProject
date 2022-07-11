@@ -51,5 +51,12 @@ public class SparkMainApp {
         UserController.filterUsers();
         CoachController.getCoachesFromFacility();
         CustomerController.getCustomersWhoVisitedFacitily();
+        WorkoutController.getPastMonthWorkoutHistoryForCustomer();
+        WorkoutController.scheduleWorkout();
+        WorkoutController.checkPastScheduledWorkouts();
+        WorkoutController.getCoachesGroupWorkouts();
+        WorkoutController.getCoachesOtherWorkouts();
+        WorkoutController.getCoachesScheduledWorkouts();
+        WorkoutController.cancelScheduledWorkout();
     }
 }

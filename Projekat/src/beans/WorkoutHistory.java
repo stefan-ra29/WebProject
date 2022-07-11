@@ -14,6 +14,14 @@ public class WorkoutHistory {
 	public WorkoutHistory(){
 	}
 
+	public WorkoutHistory(ScheduledPersonalWorkout scheduledPersonalWorkout){
+		this.workoutId = scheduledPersonalWorkout.getWorkoutId();
+		this.customerId = scheduledPersonalWorkout.getCustomerId();
+		this.coachId = scheduledPersonalWorkout.getCoachId();
+		this.startTime = scheduledPersonalWorkout.getScheduledTime();
+		this.id = UUID.randomUUID().toString();
+	}
+
 	public WorkoutHistory(LocalDateTime startTime, String workoutId, String customerId, String coachId) {
 		this.startTime = startTime;
 		this.workoutId = workoutId;

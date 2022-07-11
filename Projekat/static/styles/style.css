@@ -1,10 +1,14 @@
 body{
     margin: 0px;
+    height: 100%;
+}
+
+html {
+    height: 100%;
 }
 
 .login_wrap{
     text-align: center;
-    padding-top: 20px;
     padding-bottom: 488px;
     background-color: #e76f51;
 }
@@ -25,7 +29,6 @@ body{
 
 .registration_wrap{
     text-align: center;
-    padding-top: 20px;
     padding-bottom: 310px;
     background-color: #e76f51;
 }
@@ -59,10 +62,30 @@ table{
 .sport_facility_display_header {
     margin-bottom: 10px;
     text-align: right;
+    background-color: #1F1F1F;
+    height: 30px;
+    padding-top: 10px;
+    padding-right: 10px;
+}
+.sport_facility_display_header a{
+    text-decoration: none;
+    color: #F0F0F0;
+    font-weight: 500;
 }
 
 .sport_facility_search_display {
     text-align: left;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.sport_facilities_sort{
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
+
+.sport_facilities_filter{
+    margin-bottom: 5px;
     margin-left: 10px;
 }
 
@@ -94,9 +117,8 @@ table{
     text-align: center;
 }
 .membership_table{
-    background-color: white;
+    background-color: #E76F51;;
     border: 0px;
-    border-radius: 0;
     margin: 0 auto;
     margin-top: 100px;
 }
@@ -160,5 +182,29 @@ table{
 }
 
 .workout_schedule_table{
+    margin: 0 auto;
+}
+
+.orange_wrap{
+    background-color: #E76F51;
+    padding-bottom: 150px;
+}
+
+.orange_wrap h1{
+    color: #F0F0F0;
+}
+
+.orange_wrap h2{
+    color: #F0F0F0;
+}
+
+.current_membership_info{
+    color: #F0F0F0;
+    letter-spacing: 1px;
+    font-size: 16px;
+    height: 100%;
+}
+
+.manager_users_display_table{
     margin: 0 auto;
 }

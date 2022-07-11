@@ -24,7 +24,7 @@ Vue.component("sport_facility_display", {
 	    }
 	},
 	    template: `
-    	<div>
+    	<div class="orange_wrap facilities_display_wrap">
     	    <navbar/>
 
             <div v-if="this.manager != null && this.manager.sportFacilityId != '' && this.manager.sportFacilityId != null"">
@@ -55,7 +55,8 @@ Vue.component("sport_facility_display", {
                 </button></br>
     	    </form>
 
-            Sortiraj:
+            <div class="sport_facilities_sort">
+                Sortiraj:
                 <select style="width: 195px; padding:1px" name="sort" id="sort" v-model = "sort" @change = "sortFacilities($event)" >
                       <option value="name_increasing">Naziv (A-Z)</option>
                       <option value="name_decreasing">Naziv (Z-A)</option>
@@ -65,17 +66,22 @@ Vue.component("sport_facility_display", {
                       <option value="average_grade_decreasing">Prosecna ocena (opadajuce)</option>
                 </select>
                 <button class= "button_icon_style" v-if=" sort != ''" v-on:click="removeSort"><i class="fa-solid fa-x"></i></button></br>
+            </div>
 
-            Filtriraj:
-                <select style="width: 195px; padding:1px" name="filter" id="filter"
-                    @change = "filterFacilities($event)" v-model="filter" >
-                      <option v-for="type in facility_types" >{{type}}</option>
-                </select>
-            <button class= "button_icon_style" v-if=" filter != ''" v-on:click="removeFilter"><i class="fa-solid fa-x"></i></button></br>
+            <div class="sport_facilities_filter">
+                Filtriraj:
+                    <select style="width: 195px; padding:1px" name="filter" id="filter"
+                        @change = "filterFacilities($event)" v-model="filter" >
+                          <option v-for="type in facility_types" >{{type}}</option>
+                    </select>
+                <button class= "button_icon_style" v-if=" filter != ''" v-on:click="removeFilter"><i class="fa-solid fa-x"></i></button></br>
+            </div>
 
-            <input type="checkbox" id="openFacilities" name="openFacilities" value="openFacilities"
-             @change = "getOpenFacilities($event)" v-model="openFacilities" >
-            <label for="openFacilities">Trenutno otvoreni objekti</label>
+            <div class="sport_facilities_filter">
+                <input type="checkbox" id="openFacilities" name="openFacilities" value="openFacilities"
+                 @change = "getOpenFacilities($event)" v-model="openFacilities" >
+                <label for="openFacilities">Trenutno otvoreni objekti</label>
+            </div>
 
     	    <h1 class="facility_heading">Objekti</h1>
 

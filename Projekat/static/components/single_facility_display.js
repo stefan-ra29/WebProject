@@ -25,7 +25,7 @@ Vue.component("single_facility_display", {
 	    }
 	},
 	    template: `
-    	<div v-if="facility != null" >
+    	<div v-if="facility != null" class="orange_wrap">
     	    <navbar/>
 
             <h1 class="single_facility_header">{{facility.name}}</h1>
@@ -56,35 +56,45 @@ Vue.component("single_facility_display", {
                  </tr>
                  <tr><td colspan="2" ></td></tr>
              </table>
-             <h2 class="managers_facility_header">Treninzi:</h2>
+             <h2 class="managers_facility_header">TRENINZI:</h2>
 
-            <form v-if="workouts.length != null" class="sport_facility_search_display">
-                <select style="width: 125px; padding:1px" name="search_criteria" id="search_criteria" v-model = "criteria">
-                      <option value="withoutSupplement">Bez doplate</option>
-                      <option value="withSupplement">Sa doplatom</option>
-                </select>
-                <div v-if="criteria == 'withSupplement'">
-                    Od: <input  type="number" name="price" min="0" max="2000" v-model = "minPrice">
-                    Do: <input  type="number" name="price" min="0" max="2000" v-model = "maxPrice">
+            <div v-if="workouts.length != 0 && workouts.length != null">
+                <form v-if="workouts.length != null" class="sport_facility_search_display">
+                    <select style="width: 125px; padding:1px" name="search_criteria" id="search_criteria" v-model = "criteria">
+                          <option value="withoutSupplement">Bez doplate</option>
+                          <option value="withSupplement">Sa doplatom</option>
+                    </select>
+                    <div v-if="criteria == 'withSupplement'">
+                        Od: <input  type="number" name="price" min="0" max="2000" v-model = "minPrice">
+                        Do: <input  type="number" name="price" min="0" max="2000" v-model = "maxPrice">
+                    </div>
+                    <input type="submit" value="Pretrazi" v-on:click="searchWorkouts" name="search_button">
+                    <button class= "button_icon_style" v-if=" criteria != ''" v-on:click="removeSearch"><i class="fa-solid fa-x"></i></button></br>
+
+                </form>
+
+                <div style="margin-bottom: 10px; margin-left: 10px;">
+                    Sortiraj:
+                    <select style="width: 195px; padding:1px" name="sort" id="sort" v-model = "sort" @change = "sortWorkouts($event)" >
+                          <option value="price_increasing">Doplata (rastuce)</option>
+                          <option value="price_decreasing">Doplata (opadajuce)</option>
+                    </select>
+                    <button class= "button_icon_style" v-if=" sort != ''" v-on:click="removeSort"><i class="fa-solid fa-x"></i></button></br>
                 </div>
-                <input type="submit" value="Pretrazi" v-on:click="searchWorkouts" name="search_button">
-                <button class= "button_icon_style" v-if=" criteria != ''" v-on:click="removeSearch"><i class="fa-solid fa-x"></i></button></br>
 
-            </form>
+                <div style="margin-bottom: 10px; margin-left: 10px;">
+                    Filtriraj:
+                    <select style="width: 195px; padding:1px" name="filter" id="filter"
+                        @change = "filterWorkouts($event)" v-model="filter" >
+                          <option v-for="type in types" >{{type.type}}</option>
+                    </select>
+                    <button class= "button_icon_style" v-if=" filter != ''" v-on:click="removeFilter"><i class="fa-solid fa-x"></i></button></br>
+                </div>
+            </div>
 
-            Sortiraj:
-            <select style="width: 195px; padding:1px" name="sort" id="sort" v-model = "sort" @change = "sortWorkouts($event)" >
-                  <option value="price_increasing">Doplata (rastuce)</option>
-                  <option value="price_decreasing">Doplata (opadajuce)</option>
-            </select>
-            <button class= "button_icon_style" v-if=" sort != ''" v-on:click="removeSort"><i class="fa-solid fa-x"></i></button></br>
-
-            Filtriraj:
-            <select style="width: 195px; padding:1px" name="filter" id="filter"
-                @change = "filterWorkouts($event)" v-model="filter" >
-                  <option v-for="type in types" >{{type.type}}</option>
-            </select>
-            <button class= "button_icon_style" v-if=" filter != ''" v-on:click="removeFilter"><i class="fa-solid fa-x"></i></button></br>
+            <div v-else style="text-align: center; color: #f0f0f0;">
+                <p style="font-size: 18px;"> Objekat trenutno nema treninga u ponudi </p>
+            </div>
 
             <div v-for="(workout, index) in workouts" class="facility_display_wrap">
                  <table class="facility_table_wrap">

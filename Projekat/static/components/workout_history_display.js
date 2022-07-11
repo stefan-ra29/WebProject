@@ -8,7 +8,7 @@ Vue.component("customer_workout_history", {
 	    }
 	},
 	    template: `
-	    <div class="workout_history_wrap">
+	    <div class="workout_history_wrap orange_wrap">
 	        <navbar/>
 	        
             <h1>Istorija Vasih treninga u posljednjih mjesec dana</h1>

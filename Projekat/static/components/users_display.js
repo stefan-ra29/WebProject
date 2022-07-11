@@ -25,10 +25,10 @@ Vue.component("users_display", {
 	    }
 	},
 	    template: `
-    	<div v-if="users != null" >
+    	<div v-if="users != null" class="orange_wrap">
     	    <navbar/>
 
-            <h1 class="single_facility_header">Korisnici</h1>
+            <h1 class="single_facility_header">KORISNICI</h1>
 
             <form class="sport_facility_search_display">
                 Ime: <input type="text" name="firstNameSearch" v-model="firstNameSearch">
@@ -42,29 +42,34 @@ Vue.component("users_display", {
                 </button></br>
             </form>
 
-            Sortiraj:
-            <select style="width: 195px; padding:1px" name="sort" id="sort" v-model = "sort" @change = "sortUsers($event)" >
-                  <option value="firstName_increasing">Ime (A-Z)</option>
-                  <option value="firstName_decreasing">Ime (Z-A)</option>
-                  <option value="lastName_increasing">Prezime (A-Z)</option>
-                  <option value="lastName_decreasing">Prezime (Z-A)</option>
-                  <option value="username_increasing">Korisnicko ime (A-Z)</option>
-                  <option value="username_decreasing">Korisnicko ime (Z-A))</option>
-                  <option value="points_increasing">Broj poena (rastuce)</option>
-                  <option value="points_decreasing">Broj poena (opadajuce)</option>
-            </select>
-            <button class= "button_icon_style" v-if=" sort != ''" v-on:click="removeSort"><i class="fa-solid fa-x"></i></button></br>
+            <div class="sport_facilities_sort">
+                Sortiraj:
+                <select style="width: 195px; padding:1px" name="sort" id="sort" v-model = "sort" @change = "sortUsers($event)" >
+                      <option value="firstName_increasing">Ime (A-Z)</option>
+                      <option value="firstName_decreasing">Ime (Z-A)</option>
+                      <option value="lastName_increasing">Prezime (A-Z)</option>
+                      <option value="lastName_decreasing">Prezime (Z-A)</option>
+                      <option value="username_increasing">Korisnicko ime (A-Z)</option>
+                      <option value="username_decreasing">Korisnicko ime (Z-A))</option>
+                      <option value="points_increasing">Broj poena (rastuce)</option>
+                      <option value="points_decreasing">Broj poena (opadajuce)</option>
+                </select>
+                <button class= "button_icon_style" v-if=" sort != ''" v-on:click="removeSort"><i class="fa-solid fa-x"></i></button></br>
+            </div>
 
-            Filtriraj:
-            <select style="width: 195px; padding:1px" name="filter" id="filter"
-                @change = "filterUsers($event)" v-model="filter" >
-                  <option value="Customer" >Kupci</option>
-                  <option value="Manager" >Menadzeri</option>
-                  <option value="Coach" >Treneri</option>
-            </select>
-            <button class= "button_icon_style" v-if=" filter != ''" v-on:click="removeFilter"><i class="fa-solid fa-x"></i></button></br>
+            <div class="sport_facilities_sort">
+                Filtriraj:
+                <select style="width: 195px; padding:1px" name="filter" id="filter"
+                    @change = "filterUsers($event)" v-model="filter" >
+                      <option value="Customer" >Kupci</option>
+                      <option value="Manager" >Menadzeri</option>
+                      <option value="Coach" >Treneri</option>
+                </select>
+                <button class= "button_icon_style" v-if=" filter != ''" v-on:click="removeFilter"><i class="fa-solid fa-x"></i></button></br>
+            </div>
 
-            <div v-if="filter == 'Customer'">
+
+            <div v-if="filter == 'Customer'" class="sport_facilities_sort">
                 Tip kupca:
                 <select style="width: 195px; padding:1px" name="filter_customers" id="filter_customers"
                     @change = "filterCustomerType($event)" v-model="filterCustomers" >
@@ -75,7 +80,8 @@ Vue.component("users_display", {
                 <button class= "button_icon_style" v-if=" filterCustomers != ''" v-on:click="removeCustomerFilter"><i class="fa-solid fa-x"></i></button></br>
             </div>
 
-            <table>
+
+            <table style="margin: 0 auto;">
                  <tr>
                      <th>Ime</th>
                      <th>Prezime</th>

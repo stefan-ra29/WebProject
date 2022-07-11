@@ -7,18 +7,18 @@ Vue.component("memberships", {
 	    }
 	},
 	    template: `
-	    <div style="text-align: center">
+	    <div style="text-align: center" class="orange_wrap">
 	        <navbar/>
 
-	        <h1>Clanarine</h1>
+	        <h1>CLANARINE</h1>
 	        <p v-if="customer.customerTypeName == 'Bronzani'">Bronzani ste korisnik, imate popust od 8%</p>
             <p v-else-if="customer.customerTypeName == 'Srebrni'">Srebrni ste korisnik, imate popust od 12%</p>
             <p v-else-if="customer.customerTypeName == 'Zlatni'">Zlatni ste korisnik, imate popust od 15%</p>
-	        <div v-if="currentMembership != null">
+	        <div v-if="currentMembership != null" class="current_membership_info">
 	            <p>Trenutno imate aktivnu {{currentMembership.type}} clanarinu i ostalo Vam je {{currentMembership.availableVisits}} ulazaka</p>
                 <p>Clanarina Vam istice {{currentMembership.expirationDate.day}}.{{currentMembership.expirationDate.month}}.{{currentMembership.expirationDate.year}}.</p>
 	        </div>
-	        <div v-else>
+	        <div v-else class="current_membership_info">
 	            <p>Trenutno nemate aktivnu clanarinu</p>
 	        </div>
 

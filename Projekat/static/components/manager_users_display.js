@@ -21,13 +21,13 @@ Vue.component("manager_users_display", {
 	    }
 	},
 	    template: `
-    	<div v-if="customers != null && coaches != null" >
+    	<div v-if="customers != null && coaches != null" class="orange_wrap">
     	    <navbar/>
 
             <h1 v-if="this.displayCoaches == 'false'" class="single_facility_header">Kupci</h1>
             <h1 v-else class="single_facility_header">Treneri</h1>
 
-            <table v-if="this.displayCoaches == 'false'">
+            <table class="manager_users_display_table" v-if="this.displayCoaches == 'false'" >
                  <tr>
                      <th>Ime</th>
                      <th>Prezime</th>
@@ -48,7 +48,7 @@ Vue.component("manager_users_display", {
                      <td v-else>{{customer.points}}</td>
                  </tr>
              </table>
-             <table v-else>
+             <table class="manager_users_display_table" v-else>
                   <tr>
                       <th>Ime</th>
                       <th>Prezime</th>

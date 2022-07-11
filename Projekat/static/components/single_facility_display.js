@@ -137,8 +137,9 @@ Vue.component("single_facility_display", {
                     <div v-if="role == 'Administrator' || role =='Manager'">
                         <p v-if="comm.isApproved == true">Status: Odobren</p>
                         <p v-else>Status: Neodobren</p>
-                        <div v-if=" role == 'Administrator' && comm.isApproved == false">
-                            <button v-on:click="approveComment(comm)">Odobri</button>
+                        <div v-if=" role == 'Administrator'">
+                            <button v-on:click="deleteComment(comm.id)">Obrisi</button>
+                            <button  v-if="comm.isApproved == false" v-on:click="approveComment(comm)">Odobri</button>
                         </div>
 
                     </div>
@@ -456,6 +457,21 @@ Vue.component("single_facility_display", {
                 this.loadComments()
                 this.loadFacility(changedComment.facilityID)
             });
-        }
+        },
+         deleteComment(id){
+             if(confirm("Da li sigurno zelite da obrisete komentar?"))
+               {
+                   axios
+                   .delete("rest/comments/delete",
+                   { params : {
+                       id : id
+                   }})
+                   .then(response => {
+                       alert("Uspesno ste obrisali komentar!")
+                       this.loadComments()
+                        this.loadFacility(localStorage.getItem("facilityID"))
+                   });
+               }
+         }
     }
 });

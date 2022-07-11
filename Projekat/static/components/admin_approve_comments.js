@@ -24,7 +24,7 @@ Vue.component("admin_approve_comments", {
                      <td>{{comment.text}}</td>
                      <td>{{comment.grade}}</td>
                      <td><button v-on:click="approveComment(comment)">Odobri</button></td>
-                     <td><button v-on:click="deleteComment(comment)">Obrisi</button></td>
+                     <td><button v-on:click="deleteComment(comment.id)">Obrisi</button></td>
                  </tr>
              </table>
             </div>
@@ -55,8 +55,19 @@ Vue.component("admin_approve_comments", {
                 });
             });
         },
-        deleteComment(comm){
-
+        deleteComment(id){
+            if(confirm("Da li sigurno zelite da obrisete komentar?"))
+              {
+                  axios
+                  .delete("rest/comments/delete",
+                  { params : {
+                      id : id
+                  }})
+                  .then(response => {
+                      alert("Uspesno ste obrisali komentar!")
+                      this.loadCommentsAndFacilities()
+                  });
+              }
         }
     }
 });

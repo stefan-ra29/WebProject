@@ -69,4 +69,11 @@ public class CommentService {
         }
         return gson.toJson(filteredComments);
     }
+    public boolean deleteComment(String id){
+
+        String facilityID = commentRepository.getOne(id).getFacilityID();
+        commentRepository.delete(id);
+        sportFacilityService.recalculateAverageGrade(facilityID);
+        return true;
+    }
 }

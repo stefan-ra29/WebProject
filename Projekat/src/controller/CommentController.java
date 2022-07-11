@@ -4,8 +4,7 @@ import beans.Comment;
 import com.google.gson.Gson;
 import service.CommentService;
 
-import static spark.Spark.get;
-import static spark.Spark.put;
+import static spark.Spark.*;
 
 public class CommentController {
     private static Gson gson = new Gson();
@@ -51,6 +50,14 @@ public class CommentController {
             res.type("application/json");
 
             return commentService.getUnapprovedComments();
+        });
+    }
+    public static void deleteComment(){
+        delete("rest/comments/delete", (req, res) ->{
+            res.type("application/json");
+
+            String id = req.queryParams("id");
+            return commentService.deleteComment(id);
         });
     }
 }

@@ -33,7 +33,7 @@
       "isApproved": true,
       "isFilled": true
     },
-    "deleted": false
+    "deleted": true
   },
   {
     "entity": {
@@ -45,7 +45,7 @@
       "isApproved": false,
       "isFilled": true
     },
-    "deleted": false
+    "deleted": true
   },
   {
     "entity": {
@@ -54,7 +54,7 @@
       "text": "trener  nije dosao",
       "grade": 3,
       "id": "4555cfcf-afdd-466c-a20c-69c3269ba501",
-      "isApproved": false,
+      "isApproved": true,
       "isFilled": true
     },
     "deleted": false

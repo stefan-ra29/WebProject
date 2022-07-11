@@ -1,5 +1,6 @@
 package controller;
 
+import beans.Comment;
 import beans.SportFacility;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -121,5 +122,12 @@ public class SportFacilityController {
             return gson.toJson(sportFacilityService.isFacilityCurrentlyWorking(facilityId));
         });
     }
+    public static void getFacilityNames() {
+        post("rest/facilities/facility_names", (req, res) -> {
+            res.type("application/json");
 
+            ArrayList<Comment> comments = gson.fromJson(req.body(), new TypeToken<ArrayList<Comment>>(){}.getType());
+            return sportFacilityService.getFacilityNames(comments);
+        });
+    }
 }

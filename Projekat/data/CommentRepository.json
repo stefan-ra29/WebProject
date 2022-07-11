@@ -6,7 +6,7 @@
       "text": "Onako, okej je",
       "grade": 3,
       "id": "ef936553-8f70-46e7-9444-2073819deb27",
-      "isApproved": false,
+      "isApproved": true,
       "isFilled": true
     },
     "deleted": false
@@ -31,6 +31,30 @@
       "grade": 5,
       "id": "f68f1010-b805-43d7-adc3-dd704f966ef7",
       "isApproved": true,
+      "isFilled": true
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "customerID": "saska",
+      "facilityID": "8eb7aeaf-1fab-4503-93af-69fec50ba92c",
+      "text": "Ne svidja mi se!",
+      "grade": 1,
+      "id": "529262e8-0be9-4719-8716-4dff7dc4d7b8",
+      "isApproved": false,
+      "isFilled": true
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "customerID": "ogi",
+      "facilityID": "8eb7aeaf-1fab-4503-93af-69fec50ba92c",
+      "text": "trener  nije dosao",
+      "grade": 3,
+      "id": "4555cfcf-afdd-466c-a20c-69c3269ba501",
+      "isApproved": false,
       "isFilled": true
     },
     "deleted": false

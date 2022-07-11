@@ -2,7 +2,8 @@
   {
     "entity": {
       "visitedFacilitiesIds": [
-        "a8ffbc7c-cf81-4fe3-a9ab-9df625b43cb6"
+        "a8ffbc7c-cf81-4fe3-a9ab-9df625b43cb6",
+        "8eb7aeaf-1fab-4503-93af-69fec50ba92c"
       ],
       "points": 0.0,
       "customerTypeName": "Srebrni",
@@ -65,6 +66,9 @@
   },
   {
     "entity": {
+      "visitedFacilitiesIds": [
+        "8eb7aeaf-1fab-4503-93af-69fec50ba92c"
+      ],
       "points": 0.0,
       "firstName": "Ognjen",
       "lastName": "Gogi",

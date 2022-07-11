@@ -37,7 +37,7 @@
       "fee": 22000,
       "customerId": "saska",
       "isActive": true,
-      "availableVisits": 363
+      "availableVisits": 362
     },
     "deleted": false
   },
@@ -59,6 +59,27 @@
       "customerId": "marko",
       "isActive": true,
       "availableVisits": 56
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "id": "59fe04b2-0c23-4e6a-a3ee-7194405ba87d",
+      "type": "Mjesecna light",
+      "paymentDate": {
+        "year": 2022,
+        "month": 7,
+        "day": 11
+      },
+      "expirationDate": {
+        "year": 2022,
+        "month": 8,
+        "day": 11
+      },
+      "fee": 3600,
+      "customerId": "ogi",
+      "isActive": true,
+      "availableVisits": 29
     },
     "deleted": false
   }

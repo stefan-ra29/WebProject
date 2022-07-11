@@ -228,4 +228,11 @@ public class SportFacilityService {
         sportFacility.setAverageGrade(sum/numberOfComments);
         update(facilityId, sportFacility);
     }
+    public String getFacilityNames(ArrayList<Comment> comments){
+        ArrayList<String> sportFacilityNames = new ArrayList<String>();
+        for(Comment c : comments) {
+            sportFacilityNames.add(sportFacilityRepository.getOne(c.getFacilityID()).getName());
+        }
+        return gson.toJson(sportFacilityNames);
+    }
 }

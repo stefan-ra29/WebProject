@@ -59,4 +59,14 @@ public class CommentService {
         sportFacilityService.recalculateAverageGrade(comment.getFacilityID());
         return gson.toJson(comment);
     }
+    public String getUnapprovedComments(){
+
+        ArrayList<Comment> allComments = (ArrayList<Comment>) commentRepository.getAll();
+        ArrayList<Comment> filteredComments = new ArrayList<Comment>();
+        for(Comment c : allComments){
+            if(!c.getIsApproved() && c.getIsFilled())
+                filteredComments.add(c);
+        }
+        return gson.toJson(filteredComments);
+    }
 }

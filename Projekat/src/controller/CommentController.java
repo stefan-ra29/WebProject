@@ -46,4 +46,11 @@ public class CommentController {
             return commentService.approveComment(comment);
         });
     }
+    public static void getUnapprovedComments(){
+        get("rest/comments/get_unapproved_comments", (req, res) ->{
+            res.type("application/json");
+
+            return commentService.getUnapprovedComments();
+        });
+    }
 }

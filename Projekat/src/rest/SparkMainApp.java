@@ -55,5 +55,7 @@ public class SparkMainApp {
         CommentController.getCommentsForFacility();
         CommentController.addNewUnapprovedComment();
         CommentController.approveComment();
+        CommentController.getUnapprovedComments();
+        SportFacilityController.getFacilityNames();
     }
 }

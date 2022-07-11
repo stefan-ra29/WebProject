@@ -43,6 +43,7 @@ Vue.component("sport_facility_display", {
             </div>
             <div v-if="this.role == 'Administrator'">
                 <button v-on:click="goToUserDisplay()">Korisnici</button>
+                <button v-on:click="goToApproveComments()">Odobravanje komentara</button>
             </div>
 
     	    <form class="sport_facility_search_display">
@@ -336,6 +337,9 @@ Vue.component("sport_facility_display", {
            var sending = true
            localStorage.setItem("managerViewsCoaches", sending)
            router.push('/view_users')
+      },
+      goToApproveComments: function(e){
+          router.push('/approve_comments')
       }
 	}
 

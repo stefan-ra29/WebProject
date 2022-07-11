@@ -240,5 +240,49 @@
       "id": "a68d2a9f-aeb4-45ce-8ca7-1f9ce0baa106"
     },
     "deleted": false
+  },
+  {
+    "entity": {
+      "startTime": {
+        "date": {
+          "year": 2022,
+          "month": 7,
+          "day": 11
+        },
+        "time": {
+          "hour": 19,
+          "minute": 49,
+          "second": 10,
+          "nano": 671494600
+        }
+      },
+      "workoutId": "98c6de4b-1b24-472a-b463-2ea7f2dc4162",
+      "customerId": "saska",
+      "coachId": "tina",
+      "id": "a2ed7104-0aef-4363-b6e7-a297af46afe2"
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "startTime": {
+        "date": {
+          "year": 2022,
+          "month": 7,
+          "day": 11
+        },
+        "time": {
+          "hour": 19,
+          "minute": 50,
+          "second": 35,
+          "nano": 449224900
+        }
+      },
+      "workoutId": "98c6de4b-1b24-472a-b463-2ea7f2dc4162",
+      "customerId": "ogi",
+      "coachId": "tina",
+      "id": "c9dd8b90-0161-45e2-a23c-e1db71aeb7f5"
+    },
+    "deleted": false
   }
 ]

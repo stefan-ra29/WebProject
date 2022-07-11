@@ -70,6 +70,31 @@ public class UserService {
         return retVal;
     }
 
+    public void DeleteUser(String username){
+        User user;
+        user = administratorRepository.getOne(username);
+        if (user != null) {
+            administratorRepository.delete(username);
+            return;
+        }
+        user = managerRepository.getOne(username);
+        if (user != null) {
+            managerRepository.delete(username);
+            return;
+        }
+        user = coachRepository.getOne(username);
+        if (user != null) {
+            coachRepository.delete(username);
+            return;
+        }
+        user = customerRepository.getOne(username);
+        if(user != null){
+            customerRepository.delete(username);
+            return;
+        }
+
+    }
+
     public String getUserFromJWT(String token, String isUserManager) {
         String username = getUsernameFromJWT(token);
         if(isUserManager.equals("true")) {

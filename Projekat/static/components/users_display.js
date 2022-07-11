@@ -20,7 +20,8 @@ Vue.component("users_display", {
 	      filteredCustomers: {},
           filterDone: false,
           fromSearch: false,
-          jwt: localStorage.getItem('jwt')
+          jwt: localStorage.getItem('jwt'),
+          role : window.localStorage.getItem('role')
 	    }
 	},
 	    template: `
@@ -41,7 +42,7 @@ Vue.component("users_display", {
                 </button></br>
             </form>
 
-             Sortiraj:
+            Sortiraj:
             <select style="width: 195px; padding:1px" name="sort" id="sort" v-model = "sort" @change = "sortUsers($event)" >
                   <option value="firstName_increasing">Ime (A-Z)</option>
                   <option value="firstName_decreasing">Ime (Z-A)</option>
@@ -83,6 +84,7 @@ Vue.component("users_display", {
                      <th>E-mail</th>
                      <th>Broj bodova</th>
                      <th>Tip kupca</th>
+                     <th v-if="role == 'Administrator'">Obrisi</th>
                  <tr>
                  <tr v-for="user in users">
                      <td>{{user.firstName}}</td>
@@ -97,6 +99,7 @@ Vue.component("users_display", {
                      <td v-if="user.role !='Customer'">Korisnik nije kupac</td>
                      <td v-else-if="user.customerTypeName == undefined">Nije kategorisan.</td>
                      <td v-else>{{user.customerTypeName}}</td>
+                     <td v-if="role == 'Administrator'"> <button  v-on:click = "deleteUser(user.username)"> Obrisi korisnika </button> </td>
                  </tr>
              </table>
 
@@ -361,6 +364,23 @@ Vue.component("users_display", {
 //           console.log("Uklonjen filter za musterije, a ovo su bili korisnici")
 //           console.log(this.users)
            this.filterUsers(e)
+      },
+      deleteUser: function(id){
+
+          if(confirm("Da li sigurno zelite da obrisete ovog korisnika?"))
+          {
+              axios
+                  .delete("rest/users/delete",
+                  { params : {
+                      userId : id
+                  }})
+                  .then(response => {
+                      alert("Uspjesno ste obrisali korisnika!")
+                      window.location.reload();
+                  });
+          }
+
       }
+
     }
 });

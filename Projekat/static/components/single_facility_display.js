@@ -20,7 +20,8 @@ Vue.component("single_facility_display", {
 	      isFacilityCurrentlyWorking: null,
 	      customer: {username:'', password: '', firstName: '', lastName: '', email: '', gender: '', dob: {} },
           currentMembership: {type: '', availableVisits: '', expirationDate: {}},
-          jwt: localStorage.getItem('jwt')
+          jwt: localStorage.getItem('jwt'),
+          role : window.localStorage.getItem('role')
 	    }
 	},
 	    template: `
@@ -118,6 +119,11 @@ Vue.component("single_facility_display", {
                      </tr>
                      <tr v-if="currentMembership != null && customer.username != '' && workout.workoutType.type == 'Personalni trening' && workout.coachID != ''">
                         <button v-on:click="SchedulePersonalWorkout(workout.id, workout.name, facility.name, facility.id)">Zakazi personalni trening</button>
+                     </tr>
+
+                     <tr v-if="role == 'Administrator'">
+                        <td> </td>
+                        <td v-if="role == 'Administrator'"> <button  v-on:click = "deleteWorkout(workout.id)"> Obrisi trening </button> </td>
                      </tr>
 
                  </table>
@@ -364,6 +370,23 @@ Vue.component("single_facility_display", {
             localStorage.setItem("schedulingFacilityId", facilityId)
 
             router.push('/schedule_workout')
+        },
+
+        deleteWorkout: function(id){
+
+            if(confirm("Da li sigurno zelite da obrisete ovaj trening?"))
+            {
+                axios
+                    .delete("rest/workouts/delete",
+                    { params : {
+                        workoutId : id
+                    }})
+                    .then(response => {
+                        alert("Uspjesno ste obrisali trening!")
+                        window.location.reload();
+                    });
+            }
+
         }
 
     }

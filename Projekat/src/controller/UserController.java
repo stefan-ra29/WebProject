@@ -93,4 +93,17 @@ public class UserController {
             return userService.filterUsers(users, filter);
         });
     }
+
+    public static void deleteUser(){
+        delete("rest/users/delete", (req, res) ->{
+            res.type("application/json");
+
+            String userId = req.queryParams("userId");
+
+            userService.DeleteUser(userId);
+
+            return true;
+        });
+    }
+
 }

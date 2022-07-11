@@ -40,6 +40,11 @@ public class WorkoutService {
         workoutRepository.addOne(workout);
         return true;
     }
+
+    public void deleteWorkout(String workoutId){
+        workoutRepository.delete(workoutId);
+    }
+
     public boolean isWorkoutNameUnique(Workout workout){
 
         for(Workout w : workoutRepository.getAll()){

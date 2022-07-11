@@ -13,6 +13,7 @@ import java.util.UUID;
 
 import static spark.Spark.get;
 import static spark.Spark.post;
+import static spark.Spark.delete;
 
 public class SportFacilityController {
     private static Gson gson = new Gson();
@@ -129,6 +130,18 @@ public class SportFacilityController {
             boolean flag = sportFacilityService.isFacilityCurrentlyWorking(facilityId);
 
             return gson.toJson(sportFacilityService.isFacilityCurrentlyWorking(facilityId));
+        });
+    }
+
+    public static void deleteFacility(){
+        delete("rest/facilities/delete", (req, res) ->{
+            res.type("application/json");
+
+            String facilityId = req.queryParams("facilityId");
+
+            sportFacilityService.delete(facilityId);
+
+            return true;
         });
     }
 

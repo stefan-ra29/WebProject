@@ -212,4 +212,16 @@ public class WorkoutController {
         });
 
     }
+
+    public static void deleteWorkout(){
+        delete("rest/workouts/delete", (req, res) ->{
+            res.type("application/json");
+
+            String workoutId = req.queryParams("workoutId");
+
+            workoutService.deleteWorkout(workoutId);
+
+            return true;
+        });
+    }
 }

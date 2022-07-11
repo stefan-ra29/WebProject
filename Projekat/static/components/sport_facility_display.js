@@ -100,7 +100,10 @@ Vue.component("sport_facility_display", {
                     <tr>
                         <td>Prosecna ocena: {{facility.averageGrade}}</td>
                     </tr>
-                    <tr ><td colspan="2" class="facility_button_row" ><button class="facility_button" v-on:click = "details(facility)">Prikazi detaljnije</button></td></tr>
+                    <tr >
+                        <td class="facility_button_row" ><button class="facility_button" v-on:click = "details(facility)">Prikazi detaljnije</button></td>
+                        <td v-if="role == 'Administrator'"> <button  v-on:click = "deleteFacility(facility.id)"> Obrisi objekat </button> </td>
+                    </tr>
                 </table>
 
             </div>
@@ -315,20 +318,41 @@ Vue.component("sport_facility_display", {
                }
           }
        },
+
        goToUserDisplay: function(e){
             router.push('/users_display')
        },
+
        goToCustomersPage: function(e){
             localStorage.setItem("facilityID", this.managersFacility.id)
             var sending = false
             localStorage.setItem("managerViewsCoaches", sending)
             router.push('/view_users')
        },
+
        goToCoachesPage: function(e){
            localStorage.setItem("facilityID", this.managersFacility.id)
            var sending = true
            localStorage.setItem("managerViewsCoaches", sending)
            router.push('/view_users')
+      },
+
+      deleteFacility: function(id){
+
+        if(confirm("Da li sigurno zelite da obrisete objekat?"))
+        {
+            axios
+                .delete("rest/facilities/delete",
+                { params : {
+                    facilityId : id
+                }})
+                .then(response => {
+                    alert("Uspjesno ste obrisali objekat!")
+                    window.location.reload();
+                });
+        }
+
+
       }
 	}
 

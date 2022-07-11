@@ -58,5 +58,8 @@ public class SparkMainApp {
         WorkoutController.getCoachesOtherWorkouts();
         WorkoutController.getCoachesScheduledWorkouts();
         WorkoutController.cancelScheduledWorkout();
+        SportFacilityController.deleteFacility();
+        WorkoutController.deleteWorkout();
+        UserController.deleteUser();
     }
 }

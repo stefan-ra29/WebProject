@@ -27,7 +27,7 @@ Vue.component("create_facility", {
 					<tr><td>Postanski broj</td><td><input type="text" name="postalCode" v-model = "location.postalCode"></td></tr>
 					<tr> <td>Pocetak radnog vremena</td> <td> U <input type="number" v-model="startHour" min="0" max="23"> sati</td> </tr>
 					<tr> <td>Kraj radnog vremena</td> <td> U <input type="number" v-model="endHour" min="0" max="23"> sati</td> </tr>
-					<tr><td>Link za logo</td><td><input type="text" name="logo" v-model = "logo"></td></tr>
+					<tr><td>Logo</td><td><input type="file" id="file" ref="file" v-on:change="onChangeFileUpload()"/></td></tr>
 					<tr v-if="this.managers.length !== 0">
                                             <td>Menadzer</td>
                                             <td>
@@ -85,6 +85,21 @@ Vue.component("create_facility", {
             e.preventDefault()
             localStorage.setItem("facilityCreationInProcess", '1')
             router.push("/managerRegistration")
+        },
+
+        onChangeFileUpload($event) {
+            this.file = this.$refs.file.files[0];
+            this.encodeImage(this.file)
+        },
+
+        encodeImage(input) {
+        	if(input) {
+        		const reader = new FileReader()
+        		reader.onload = (e) => {
+        			this.logo = e.target.result
+        		}
+        		reader.readAsDataURL(input)
+        	}
         },
 
         checkResponse: function(response, e) {

@@ -15,7 +15,7 @@ Vue.component("add_new_workout", {
             <form id="form" class="registration_form">
                 <table>
                     <tr><td>*Naziv</td><td><input type="text" name="name" v-model = "workout.name"></td></tr>
-                    <tr><td>*Link za logo</td><td><input type="text" name="logo" v-model = "workout.picture"></td></tr>
+                    <tr><td>*Logo</td><td><input type="file" id="file" ref="file" v-on:change="onChangeFileUpload()"/></td></tr>
                     <tr>
                         <td>*Tip treninga</td>
                         <td v-if="this.types != undefined">
@@ -107,19 +107,37 @@ Vue.component("add_new_workout", {
                 });
             }
         },
+
         addTypes : function(e){
             axios
             .get("rest/workouts/get_types")
             .then(response => {this.types = response.data});
         },
+
         addCoaches : function(e){
             axios
             .get("rest/coaches/get_all")
             .then(response => {this.coaches = response.data});
         },
+
         removeCoach: function(e){
             e.preventDefault
             this.workout.coachID = ""
+        },
+
+        onChangeFileUpload($event) {
+            this.file = this.$refs.file.files[0];
+            this.encodeImage(this.file)
+        },
+
+        encodeImage(input) {
+            if(input) {
+                const reader = new FileReader()
+                reader.onload = (e) => {
+                    this.workout.picture = e.target.result
+                }
+                reader.readAsDataURL(input)
+            }
         }
 	}
 });

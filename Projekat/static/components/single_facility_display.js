@@ -114,10 +114,10 @@ Vue.component("single_facility_display", {
                      </tr>
                      <tr><td><button v-if="isManager == true" v-on:click = "changeWorkout(workout.id)">Izmeni</button></td></tr>
 
-                     <tr v-if="isFacilityCurrentlyWorking == true && currentMembership != null && customer.username != '' && workout.workoutType.type != 'Personalni trening'">
+                     <tr v-if="isFacilityCurrentlyWorking == true && currentMembership != null && customer.username != '' && workout.workoutType.type != 'Personalni trening' && facility.isOpen == true">
                         <button v-on:click="checkInToWorkout(customer.username, workout.id)">Prijavi se na trening</button>
                      </tr>
-                     <tr v-if="currentMembership != null && customer.username != '' && workout.workoutType.type == 'Personalni trening' && workout.coachID != ''">
+                     <tr v-if="currentMembership != null && customer.username != '' && workout.workoutType.type == 'Personalni trening' && workout.coachID != '' && facility.isOpen == true">
                         <button v-on:click="SchedulePersonalWorkout(workout.id, workout.name, facility.name, facility.id)">Zakazi personalni trening</button>
                      </tr>
 

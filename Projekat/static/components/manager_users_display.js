@@ -23,7 +23,7 @@ Vue.component("manager_users_display", {
 	    template: `
     	<div v-if="customers != null && coaches != null" >
     	    <navbar/>
-    	    
+
             <h1 v-if="this.displayCoaches == 'false'" class="single_facility_header">Kupci</h1>
             <h1 v-else class="single_facility_header">Treneri</h1>
 

@@ -9,6 +9,8 @@ Vue.component("login", {
 	    template: `
 
     	<div class="login_wrap">
+    	    <navbar/>
+
     	    <h1>PRIJAVA</h1>
             <form class="login_form">
                 <table>

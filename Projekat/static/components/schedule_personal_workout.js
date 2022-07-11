@@ -20,6 +20,8 @@ Vue.component("schedule_workout", {
 	},
 	    template: `
             <div class="login_wrap">
+                <navbar/>
+
                 <h1>Zakazivanje treninga {{workoutName}} u {{facilityName}}</h1>
 
                     <table v-if="facility.startHour != null" class="workout_schedule_table">

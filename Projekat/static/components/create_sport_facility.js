@@ -14,6 +14,8 @@ Vue.component("create_facility", {
 	},
 	    template: `
     	<div class="registration_wrap">
+    	    <navbar/>
+
     	    <h1>DODAVANJE NOVOG OBJEKTA</h1>
     		<form id="form"  class="registration_form">
 				<table v-if="this.managers.length !== 0">

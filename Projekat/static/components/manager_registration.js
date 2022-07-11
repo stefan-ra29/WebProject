@@ -9,6 +9,8 @@ Vue.component("register_manager", {
 	},
 	    template: `
     	<div class="registration_wrap">
+    	    <navbar/>
+
     	    <h1>DODAVANJE MENADZERA</h1>
     		<form id="form" class="registration_form">
 				<table>

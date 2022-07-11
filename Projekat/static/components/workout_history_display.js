@@ -9,6 +9,8 @@ Vue.component("customer_workout_history", {
 	},
 	    template: `
 	    <div class="workout_history_wrap">
+	        <navbar/>
+	        
             <h1>Istorija Vasih treninga u posljednjih mjesec dana</h1>
             <table v-if="pastMonthWorkoutHistoryDTOs != null">
                 <tr>

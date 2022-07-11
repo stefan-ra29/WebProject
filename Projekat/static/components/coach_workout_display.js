@@ -11,6 +11,8 @@ Vue.component("coach_workout_display", {
 	},
 	    template: `
 	    <div class="workout_history_wrap">
+	        <navbar/>
+
             <h1>Vasi treninzi</h1>
 
             <h2>Zakazani personalni treninzi</h2>

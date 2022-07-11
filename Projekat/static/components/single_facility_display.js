@@ -25,6 +25,8 @@ Vue.component("single_facility_display", {
 	},
 	    template: `
     	<div v-if="facility != null" >
+    	    <navbar/>
+
             <h1 class="single_facility_header">{{facility.name}}</h1>
             <button v-if="isManager == true" style="margin-left : 10px" v-on:click="addNewWorkout()" >Dodaj novi trening</button>
             <table class="facility_table_wrap">

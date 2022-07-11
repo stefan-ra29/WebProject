@@ -5,6 +5,8 @@ Vue.component("create_facility", {
             name: null,
             type: {type: ''},
             location: {street: '', streetNumber: '', city: '', postalCode: '', longditude: 45.5, latitude: 102.5},
+            startHour: '',
+            endHour: '',
             logo: null,
             managers: {},
             manager: null
@@ -21,6 +23,8 @@ Vue.component("create_facility", {
 					<tr><td>Broj</td><td><input type="text" name="streetNum" v-model = "location.streetNumber"></td></tr>
 					<tr><td>Grad</td><td><input type="text" name="city" v-model = "location.city"></td></tr>
 					<tr><td>Postanski broj</td><td><input type="text" name="postalCode" v-model = "location.postalCode"></td></tr>
+					<tr> <td>Pocetak radnog vremena</td> <td> U <input type="number" v-model="startHour" min="0" max="23"> sati</td> </tr>
+					<tr> <td>Kraj radnog vremena</td> <td> U <input type="number" v-model="endHour" min="0" max="23"> sati</td> </tr>
 					<tr><td>Link za logo</td><td><input type="text" name="logo" v-model = "logo"></td></tr>
 					<tr v-if="this.managers.length !== 0">
                                             <td>Menadzer</td>
@@ -54,7 +58,7 @@ Vue.component("create_facility", {
         receiveFormData: function(e) {
             e.preventDefault();
             if(this.name === "" || this.type === "" || this.logo === "" || this.location.street === "" || this.location.streetNumber === ""
-            || this.location.city === "" || this.location.postalCode === "" ) {
+            || this.location.city === "" || this.location.postalCode === "" || this.startHour === "" || this.endHour === "") {
                 alert("Morate popuniti sva polja!")
                 e.preventDefault()
             }
@@ -66,7 +70,11 @@ Vue.component("create_facility", {
                         logo: this.logo,
                         type: this.type,
                         location: this.location },
-                        { params: { manager: this.manager } })
+                        { params: {
+                            manager: this.manager,
+                            startHour: this.startHour,
+                            endHour: this.endHour
+                            } })
                     .then(response => (this.checkResponse(response, e) ))
             }
         },

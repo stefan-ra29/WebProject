@@ -7,6 +7,7 @@ import repository.ManagerRepository;
 import service.ManagerService;
 import service.SportFacilityService;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -97,6 +98,15 @@ public class SportFacilityController {
             facility.setId(UUID.randomUUID().toString());
 
             managerService.setFacilityToManager(req.queryParams("manager"), facility.getId());
+
+            int startHour = Integer.parseInt(req.queryParams("startHour"));
+            int endHour = Integer.parseInt(req.queryParams("endHour"));
+
+            LocalTime startTime = LocalTime.of(startHour, 0);
+            LocalTime endTime = LocalTime.of(endHour, 0);
+
+            facility.setStartHour(startTime);
+            facility.setClosingHour(endTime);
 
             return sportFacilityService.addOne(facility);
         });

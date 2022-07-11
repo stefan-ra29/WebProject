@@ -130,5 +130,38 @@
       }
     },
     "deleted": false
+  },
+  {
+    "entity": {
+      "id": "a6f03bca-536f-4d5f-b323-31471cf26c3b",
+      "name": "xgym",
+      "type": {
+        "type": "teretana"
+      },
+      "isOpen": false,
+      "location": {
+        "longditude": 45.5,
+        "latitude": 102.5,
+        "street": "svetosavska",
+        "streetNumber": "5",
+        "city": "prnjavor",
+        "postalCode": 545
+      },
+      "logo": "https://external-content.duckduckgo.com/iu/?u\u003dhttps%3A%2F%2Fsecure15.clubwise.com%2Fgymx%2Fajax.asp%3FAction%3DGetPicture%26Value%3D%2FWebsite%2Fclublogo.jpg\u0026f\u003d1\u0026nofb\u003d1",
+      "averageGrade": 0.0,
+      "startHour": {
+        "hour": 7,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "closingHour": {
+        "hour": 22,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "deleted": false
   }
 ]

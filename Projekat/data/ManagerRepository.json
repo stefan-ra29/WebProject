@@ -1,20 +1,19 @@
 [
   {
     "entity": {
-      "sportFacilityId": "c1111cdc-66a4-4279-ab44-947f93dd61e9",
+      "sportFacilityId": "a8ffbc7c-cf81-4fe3-a9ab-9df625b43cb6",
       "firstName": "Ivana",
       "lastName": "Ivanic",
       "email": "ivana@gmail.com",
       "username": "ivana",
       "password": "ivana",
       "gender": "female",
-      "role": "Manager",
       "dob": {
         "year": 1998,
         "month": 8,
         "day": 4
       },
-      "sportFacilityId": "a8ffbc7c-cf81-4fe3-a9ab-9df625b43cb6"
+      "role": "Manager"
     },
     "deleted": false
   },
@@ -27,18 +26,17 @@
       "username": "menadzer2",
       "password": "menadzer2",
       "gender": "male",
-      "role": "Manager",
       "dob": {
         "year": 1991,
         "month": 1,
         "day": 27
-      }
+      },
+      "role": "Manager"
     },
     "deleted": false
   },
   {
     "entity": {
-      "sportFacilityId": "",
       "firstName": "Boban",
       "lastName": "Todorovic",
       "email": "bobby@gmail.com",
@@ -56,6 +54,7 @@
   },
   {
     "entity": {
+      "sportFacilityId": "a6f03bca-536f-4d5f-b323-31471cf26c3b",
       "firstName": "qdfl;lbm",
       "lastName": "df;l;bmdflk",
       "email": ";dlfmbkm",

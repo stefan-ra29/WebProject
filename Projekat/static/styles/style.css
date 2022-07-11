@@ -207,4 +207,16 @@ table{
 
 .manager_users_display_table{
     margin: 0 auto;
+
+.comment_form{
+    margin-bottom: 100px;
+    text-align: center;
+}
+.comment_table{
+    margin-left:210px;
+    margin-bottom:10px;
+    margin-top:10px;
+    margin-right:400px;
+    padding: 20px 5px 5px 20px;
+    background-color: #f4a261;
 }

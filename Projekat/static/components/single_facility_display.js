@@ -3,6 +3,7 @@ Vue.component("single_facility_display", {
 	    return {
 	      facility : null,
 	      isManager : false,
+	      canCustomerComment : null,
 	      workouts: {},
 	      workoutsBeforeSearch: {},
 	      coaches: {},
@@ -21,6 +22,10 @@ Vue.component("single_facility_display", {
 	      customer: {username:'', password: '', firstName: '', lastName: '', email: '', gender: '', dob: {} },
           currentMembership: {type: '', availableVisits: '', expirationDate: {}},
           jwt: localStorage.getItem('jwt'),
+          comments: {},
+          commentText: '',
+          grade: null,
+          comment:{ text:'', customerID: '', facilityID: '', grade: '', id:''},
           role : window.localStorage.getItem('role')
 	    }
 	},
@@ -51,10 +56,14 @@ Vue.component("single_facility_display", {
                       <td v-if="facility.isOpen == true">Status: Objekat radi</td>
                       <td v-else>Status: Objekat trenutno ne radi</td>
                   </tr>
-                 <tr>
+                 <tr v-if="facility.averageGrade == 0">
+                     <td>Prosecna ocena: nema ocenu za sada</td>
+                 </tr>
+                 <tr v-else>
                      <td>Prosecna ocena: {{facility.averageGrade}}</td>
                  </tr>
                  <tr><td colspan="2" ></td></tr>
+
              </table>
              <h2 class="managers_facility_header">TRENINZI:</h2>
 
@@ -135,11 +144,36 @@ Vue.component("single_facility_display", {
                         <td> </td>
                         <td v-if="role == 'Administrator'"> <button  v-on:click = "deleteWorkout(workout.id)"> Obrisi trening </button> </td>
                      </tr>
-
                  </table>
              </div>
 
+             <h2 class="managers_facility_header">Komentari:</h2>
+             <div v-if="comments.length == 0" style=" text-align: center; margin-bottom:10px;" > Nema komentara za ovaj objekat</div>
+             <div v-else>
+                <div v-for="comm in comments" class="comment_table">
+                    <p>Korisnik: {{comm.customerID}}</p>
+                    <p>Ocena: {{comm.grade}}</p>
+                    <p>Komentar: {{comm.text}}</p>
+                    <div v-if="role == 'Administrator' || role =='Manager'">
+                        <p v-if="comm.isApproved == true">Status: Odobren</p>
+                        <p v-else>Status: Neodobren</p>
+                        <div v-if=" role == 'Administrator'">
+                            <button v-on:click="deleteComment(comm.id)">Obrisi</button>
+                            <button  v-if="comm.isApproved == false" v-on:click="approveComment(comm)">Odobri</button>
+                        </div>
 
+                    </div>
+                </div>
+             </div>
+             <div v-if="canCustomerComment == true ">
+                <form class="comment_form">
+                    Ostavi komentar:
+                    <input type="text" v-model="commentText" style="width:500px; height:100px;" ></br>
+                    Oceni od 1 do 5:
+                    <input type="number" min="1" max="5" v-model="grade">
+                    <input type="submit" name="addComment" value="Dodaj komentar" v-on:click="addComment">
+                </form>
+             </div>
     	</div>
     	`,
     mounted () {
@@ -158,16 +192,7 @@ Vue.component("single_facility_display", {
                 }
             });
         }
-        axios
-        .get("rest/facilities/get_one",
-        { params : {
-                        id : id
-                    }})
-        .then(response => {
-            this.facility = response.data
-            this.setIsFacilityCurrentlyWorking(id)
-
-        });
+        this.loadFacility(id)
 
         axios
         .get("rest/workouts/get_workouts_by_facility",
@@ -192,16 +217,51 @@ Vue.component("single_facility_display", {
             }})
             .then(response => {this.loadCustomer(response)});
         }
-
-
+        this.loadComments()
     },
     methods: {
+        loadFacility: function(id){
+            axios
+            .get("rest/facilities/get_one",
+            { params : {
+                            id : id
+                        }})
+            .then(response => {
+                this.facility = response.data
+                this.setIsFacilityCurrentlyWorking(id)
+            });
+        },
+        loadComments: function(){
+            axios
+            .get("rest/comments/get_comments_for_facility",
+            { params : {
+                role : localStorage.getItem('role'),
+                facilityID : localStorage.getItem("facilityID")
+            }})
+            .then(response => {this.comments = response.data});
+        },
 
         loadCustomer: function(response){
             this.customer = response.data
+
+            this.checkIfCustomerCanComment()
+
             this.loadCurrentMembership()
         },
-
+        checkIfCustomerCanComment: function(){
+            axios
+            .get("rest/comments/check_possible_commenting",
+            { params : {
+                customerID : this.customer.username,
+                facilityID : localStorage.getItem("facilityID")
+            }})
+            .then(response => {
+                this.comment = response.data
+                if(this.comment.customerID != ""){
+                    this.canCustomerComment = true
+                }
+            });
+        },
         loadCurrentMembership() {
             axios
             .post("rest/memberships/getCurrentMembership", this.customer)
@@ -364,8 +424,10 @@ Vue.component("single_facility_display", {
                }})
              .then(response => {
               console.log(response.data)
-              if(response.data == true)
+              if(response.data == true){
                 alert("Uspjesno ste se prijavili na trening!")
+                this.checkIfCustomerCanComment()
+              }
               else
                 alert("Nemate vise preostalih posjeta u okviru clanarine! Uplatite novu.")
               });
@@ -397,7 +459,66 @@ Vue.component("single_facility_display", {
                     });
             }
 
-        }
+        },
 
+        addComment: function(e){
+            e.preventDefault()
+
+            if(this.commentText.trim() == ""){
+                alert("Test komentara ne moze biti prazan!")
+                e.preventDefault()
+            }
+            else{
+
+                if(this.grade != null && (this.grade < 1 || this.grade >5)){
+                    alert("Ocena mora biti od 1 do 5!")
+                    e.preventDefault()
+                    return
+                }
+                else if(this.grade == null){
+                    alert("Ocena mora biti popunjena!")
+                    e.preventDefault()
+                    return
+                }
+                if(!Number.isInteger(parseInt(this.grade))){
+                    alert("Morate staviti ceo broj!")
+                    e.preventDefault()
+                    return
+                }
+
+                this.comment.text = this.commentText.trim()
+                this.comment.grade = this.grade
+                axios
+                .put("rest/comments/create_filled_comment", this.comment)
+                .then(response => {
+                    this.comment = response.data
+                    this.canCustomerComment = false
+                });
+            }
+        },
+        approveComment(comm){
+            axios
+            .put("rest/comments/approve_comment", comm)
+            .then(response => {
+                var changedComment = response.data
+                this.loadComments()
+                this.loadFacility(changedComment.facilityID)
+            });
+        },
+         deleteComment(id){
+             if(confirm("Da li sigurno zelite da obrisete komentar?"))
+               {
+                   axios
+                   .delete("rest/comments/delete",
+                   { params : {
+                       id : id
+                   }})
+                   .then(response => {
+                       alert("Uspesno ste obrisali komentar!")
+                       this.loadComments()
+                        this.loadFacility(localStorage.getItem("facilityID"))
+                   });
+               }
+         }
     }
 });

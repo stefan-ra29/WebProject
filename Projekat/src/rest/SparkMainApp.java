@@ -61,5 +61,12 @@ public class SparkMainApp {
         SportFacilityController.deleteFacility();
         WorkoutController.deleteWorkout();
         UserController.deleteUser();
+        CommentController.checkForUnfilledComments();
+        CommentController.getCommentsForFacility();
+        CommentController.addNewUnapprovedComment();
+        CommentController.approveComment();
+        CommentController.getUnapprovedComments();
+        SportFacilityController.getFacilityNames();
+        CommentController.deleteComment();
     }
 }

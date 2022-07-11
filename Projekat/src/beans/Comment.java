@@ -1,33 +1,41 @@
 package beans;
 
+import java.util.UUID;
+
 public class Comment {
-	private Customer customer;
-	private SportFacility facility;
+	private String customerID;
+	private String facilityID;
 	private String text;
 	private int grade;
+	private String id;
+	private boolean isApproved;
+	private boolean isFilled;
 	
-	public Comment(Customer customer, SportFacility facility, String text, int grade) {
+	public Comment(String customer, String facility, String text, int grade, boolean isApproved, boolean isFilled) {
 		super();
-		this.customer = customer;
-		this.facility = facility;
+		this.id = UUID.randomUUID().toString();
+		this.customerID = customer;
+		this.facilityID = facility;
 		this.text = text;
 		this.grade = grade;
+		this.isApproved = isApproved;
+		this.isFilled = isFilled;
 	}
 
-	public Customer getCustomer() {
-		return customer;
+	public String getCustomerID() {
+		return customerID;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setCustomerID(String customerID) {
+		this.customerID = customerID;
 	}
 
-	public SportFacility getFacility() {
-		return facility;
+	public String getFacilityID() {
+		return facilityID;
 	}
 
-	public void setFacility(SportFacility facility) {
-		this.facility = facility;
+	public void setFacilityID(String facilityID) {
+		this.facilityID = facilityID;
 	}
 
 	public String getText() {
@@ -46,4 +54,23 @@ public class Comment {
 		this.grade = grade;
 	}
 
+	public boolean getIsApproved() {
+		return isApproved;
+	}
+
+	public void setIsApproved(boolean approved) {
+		isApproved = approved;
+	}
+
+	public boolean getIsFilled() {
+		return isFilled;
+	}
+
+	public void setIsFilled(boolean filled) {
+		isFilled = filled;
+	}
+
+	public String getId() {
+		return id;
+	}
 }

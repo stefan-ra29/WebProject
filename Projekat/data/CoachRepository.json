@@ -40,7 +40,14 @@
   {
     "entity": {
       "workoutHistoryIds": [
-        "954dee27-0ed6-401a-94e9-0be4c9fe47e7"
+        "f4e81119-238b-431e-8e19-7046c490cfa4",
+        "639a8435-9410-40ea-b513-084a92eda23f",
+        "2454f125-999a-4ad2-83d5-3647e853ac13",
+        "729e0fdb-ea3b-4272-9358-34ea9b252bb1",
+        "f3680618-5e9c-4388-8657-b14c6be67040",
+        "a68d2a9f-aeb4-45ce-8ca7-1f9ce0baa106",
+        "a2ed7104-0aef-4363-b6e7-a297af46afe2",
+        "c9dd8b90-0161-45e2-a23c-e1db71aeb7f5"
       ],
       "firstName": "Tina",
       "lastName": "Tinic",

@@ -15,6 +15,7 @@ const CustomerWorkoutHistory = { template: '<customer_workout_history></customer
 const ScheduleWorkout = { template: '<schedule_workout></schedule_workout>' }
 const CoachWorkoutDisplay = { template: '<coach_workout_display></coach_workout_display>' }
 const Navbar = {template: '<navbar></navbar>'}
+const AdminApprovalOfComments = { template: '<admin_approve_comments></admin_approve_comments>'}
 
 const router = new VueRouter({
 	mode: 'hash',
@@ -34,7 +35,8 @@ const router = new VueRouter({
         { path: '/view_users', component: ManagerUserDisplay},
         { path: '/customer_workout_history', component: CustomerWorkoutHistory},
         { path: '/schedule_workout', component: ScheduleWorkout},
-        { path: '/coach_workout_display', component: CoachWorkoutDisplay}
+        { path: '/coach_workout_display', component: CoachWorkoutDisplay},
+        { path: '/approve_comments', component: AdminApprovalOfComments}
 	  ]
 });
 

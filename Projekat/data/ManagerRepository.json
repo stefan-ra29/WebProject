@@ -52,5 +52,23 @@
       "role": "Manager"
     },
     "deleted": false
+  },
+  {
+    "entity": {
+      "sportFacilityId": "18d525be-af20-4461-b964-81778309fc36",
+      "firstName": "Sasa",
+      "lastName": "Males",
+      "email": "sasa@gmail.com",
+      "username": "Sasa",
+      "password": "sasa",
+      "gender": "male",
+      "dob": {
+        "year": 2018,
+        "month": 12,
+        "day": 10
+      },
+      "role": "Manager"
+    },
+    "deleted": false
   }
 ]

@@ -1,10 +1,12 @@
 package service;
 
+import beans.Comment;
 import beans.SportFacility;
 import com.google.gson.Gson;
 import comparators.AverageGradeComparator;
 import comparators.LocationComparator;
 import comparators.NameComparator;
+import repository.CommentRepository;
 import repository.SportFacilityRepository;
 
 import java.time.LocalTime;
@@ -15,6 +17,7 @@ import java.util.List;
 public class SportFacilityService {
 
     SportFacilityRepository sportFacilityRepository = new SportFacilityRepository();
+    CommentRepository commentRepository = new CommentRepository();
     Gson gson = new Gson();
     public String getAll() {
 
@@ -211,5 +214,25 @@ public class SportFacilityService {
         }
 
         return false;
+    }
+    public void recalculateAverageGrade(String facilityId){
+        int numberOfComments = 0;
+        double sum = 0;
+        SportFacility sportFacility = sportFacilityRepository.getOne(facilityId);
+        for(Comment c : commentRepository.getAll()) {
+            if(c.getFacilityID().equals(facilityId) && c.getIsApproved()){
+                sum += c.getGrade();
+                numberOfComments++;
+            }
+        }
+        sportFacility.setAverageGrade(sum/numberOfComments);
+        update(facilityId, sportFacility);
+    }
+    public String getFacilityNames(ArrayList<Comment> comments){
+        ArrayList<String> sportFacilityNames = new ArrayList<String>();
+        for(Comment c : comments) {
+            sportFacilityNames.add(sportFacilityRepository.getOne(c.getFacilityID()).getName());
+        }
+        return gson.toJson(sportFacilityNames);
     }
 }

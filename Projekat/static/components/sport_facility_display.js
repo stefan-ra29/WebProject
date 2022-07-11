@@ -34,6 +34,7 @@ Vue.component("sport_facility_display", {
             </div>
             <div v-if="this.role == 'Administrator'">
                 <button v-on:click="goToUserDisplay()">Korisnici</button>
+                <button v-on:click="goToApproveComments()">Odobravanje komentara</button>
             </div>
 
     	    <form class="sport_facility_search_display">
@@ -103,7 +104,10 @@ Vue.component("sport_facility_display", {
                     <tr>
                         <td>Tip objekta: {{facility.type.type}}</td>
                     </tr>
-                    <tr>
+                    <tr v-if="facility.averageGrade == 0">
+                        <td>Prosecna ocena: nema ocenu za sada</td>
+                    </tr>
+                    <tr v-else>
                         <td>Prosecna ocena: {{facility.averageGrade}}</td>
                     </tr>
                     <tr >
@@ -342,7 +346,6 @@ Vue.component("sport_facility_display", {
            localStorage.setItem("managerViewsCoaches", sending)
            router.push('/view_users')
       },
-
       deleteFacility: function(id){
 
         if(confirm("Da li sigurno zelite da obrisete objekat?"))
@@ -357,8 +360,9 @@ Vue.component("sport_facility_display", {
                     window.location.reload();
                 });
         }
-
-
+      },
+      goToApproveComments: function(e){
+          router.push('/approve_comments')
       }
 	}
 

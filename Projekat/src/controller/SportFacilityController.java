@@ -110,6 +110,8 @@ public class SportFacilityController {
             facility.setStartHour(startTime);
             facility.setClosingHour(endTime);
 
+            facility.setIsOpen(true);
+
             return sportFacilityService.addOne(facility);
         });
     }

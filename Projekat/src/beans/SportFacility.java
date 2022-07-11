@@ -60,11 +60,11 @@ public class SportFacility {
 		this.workouts = workouts;
 	}
 
-	public boolean isOpen() {
+	public boolean getIsOpen() {
 		return isOpen;
 	}
 
-	public void setOpen(boolean isOpen) {
+	public void setIsOpen(boolean isOpen) {
 		this.isOpen = isOpen;
 	}
 

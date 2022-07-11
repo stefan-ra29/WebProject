@@ -70,5 +70,59 @@
       "role": "Manager"
     },
     "deleted": false
+  },
+  {
+    "entity": {
+      "sportFacilityId": "c2da373d-0ed1-4bb7-b566-d64e33701156",
+      "firstName": "Sandra",
+      "lastName": "Pusic",
+      "email": "sandraa@gmail.com",
+      "username": "sandra",
+      "password": "sandra",
+      "gender": "female",
+      "dob": {
+        "year": 1998,
+        "month": 8,
+        "day": 7
+      },
+      "role": "Manager"
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "sportFacilityId": "4ac81e9a-b556-4f37-ad02-537c2d4db0b6",
+      "firstName": "Maja",
+      "lastName": "Preradovic",
+      "email": "maya@gmail.com",
+      "username": "maja",
+      "password": "maja",
+      "gender": "female",
+      "dob": {
+        "year": 2000,
+        "month": 5,
+        "day": 14
+      },
+      "role": "Manager"
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "sportFacilityId": "a6f03bca-536f-4d5f-b323-31471cf26c3b",
+      "firstName": "Nemanja",
+      "lastName": "Vasilic",
+      "email": "vasila@gmail.com",
+      "username": "neco",
+      "password": "neco",
+      "gender": "male",
+      "dob": {
+        "year": 1989,
+        "month": 9,
+        "day": 13
+      },
+      "role": "Manager"
+    },
+    "deleted": false
   }
 ]

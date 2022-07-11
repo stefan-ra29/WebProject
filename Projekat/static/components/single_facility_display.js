@@ -150,10 +150,12 @@ Vue.component("single_facility_display", {
              <h2 class="managers_facility_header">Komentari:</h2>
              <div v-if="comments.length == 0" style=" text-align: center; margin-bottom:10px;" > Nema komentara za ovaj objekat</div>
              <div v-else>
-                <div v-for="comm in comments" class="comment_table">
-                    <p>Korisnik: {{comm.customerID}}</p>
-                    <p>Ocena: {{comm.grade}}</p>
-                    <p>Komentar: {{comm.text}}</p>
+                <div class="single_comment" v-for="comm in comments">
+                    <div>
+                        <p class="single_comment_user">Korisnik: {{comm.customerID}}</p>
+                        <p class="single_comment_grade">Ocena: {{comm.grade}}</p>
+                    </div>
+                    <p class="single_comment_text"> \" {{comm.text}} \"</p>
                     <div v-if="role == 'Administrator' || role =='Manager'">
                         <p v-if="comm.isApproved == true">Status: Odobren</p>
                         <p v-else>Status: Neodobren</p>

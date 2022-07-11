@@ -6,7 +6,7 @@
       "type": {
         "type": "Teretana"
       },
-      "isOpen": false,
+      "isOpen": true,
       "location": {
         "longditude": 10.0,
         "latitude": 10.0,
@@ -16,7 +16,7 @@
         "postalCode": 21244
       },
       "logo": "https://encrypted-tbn0.gstatic.com/images?q\u003dtbn:ANd9GcTp1FjFlsvpIirFMMDMWavGzQHYl2IPE5sT4g\u0026usqp\u003dCAU",
-      "averageGrade": 3.5,
+      "averageGrade": 0.0,
       "startHour": {
         "hour": 8,
         "minute": 0,
@@ -24,7 +24,7 @@
         "nano": 0
       },
       "closingHour": {
-        "hour": 20,
+        "hour": 23,
         "minute": 0,
         "second": 0,
         "nano": 0
@@ -49,7 +49,7 @@
         "postalCode": 21200
       },
       "logo": "https://flyclipart.com/thumb2/yoga-pose-png-background-photo-362883.png",
-      "averageGrade": 3.0,
+      "averageGrade": 4.0,
       "startHour": {
         "hour": 10,
         "minute": 0,
@@ -171,7 +171,7 @@
       "type": {
         "type": "Teretana"
       },
-      "isOpen": false,
+      "isOpen": true,
       "location": {
         "longditude": 45.5,
         "latitude": 102.5,
@@ -204,7 +204,7 @@
       "type": {
         "type": "Teretana"
       },
-      "isOpen": false,
+      "isOpen": true,
       "location": {
         "longditude": 45.5,
         "latitude": 102.5,

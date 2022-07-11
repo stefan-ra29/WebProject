@@ -68,5 +68,40 @@
       }
     },
     "deleted": false
+  },
+  {
+    "entity": {
+      "workoutId": "29d67334-266f-49b9-b1f9-ba2f50562359",
+      "customerId": "saska",
+      "coachId": "tina",
+      "id": "a25cb777-725d-48f1-97ed-0fa9ecb0663d",
+      "startTime": {
+        "date": {
+          "year": 2022,
+          "month": 7,
+          "day": 11
+        },
+        "time": {
+          "hour": 22,
+          "minute": 46,
+          "second": 12,
+          "nano": 396346500
+        }
+      },
+      "scheduledTime": {
+        "date": {
+          "year": 2022,
+          "month": 7,
+          "day": 14
+        },
+        "time": {
+          "hour": 18,
+          "minute": 0,
+          "second": 0,
+          "nano": 0
+        }
+      }
+    },
+    "deleted": false
   }
 ]

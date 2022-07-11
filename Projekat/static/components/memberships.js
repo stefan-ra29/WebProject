@@ -116,6 +116,7 @@ Vue.component("memberships", {
         successMessage: function(e) {
             e.preventDefault()
             alert("Uspjesno ste uplatili clanarinu")
+            window.location.reload()
         }
 
     }

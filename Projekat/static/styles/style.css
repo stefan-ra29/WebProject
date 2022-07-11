@@ -207,16 +207,31 @@ table{
 
 .manager_users_display_table{
     margin: 0 auto;
-
+}
 .comment_form{
     margin-bottom: 100px;
     text-align: center;
 }
-.comment_table{
-    margin-left:210px;
-    margin-bottom:10px;
-    margin-top:10px;
-    margin-right:400px;
-    padding: 20px 5px 5px 20px;
-    background-color: #f4a261;
+.single_comment{
+    background-color: #F0F0F0;
+    width: 70%;
+    margin: 0 auto;
+    padding: 1px 8px 1px 8px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+}
+.single_comment_user{
+    font-size: 15px;
+    margin-bottom: 4px;
+    margin-top: 5px;
+}
+.single_comment_grade {
+    font-size: 18px;
+    margin: 0;
+}
+.single_comment_text {
+    font-size: 19px;
+    text-align: center;
+    margin: 8px 0px 8px 0px;
 }

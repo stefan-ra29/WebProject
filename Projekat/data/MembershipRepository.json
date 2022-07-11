@@ -1,49 +1,28 @@
 [
   {
     "entity": {
-      "id": "696b5a5d-225c-4594-899e-35aba22a0aa2",
+      "id": "d45b93a4-8b71-426e-8e20-4b0ad57c32d7",
       "type": "Mjesecna light",
       "paymentDate": {
         "year": 2022,
         "month": 7,
-        "day": 6
+        "day": 11
       },
       "expirationDate": {
         "year": 2022,
         "month": 8,
-        "day": 7
+        "day": 11
       },
       "fee": 3600,
       "customerId": "stefan",
       "isActive": true,
-      "availableVisits": 13
+      "availableVisits": 29
     },
     "deleted": false
   },
   {
     "entity": {
-      "id": "0afb36ec-b385-4a58-8800-8dcffd0c46fa",
-      "type": "Godisnja",
-      "paymentDate": {
-        "year": 2022,
-        "month": 7,
-        "day": 6
-      },
-      "expirationDate": {
-        "year": 2023,
-        "month": 7,
-        "day": 6
-      },
-      "fee": 22000,
-      "customerId": "saska",
-      "isActive": true,
-      "availableVisits": 362
-    },
-    "deleted": false
-  },
-  {
-    "entity": {
-      "id": "c7150902-b5c7-43d2-b6fe-040692a44744",
+      "id": "9a39dd17-b58a-434b-8597-6af204597070",
       "type": "Mjesecna premium",
       "paymentDate": {
         "year": 2022,
@@ -56,30 +35,51 @@
         "day": 11
       },
       "fee": 5400,
-      "customerId": "marko",
+      "customerId": "saska",
       "isActive": true,
-      "availableVisits": 56
+      "availableVisits": 58
     },
     "deleted": false
   },
   {
     "entity": {
-      "id": "59fe04b2-0c23-4e6a-a3ee-7194405ba87d",
-      "type": "Mjesecna light",
+      "id": "e3111686-f780-421a-ab95-2ff34d3940a6",
+      "type": "Godisnja",
       "paymentDate": {
         "year": 2022,
         "month": 7,
         "day": 11
       },
       "expirationDate": {
-        "year": 2022,
-        "month": 8,
+        "year": 2023,
+        "month": 7,
         "day": 11
       },
-      "fee": 3600,
-      "customerId": "ogi",
+      "fee": 22000,
+      "customerId": "zlaja",
       "isActive": true,
-      "availableVisits": 29
+      "availableVisits": 362
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "id": "6ed506f1-cdc8-43ea-b88e-a200a175917d",
+      "type": "Godisnja",
+      "paymentDate": {
+        "year": 2022,
+        "month": 7,
+        "day": 11
+      },
+      "expirationDate": {
+        "year": 2023,
+        "month": 7,
+        "day": 11
+      },
+      "fee": 22000,
+      "customerId": "marko",
+      "isActive": true,
+      "availableVisits": 365
     },
     "deleted": false
   }

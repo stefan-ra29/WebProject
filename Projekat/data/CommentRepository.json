@@ -3,9 +3,9 @@
     "entity": {
       "customerID": "saska",
       "facilityID": "a8ffbc7c-cf81-4fe3-a9ab-9df625b43cb6",
-      "text": "Onako, okej je",
-      "grade": 3,
-      "id": "ef936553-8f70-46e7-9444-2073819deb27",
+      "text": "Sve oke, malo smrdi u wc-u",
+      "grade": 4,
+      "id": "ecb03750-5ec8-4212-914a-11b92983b0ea",
       "isApproved": true,
       "isFilled": true
     },
@@ -15,46 +15,34 @@
     "entity": {
       "customerID": "stefan",
       "facilityID": "8eb7aeaf-1fab-4503-93af-69fec50ba92c",
-      "text": "Srce mi je stalo",
-      "grade": 4,
-      "id": "211e67f6-6c7e-4381-b387-832b7e5730ea",
-      "isApproved": true,
+      "text": "Sve pohvale",
+      "grade": 5,
+      "id": "cf4d1b58-499f-4b3d-be34-e43233f947c7",
+      "isApproved": false,
       "isFilled": true
     },
     "deleted": false
   },
   {
     "entity": {
-      "customerID": "marko",
+      "customerID": "zlaja",
       "facilityID": "8eb7aeaf-1fab-4503-93af-69fec50ba92c",
-      "text": "Mnogo sam zadovoljan ovim objektom!!!!",
-      "grade": 5,
-      "id": "f68f1010-b805-43d7-adc3-dd704f966ef7",
-      "isApproved": true,
-      "isFilled": true
-    },
-    "deleted": true
-  },
-  {
-    "entity": {
-      "customerID": "saska",
-      "facilityID": "8eb7aeaf-1fab-4503-93af-69fec50ba92c",
-      "text": "Ne svidja mi se!",
-      "grade": 1,
-      "id": "529262e8-0be9-4719-8716-4dff7dc4d7b8",
+      "text": "Nice",
+      "grade": 4,
+      "id": "b6b75017-ca3e-4756-b512-228597f38032",
       "isApproved": false,
       "isFilled": true
     },
-    "deleted": true
+    "deleted": false
   },
   {
     "entity": {
-      "customerID": "ogi",
-      "facilityID": "8eb7aeaf-1fab-4503-93af-69fec50ba92c",
-      "text": "trener  nije dosao",
+      "customerID": "zlaja",
+      "facilityID": "a8ffbc7c-cf81-4fe3-a9ab-9df625b43cb6",
+      "text": "Preglasna muzika",
       "grade": 3,
-      "id": "4555cfcf-afdd-466c-a20c-69c3269ba501",
-      "isApproved": true,
+      "id": "048a179c-ff7b-44e8-817d-d41c8dedaeac",
+      "isApproved": false,
       "isFilled": true
     },
     "deleted": false

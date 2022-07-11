@@ -2,7 +2,8 @@
   {
     "entity": {
       "workoutHistoryIds": [
-        "e0f8edf3-3f4d-4438-8ebb-ffc8ba5c61c9"
+        "e0f8edf3-3f4d-4438-8ebb-ffc8ba5c61c9",
+        "22f84b36-6c89-498e-b9a9-d80c400c784e"
       ],
       "firstName": "Mina",
       "lastName": "Minic",
@@ -21,7 +22,9 @@
   },
   {
     "entity": {
-      "workoutHistoryIds": [],
+      "workoutHistoryIds": [
+        "89315ec6-a615-4f8a-a6a2-5b09df021f13"
+      ],
       "firstName": "David",
       "lastName": "Davidovic",
       "email": "david@gmail.com",
@@ -47,7 +50,9 @@
         "f3680618-5e9c-4388-8657-b14c6be67040",
         "a68d2a9f-aeb4-45ce-8ca7-1f9ce0baa106",
         "a2ed7104-0aef-4363-b6e7-a297af46afe2",
-        "c9dd8b90-0161-45e2-a23c-e1db71aeb7f5"
+        "c9dd8b90-0161-45e2-a23c-e1db71aeb7f5",
+        "cc4a2fad-adc1-4c17-9cc4-478b21a0292b",
+        "a82ae92b-5d79-4595-b84f-f8415a565b5e"
       ],
       "firstName": "Tina",
       "lastName": "Tinic",
@@ -66,6 +71,9 @@
   },
   {
     "entity": {
+      "workoutHistoryIds": [
+        "3ee13024-8491-45e9-a0a9-ff822d85023d"
+      ],
       "firstName": "Vlado",
       "lastName": "Cvijanovic",
       "email": "dovla@gmail.com",

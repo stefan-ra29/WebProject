@@ -51,5 +51,8 @@ public class SparkMainApp {
         UserController.filterUsers();
         CoachController.getCoachesFromFacility();
         CustomerController.getCustomersWhoVisitedFacitily();
+        CommentController.checkForUnfilledComments();
+        CommentController.getCommentsForFacility();
+        CommentController.addNewUnapprovedComment();
     }
 }

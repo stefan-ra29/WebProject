@@ -14,6 +14,8 @@ import java.util.Collections;
 public class CustomerService {
     private CustomerRepository customerRepository = new CustomerRepository();
     private AdministratorRepository administratorRepository = new AdministratorRepository();
+    private CommentService commentService = new CommentService();
+
     private static Gson gson = new Gson();
     public String getAll(){
         return gson.toJson(customerRepository.getAll());
@@ -50,6 +52,8 @@ public class CustomerService {
                 ArrayList<String> newVisitedFacilitiesIds = customer.getVisitedFacilitiesIds();
                 newVisitedFacilitiesIds.add(facilityId);
                 customer.setVisitedFacilities(newVisitedFacilitiesIds);
+                commentService.CreateUnfilledComment(customerId, facilityId);
+
             }
 
             customerRepository.update(customerId, customer);
@@ -60,6 +64,8 @@ public class CustomerService {
             newVisitedFacilitiesIds.add(facilityId);
             customer.setVisitedFacilities(newVisitedFacilitiesIds);
             customerRepository.update(customerId, customer);
+
+            commentService.CreateUnfilledComment(customerId, facilityId);
         }
     }
     public String sortUsers(ArrayList<Customer> usersList, String sortBy ){

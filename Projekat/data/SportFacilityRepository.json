@@ -6,7 +6,7 @@
       "type": {
         "type": "Teretana"
       },
-      "isOpen": false,
+      "isOpen": true,
       "location": {
         "longditude": 10.0,
         "latitude": 10.0,
@@ -72,7 +72,7 @@
       "type": {
         "type": "Studio"
       },
-      "isOpen": true,
+      "isOpen": false,
       "location": {
         "longditude": 54.0,
         "latitude": 54.0,

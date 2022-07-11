@@ -1,0 +1,26 @@
+[
+  {
+    "entity": {
+      "customerID": "saska",
+      "facilityID": "a8ffbc7c-cf81-4fe3-a9ab-9df625b43cb6",
+      "text": "Onako, okej je",
+      "grade": 3,
+      "id": "ef936553-8f70-46e7-9444-2073819deb27",
+      "isApproved": false,
+      "isFilled": true
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "customerID": "stefan",
+      "facilityID": "8eb7aeaf-1fab-4503-93af-69fec50ba92c",
+      "text": "Srce mi je stalo",
+      "grade": 4,
+      "id": "211e67f6-6c7e-4381-b387-832b7e5730ea",
+      "isApproved": false,
+      "isFilled": true
+    },
+    "deleted": false
+  }
+]

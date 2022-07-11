@@ -2,8 +2,8 @@ Vue.component("users_display", {
 	data: function () {
 	    return {
 	      users: null,
-          coachesAndManagers: {username:'', password: '', firstName: '', lastName: '', email: '', gender: '', dob: {}, role: '', points: 0 },
-          customers: {username:'', password: '', firstName: '', lastName: '', email: '', gender: '', dob: {}, role: '', points: 0 },
+          coachesAndManagers: {username:'', password: '', firstName: '', lastName: '', email: '', gender: '', dob: {}, role: '', points: 0, customerTypeName: '' },
+          customers: {username:'', password: '', firstName: '', lastName: '', email: '', gender: '', dob: {}, role: '', points: 0, customerTypeName: '' },
           firstNameSearch: '',
           lastNameSearch: '',
           usernameSearch: '',
@@ -12,10 +12,14 @@ Vue.component("users_display", {
           sort: "",
           pointSortHappened: false,
           filterCustomers: '',
+          filterCustomersHappened: false,
+          filterCustomersDone: false,
           filter: "",
 	      filterHappened: false,
 	      filteredUsers: {},
+	      filteredCustomers: {},
           filterDone: false,
+          fromSearch: false,
           jwt: localStorage.getItem('jwt')
 	    }
 	},
@@ -61,9 +65,9 @@ Vue.component("users_display", {
                 Tip kupca:
                 <select style="width: 195px; padding:1px" name="filter_customers" id="filter_customers"
                     @change = "filterCustomerType($event)" v-model="filterCustomers" >
-                      <option value="bronze_customer" >Bronzani kupac</option>
-                      <option value="silver_customer" >Srebrni kupac</option>
-                      <option value="gold_customer" >Zlatni kupac</option>
+                      <option value="Bronzani" >Bronzani kupac</option>
+                      <option value="Srebrni" >Srebrni kupac</option>
+                      <option value="Zlatni" >Zlatni kupac</option>
                 </select>
                 <button class= "button_icon_style" v-if=" filterCustomers != ''" v-on:click="removeCustomerFilter"><i class="fa-solid fa-x"></i></button></br>
             </div>
@@ -76,6 +80,7 @@ Vue.component("users_display", {
                      <th>Tip korisnika</th>
                      <th>E-mail</th>
                      <th>Broj bodova</th>
+                     <th>Tip kupca</th>
                  <tr>
                  <tr v-for="user in users">
                      <td>{{user.firstName}}</td>
@@ -87,6 +92,9 @@ Vue.component("users_display", {
                      <td>{{user.email}}</td>
                      <td v-if="user.points == undefined">Tip korisnika nema poene</td>
                      <td v-else>{{user.points}}</td>
+                     <td v-if="user.role !='Customer'">Korisnik nije kupac</td>
+                     <td v-else-if="user.customerTypeName == undefined">Nije kategorisan.</td>
+                     <td v-else>{{user.customerTypeName}}</td>
                  </tr>
              </table>
 
@@ -119,8 +127,13 @@ Vue.component("users_display", {
                 return;
             }
 
-            if(this.filterDone == true){
+            if(this.filterDone == true && this.filterCustomersHappened == false){
                 this.users = this.filteredUsers
+                console.log("u filter done")
+            }
+            else if(this.filterDone == true && this.filterCustomersHappened == true){
+                this.users = this.filteredCustomers
+                 console.log("u filter done z aucstomere")
             }
             else{
                 if(this.searchHappened == true && this.pointSortHappened != true){
@@ -132,10 +145,11 @@ Vue.component("users_display", {
 //                this.previousState(e)
 //            }
 
-            if(this.sort != "" && this.pointSortHappened != true){
+            if((this.sort == "points_increasing" || this.sort == "points_decreasing") && this.pointSortHappened != true){
 //                if(this.sort == "points_increasing" || this.sort == "points_decreasing"){
 //                    this.pointSortHappened = true;
 //                }
+            console.log("da li je ovde usao")
                 this.sortUsers(e)
             }
 
@@ -153,10 +167,18 @@ Vue.component("users_display", {
                 this.users = response.data
 
                 if(this.users.length == 0){
-                    alert("Nijedan objekat se ne podudara sa pretragom")
+                    alert("Nijedan korisnik se ne podudara sa pretragom")
+                }
+                if((this.sort == "points_increasing" || this.sort == "points_decreasing") && this.sort != ""){
+                    this.fromSearch = true
+                    this.pointSortHappened = false
+
+                }
+                else if(this.sort != "points_increasing" && this.sort != "points_decreasing" && this.sort != ""){
+                    this.sortUsers(e)
                 }
                 this.givebackCustomerAttributes(e)
-                this.pointSortHappened = false
+                console.log(this.users)
             });
 
             this.searchHappened = true
@@ -170,8 +192,11 @@ Vue.component("users_display", {
             this.lastNameSearch = ""
             this.usernameSearch = ""
             this.searchHappened = false
-            if(this.filter != ""){
+            if(this.filter != "" && this.filterCustomers == ""){
                 this.filterUsers(e)
+            }
+            else if(this.filter != "" && this.filterCustomers != ""){
+                this.filterCustomerType(e)
             }
             else{
                 if(this.sort != ""){
@@ -235,6 +260,7 @@ Vue.component("users_display", {
                 if(user.role == "Customer"){
                     var customer = this.customers.find(element => element.username == user.username);
                     user.points = customer.points
+                    user.customerTypeName = customer.customerTypeName
                 }
             }
         },
@@ -243,6 +269,9 @@ Vue.component("users_display", {
 
           if(this.filterHappened == true){
               this.previousState(e)
+          }
+          if(this.filter == "Customer" && this.filterCustomersDone == true){
+            this.users = this.customers
           }
            axios
            .post("rest/users/filter", this.users,
@@ -257,7 +286,9 @@ Vue.component("users_display", {
                 this.filterDone = true;
 
                if(this.searchHappened == true){
+                console.log("ima search u filteru, pa trebad a se uradi i ovo jeposle njega tsanje")
                    this.searchUsers(e)
+                   console.log(this.users)
                }
                else{
                   if(this.sort != ""){
@@ -265,7 +296,7 @@ Vue.component("users_display", {
                    }
                }
            if(this.users.length == 0){
-                alert("Nijedan trening se ne podudara sa pretragom")
+                alert("Nijedan korisnik se ne podudara sa pretragom")
             }
            });
            this.filterHappened = true
@@ -288,11 +319,46 @@ Vue.component("users_display", {
            }
       },
 
-      filterCustomerType: function(e){},
+      filterCustomerType: function(e){
+            e.preventDefault()
+
+            if(this.filterCustomersHappened == true){
+                this.users = this.filteredUsers
+            }
+
+             axios
+             .post("rest/customers/filter", this.users,
+             { params : {
+                 filterBy : this.filterCustomers
+             }})
+
+             .then(response => {this.users = response.data
+
+                  this.filteredCustomers = this.users
+                  this.filterCustomersHappened = true
+                  //this.filterDone = true;
+
+//                 if(this.searchHappened == true){
+//                     this.searchUsers(e)
+//                 }
+//                 else{
+//                    if(this.sort != ""){
+//                         this.sortUsers(e)
+//                     }
+//                 }
+                 if(this.users.length == 0){
+                      alert("Nijedan korisnik se ne podudara sa pretragom")
+                  }
+             });
+      },
       removeCustomerFilter: function(e){
            e.preventDefault()
-           this.previousState()
            this.filterCustomers = ""
+           this.filterCustomersHappened = false
+           this.filterCustomersDone = true
+//           console.log("Uklonjen filter za musterije, a ovo su bili korisnici")
+//           console.log(this.users)
+           this.filterUsers(e)
       }
     }
 });

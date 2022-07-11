@@ -76,15 +76,13 @@ public class CustomerService {
     }
     public String filterCustomers(ArrayList<Customer> usersList, String filter ){
 
-//        switch (filter) {
-//            case "points_increasing":
-//                Collections.sort(usersList, new PointsComparator());
-//                break;
-//            case "points_decreasing":
-//                Collections.sort(usersList, new PointsComparator().reversed());
-//                break;
-//        }
-        return gson.toJson(usersList);
+        ArrayList<Customer> filteredCustomers = new ArrayList<Customer>();
+
+        for(Customer c : usersList){
+            if(c.getCustomerTypeName() != null && c.getCustomerTypeName().equals(filter))
+                filteredCustomers.add(c);
+        }
+        return gson.toJson(filteredCustomers);
     }
     public String getCustomersWhoVisitedFacitily(String facilityID){
 

@@ -37,4 +37,13 @@ public class CommentController {
             return commentService.addNewUnapprovedComment(comment);
         });
     }
+
+    public static void approveComment(){
+        put("rest/comments/approve_comment", (req, res) ->{
+            res.type("application/json");
+
+            Comment comment = gson.fromJson(req.body(), Comment.class);
+            return commentService.approveComment(comment);
+        });
+    }
 }

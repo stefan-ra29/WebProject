@@ -16,7 +16,7 @@
         "postalCode": 21244
       },
       "logo": "https://encrypted-tbn0.gstatic.com/images?q\u003dtbn:ANd9GcTp1FjFlsvpIirFMMDMWavGzQHYl2IPE5sT4g\u0026usqp\u003dCAU",
-      "averageGrade": 4.2,
+      "averageGrade": 4.5,
       "startHour": {
         "hour": 8,
         "minute": 0,
@@ -49,7 +49,7 @@
         "postalCode": 21200
       },
       "logo": "https://flyclipart.com/thumb2/yoga-pose-png-background-photo-362883.png",
-      "averageGrade": 2.2,
+      "averageGrade": 0.0,
       "startHour": {
         "hour": 10,
         "minute": 0,
@@ -82,7 +82,7 @@
         "postalCode": 2120
       },
       "logo": "https://flyclipart.com/thumb2/zumba-427835.png",
-      "averageGrade": 4.9,
+      "averageGrade": 0.0,
       "startHour": {
         "hour": 10,
         "minute": 0,
@@ -115,7 +115,7 @@
         "postalCode": 21200
       },
       "logo": "https://e7.pngegg.com/pngimages/240/627/png-clipart-gym-logo-mark-gym.png",
-      "averageGrade": 4.4,
+      "averageGrade": 0.0,
       "startHour": {
         "hour": 5,
         "minute": 0,
@@ -124,6 +124,39 @@
       },
       "closingHour": {
         "hour": 23,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "id": "18d525be-af20-4461-b964-81778309fc36",
+      "name": "TheFittest",
+      "type": {
+        "type": "Teretana"
+      },
+      "isOpen": false,
+      "location": {
+        "longditude": 45.5,
+        "latitude": 102.5,
+        "street": "Safarikova",
+        "streetNumber": "15",
+        "city": "Titel",
+        "postalCode": 21243
+      },
+      "logo": "https://www.kindpng.com/picc/m/11-112228_workout-png-transparent-png.png",
+      "averageGrade": 0.0,
+      "startHour": {
+        "hour": 7,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "closingHour": {
+        "hour": 19,
         "minute": 0,
         "second": 0,
         "nano": 0

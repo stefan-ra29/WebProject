@@ -18,7 +18,19 @@
       "text": "Srce mi je stalo",
       "grade": 4,
       "id": "211e67f6-6c7e-4381-b387-832b7e5730ea",
-      "isApproved": false,
+      "isApproved": true,
+      "isFilled": true
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "customerID": "marko",
+      "facilityID": "8eb7aeaf-1fab-4503-93af-69fec50ba92c",
+      "text": "Mnogo sam zadovoljan ovim objektom!!!!",
+      "grade": 5,
+      "id": "f68f1010-b805-43d7-adc3-dd704f966ef7",
+      "isApproved": true,
       "isFilled": true
     },
     "deleted": false

@@ -106,7 +106,10 @@ Vue.component("sport_facility_display", {
                     <tr>
                         <td>Tip objekta: {{facility.type.type}}</td>
                     </tr>
-                    <tr>
+                    <tr v-if="facility.averageGrade == 0">
+                        <td>Prosecna ocena: nema ocenu za sada</td>
+                    </tr>
+                    <tr v-else>
                         <td>Prosecna ocena: {{facility.averageGrade}}</td>
                     </tr>
                     <tr ><td colspan="2" class="facility_button_row" ><button class="facility_button" v-on:click = "details(facility)">Prikazi detaljnije</button></td></tr>

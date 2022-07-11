@@ -45,6 +45,9 @@
   },
   {
     "entity": {
+      "visitedFacilitiesIds": [
+        "8eb7aeaf-1fab-4503-93af-69fec50ba92c"
+      ],
       "points": 0.0,
       "firstName": "Marko",
       "lastName": "Markovic",

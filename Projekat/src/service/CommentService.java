@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class CommentService {
     CommentRepository commentRepository = new CommentRepository();
+    SportFacilityService sportFacilityService = new SportFacilityService();
     Gson gson = new Gson();
 
     public void CreateUnfilledComment(String customerId, String facilityId){
@@ -31,7 +32,7 @@ public class CommentService {
         ArrayList<Comment> allComments = (ArrayList<Comment>) commentRepository.getAll();
         ArrayList<Comment> filteredComments = new ArrayList<Comment>();
 
-        if(role.equals("Customer") || role == null){
+        if(role.equals("Customer") || role.equals("")){
             for(Comment c : allComments){
                 if(c.getIsApproved() && c.getFacilityID().equals(facilityId))
                     filteredComments.add(c);
@@ -49,6 +50,13 @@ public class CommentService {
         comment.setIsApproved(false);
         comment.setIsFilled(true);
         commentRepository.update(comment.getId(), comment);
+        return gson.toJson(comment);
+    }
+    public String approveComment(Comment comment){
+
+        comment.setIsApproved(true);
+        commentRepository.update(comment.getId(), comment);
+        sportFacilityService.recalculateAverageGrade(comment.getFacilityID());
         return gson.toJson(comment);
     }
 }

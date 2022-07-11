@@ -1,20 +1,19 @@
 [
   {
     "entity": {
-      "sportFacilityId": "c1111cdc-66a4-4279-ab44-947f93dd61e9",
+      "sportFacilityId": "a8ffbc7c-cf81-4fe3-a9ab-9df625b43cb6",
       "firstName": "Ivana",
       "lastName": "Ivanic",
       "email": "ivana@gmail.com",
       "username": "ivana",
       "password": "ivana",
       "gender": "female",
-      "role": "Manager",
       "dob": {
         "year": 1998,
         "month": 8,
         "day": 4
       },
-      "sportFacilityId": "a8ffbc7c-cf81-4fe3-a9ab-9df625b43cb6"
+      "role": "Manager"
     },
     "deleted": false
   },
@@ -27,12 +26,12 @@
       "username": "menadzer2",
       "password": "menadzer2",
       "gender": "male",
-      "role": "Manager",
       "dob": {
         "year": 1991,
         "month": 1,
         "day": 27
-      }
+      },
+      "role": "Manager"
     },
     "deleted": false
   },
@@ -49,6 +48,24 @@
         "year": 2001,
         "month": 9,
         "day": 21
+      },
+      "role": "Manager"
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "sportFacilityId": "18d525be-af20-4461-b964-81778309fc36",
+      "firstName": "Sasa",
+      "lastName": "Males",
+      "email": "sasa@gmail.com",
+      "username": "Sasa",
+      "password": "sasa",
+      "gender": "male",
+      "dob": {
+        "year": 2018,
+        "month": 12,
+        "day": 10
       },
       "role": "Manager"
     },

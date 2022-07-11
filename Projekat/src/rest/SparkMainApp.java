@@ -54,5 +54,6 @@ public class SparkMainApp {
         CommentController.checkForUnfilledComments();
         CommentController.getCommentsForFacility();
         CommentController.addNewUnapprovedComment();
+        CommentController.approveComment();
     }
 }

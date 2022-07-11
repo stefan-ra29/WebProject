@@ -9,6 +9,8 @@ Vue.component("change_workout", {
 	},
 	    template: `
     	<div>
+    	    <navbar/>
+
             <h1 class="single_facility_header">Izmeni trening</h1>
             <form id="form" class="registration_form">
                 <table>

@@ -12,6 +12,7 @@ const ChangeWorkout = { template: '<change_workout></change_workout>' }
 const CustomerWorkoutHistory = { template: '<customer_workout_history></customer_workout_history>' }
 const ScheduleWorkout = { template: '<schedule_workout></schedule_workout>' }
 const CoachWorkoutDisplay = { template: '<coach_workout_display></coach_workout_display>' }
+const Navbar = {template: '<navbar></navbar>'}
 
 
 const router = new VueRouter({

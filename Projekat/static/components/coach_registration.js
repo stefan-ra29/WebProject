@@ -9,6 +9,8 @@ Vue.component("register_coach", {
 	},
 	    template: `
     	<div class="registration_wrap">
+    	    <navbar/>
+
     	    <h1>DODAVANJE TRENERA</h1>
     		<form id="form" class="registration_form">
 				<table>

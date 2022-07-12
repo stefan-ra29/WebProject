@@ -16,7 +16,15 @@ Vue.component("customer_workout_history", {
 	      monthEarlier: '2022-1-1',
 	      minDate: "",
 	      maxDate: "",
-          searchHappened: ''
+          searchHappened: '',
+          sort: '',
+          filter: '',
+          filterType: '',
+          facilityTypes: {},
+          workoutTypes: {},
+          filterHappened: false,
+          filterDone: false,
+          filteredWorkouts: {}
 
 	    }
 	},
@@ -49,6 +57,35 @@ Vue.component("customer_workout_history", {
                 </button></br>
             </form>
 
+            <div style="margin-bottom: 10px; margin-left: 10px; text-align: left;">
+                Sortiraj:
+                <select style="width: 195px; padding:1px" name="sort" id="sort" v-model = "sort" @change = "sortWorkouts($event)" >
+                      <option value="name_increasing">Ime objekta (A-Z)</option>
+                      <option value="name_decreasing">Ime objekta (Z-A)</option>
+                      <option value="price_increasing">Doplata (rastuce)</option>
+                      <option value="price_decreasing">Doplata (opadajuce)</option>
+                      <option value="date_increasing">Datum treninga (rastuce)</option>
+                      <option value="date_decreasing">Datum treninga (opadajuce)</option>
+                </select>
+                <button class= "button_icon_style" v-if=" sort != ''" v-on:click="removeSort"><i class="fa-solid fa-x"></i></button></br>
+            </div>
+
+            <div style="margin-bottom: 10px; margin-left: 10px; text-align: left;">
+                Filtriraj:
+                <select style="width: 195px; padding:1px" name="filter" id="filter" v-model="filter" >
+                      <option value="facilityType">Po tipu objekta</option>
+                      <option value="workoutType">Po tipu treninga</option>
+                </select>
+                <select v-if="filter == 'facilityType'" style="width: 195px; padding:1px" name="facilityFilter" id="facilityFilter"
+                    @change = "filterWorkouts($event)" v-model="filterType" >
+                      <option v-for="type in facilityTypes" >{{type}}</option>
+                </select>
+                <select v-if="filter == 'workoutType'" style="width: 195px; padding:1px" name="workoutFilter" id="workoutFilter"
+                    @change = "filterWorkouts($event)" v-model="filterType" >
+                      <option v-for="type in workoutTypes" >{{type.type}}</option>
+                </select>
+                <button class= "button_icon_style" v-if=" filter != ''" v-on:click="removeFilter"><i class="fa-solid fa-x"></i></button></br>
+            </div>
 
             <table v-if="pastMonthWorkoutHistoryDTOs != null">
                 <tr>
@@ -83,9 +120,19 @@ Vue.component("customer_workout_history", {
            });
 
            this.defineDates()
+           this.defineFacilityAndWorkoutTypes()
     },
 
     methods: {
+        defineFacilityAndWorkoutTypes: function(e){
+            axios
+              .get("rest/workouts/get_types")
+              .then(response => {this.workoutTypes = response.data});
+
+          axios
+            .get("rest/facilities/get_facility_types")
+            .then(response => {this.facilityTypes = response.data});
+        },
         previousState: function(e){
             this.pastMonthWorkoutHistoryDTOs = this.workoutsBeforeSearch
         },
@@ -143,14 +190,14 @@ Vue.component("customer_workout_history", {
                      return
                  }
             }
-//            if(this.filterDone == true){
-//                this.workouts = this.filteredWorkouts
-//            }
-//            else{
+            if(this.filterDone == true){
+                this.pastMonthWorkoutHistoryDTOs = this.filteredWorkouts
+            }
+            else{
                 if(this.searchHappened == true){
                     this.previousState(e)
                 }
-//            }
+            }
 
             axios
             .post("rest/history_workouts/search", this.pastMonthWorkoutHistoryDTOs,
@@ -164,9 +211,9 @@ Vue.component("customer_workout_history", {
             }})
             .then(response => {
                 this.pastMonthWorkoutHistoryDTOs = response.data
-//                if(this.sort != ""){
-//                    this.sortWorkouts(e)
-//                }
+                if(this.sort != ""){
+                    this.sortWorkouts(e)
+                }
                 if(this.pastMonthWorkoutHistoryDTOs.length == 0){
                      alert("Nijedan trening se ne podudara sa pretragom")
                  }
@@ -183,7 +230,82 @@ Vue.component("customer_workout_history", {
             this.maxPrice = ""
             this.minDate = ""
             this.maxDate = ""
+            this.searchHappened = false
+            if(this.filter != ""){
+                this.filterWorkouts(e)
+            }
+            else{
+                if(this.sort != ""){
+                     this.sortWorkouts(e)
+                 }
+            }
+        },
+
+        sortWorkouts(e){
+            e.preventDefault()
+            axios
+            .post("rest/history_workouts/sort", this.pastMonthWorkoutHistoryDTOs,
+            { params : {
+                sortBy : this.sort
+            }})
+            .then(response => {this.pastMonthWorkoutHistoryDTOs = response.data});
+        },
+
+        removeSort: function(e){
+            e.preventDefault()
+            this.sort = ""
+        },
+
+        filterWorkouts(e){
+             e.preventDefault()
+
+            if(this.filterHappened == true){
+                this.previousState(e)
+            }
+             axios
+             .post("rest/history_workouts/filter", this.pastMonthWorkoutHistoryDTOs,
+             { params : {
+                 filterBy : this.filter,
+                 filterType : this.filterType
+             }})
+
+             .then(response => {this.pastMonthWorkoutHistoryDTOs = response.data
+
+                 this.filteredWorkouts = this.pastMonthWorkoutHistoryDTOs
+
+                 if(this.criteria != ""){
+                     this.filterDone = true;
+                     this.searchWorkouts(e)
+                 }
+                 else{
+                    this.filterDone = true;
+                    if(this.sort != ""){
+                         this.sortWorkouts(e)
+                     }
+                 }
+                 if(this.pastMonthWorkoutHistoryDTOs.length == 0){
+                      alert("Nijedan trening se ne podudara sa pretragom")
+                  }
+             });
+             this.filterHappened = true
+         },
+
+        removeFilter: function(e){
+            e.preventDefault()
+            this.previousState()
+            this.filter = ""
+            this.filterType = ""
+            this.filterHappened = false
+            this.filterDone = false;
+            if(this.criteria != ""){
+                this.searchWorkouts(e)
+            }else{
+            if(this.sort != ""){
+               this.sortWorkouts(e)
+                }
+            }
         }
+
 
     }
 

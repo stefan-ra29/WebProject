@@ -2,6 +2,9 @@ package service;
 
 import beans.*;
 import com.google.gson.Gson;
+import comparators.DateComparator;
+import comparators.NameComparatorForWorkouts;
+import comparators.PriceComparatorForWorkoutHistory;
 import dto.CustomerWorkoutHistoryDTO;
 import repository.*;
 
@@ -9,6 +12,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class WorkoutHistoryService {
     private WorkoutHistoryRepository workoutHistoryRepository = new WorkoutHistoryRepository();
@@ -152,5 +156,57 @@ public class WorkoutHistoryService {
             workoutsDTO.add(dto);
         }
         return  workoutsDTO;
+    }
+    public String sortHistoryWorkouts(ArrayList<CustomerWorkoutHistoryDTO>workouts, String sortBy){
+
+        switch (sortBy) {
+            case "name_increasing":
+                Collections.sort(workouts, new NameComparatorForWorkouts());
+                break;
+            case "name_decreasing":
+                Collections.sort(workouts, new NameComparatorForWorkouts().reversed());
+                break;
+            case "price_increasing":
+                Collections.sort(workouts, new PriceComparatorForWorkoutHistory());
+                break;
+            case "price_decreasing":
+                Collections.sort(workouts, new PriceComparatorForWorkoutHistory().reversed());
+                break;
+            case "date_increasing":
+                Collections.sort(workouts, new DateComparator());
+                break;
+            case "date_decreasing":
+                Collections.sort(workouts, new DateComparator().reversed());
+                break;
+        }
+        return gson.toJson(workouts);
+    }
+    public String filterHistoryWorkouts(ArrayList<WorkoutHistory> workouts, String filterType, String filterBy){
+
+        ArrayList<WorkoutHistory> filteredWorkouts = new ArrayList<WorkoutHistory>();
+
+        switch (filterBy) {
+            case "facilityType":
+
+                for (WorkoutHistory workoutHistory : workouts) {
+                    Workout workout = workoutRepository.getOne(workoutHistory.getWorkoutId());
+                    SportFacility sportFacility = sportFacilityRepository.getOne(workout.getSportFacilityID());
+
+                    if (sportFacility.getType().getType().equals(filterType))
+                        filteredWorkouts.add(workoutHistory);
+                }
+                break;
+            case "workoutType":
+
+                for (WorkoutHistory workoutHistory : workouts) {
+                    Workout workout = workoutRepository.getOne(workoutHistory.getWorkoutId());
+
+                    if (workout.getWorkoutType().getType().equals(filterType))
+                        filteredWorkouts.add(workoutHistory);
+                }
+                break;
+        }
+        ArrayList<CustomerWorkoutHistoryDTO> workoutsForSending = createDTOFromBeans(filteredWorkouts);
+        return gson.toJson(workoutsForSending);
     }
 }

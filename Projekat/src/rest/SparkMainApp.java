@@ -69,5 +69,7 @@ public class SparkMainApp {
         SportFacilityController.getFacilityNames();
         CommentController.deleteComment();
         WorkoutHistoryController.searchHistoryWorkouts();
+        WorkoutHistoryController.sortHistoryWorkouts();
+        WorkoutHistoryController.filterHistoryWorkouts();
     }
 }

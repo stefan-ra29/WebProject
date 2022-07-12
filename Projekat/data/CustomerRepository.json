@@ -2,7 +2,8 @@
   {
     "entity": {
       "visitedFacilitiesIds": [
-        "a8ffbc7c-cf81-4fe3-a9ab-9df625b43cb6"
+        "a8ffbc7c-cf81-4fe3-a9ab-9df625b43cb6",
+        "8eb7aeaf-1fab-4503-93af-69fec50ba92c"
       ],
       "points": 1150.0,
       "customerTypeName": "Srebrni",
@@ -49,9 +50,9 @@
       "customerTypeName": "Srebrni",
       "firstName": "Marko",
       "lastName": "Markovic",
+      "email": "markoni23@gmail.com",
       "username": "marko",
       "password": "marko",
-      "email": "markoni23@gmail.com",
       "gender": "male",
       "dob": {
         "year": 2000,
@@ -68,9 +69,9 @@
       "points": 0.0,
       "firstName": "Ognjen",
       "lastName": "Gogi",
+      "email": "ognjenas@gmail.com",
       "username": "ogi",
       "password": "bogi",
-      "email": "ognjenas@gmail.com",
       "gender": "male",
       "dob": {
         "year": 1998,
@@ -87,13 +88,13 @@
         "8eb7aeaf-1fab-4503-93af-69fec50ba92c",
         "a8ffbc7c-cf81-4fe3-a9ab-9df625b43cb6"
       ],
-      "customerTypeName": "Bronzani",
       "points": 810.0,
+      "customerTypeName": "Bronzani",
       "firstName": "Zlatko",
       "lastName": "Ivanovic",
+      "email": "zlaivson@gmail.com",
       "username": "zlaja",
       "password": "zlaiva",
-      "email": "zlaivson@gmail.com",
       "gender": "else",
       "dob": {
         "year": 1996,

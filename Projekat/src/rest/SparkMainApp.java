@@ -68,5 +68,6 @@ public class SparkMainApp {
         CommentController.getUnapprovedComments();
         SportFacilityController.getFacilityNames();
         CommentController.deleteComment();
+        WorkoutHistoryController.searchHistoryWorkouts();
     }
 }

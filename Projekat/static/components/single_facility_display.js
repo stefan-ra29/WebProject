@@ -291,8 +291,10 @@ Vue.component("single_facility_display", {
             if(this.criteria == "withSupplement"){
                 if(this.minPrice == "" || this.maxPrice == ""){
                     alert("Morate uneti i minimalnu i maksimalnu vrednost!")
+                    return
                 }else if(+this.minPrice > +this.maxPrice){
                     alert("Maksimalna vrednost mora biti veca od minimalne!")
+                    return
                 }
             }
             if(this.filterDone == true){
@@ -495,6 +497,7 @@ Vue.component("single_facility_display", {
                 .then(response => {
                     this.comment = response.data
                     this.canCustomerComment = false
+                    aler("Uspesno ste dodali komentar!")
                 });
             }
         },

@@ -52,7 +52,9 @@
         "a2ed7104-0aef-4363-b6e7-a297af46afe2",
         "c9dd8b90-0161-45e2-a23c-e1db71aeb7f5",
         "cc4a2fad-adc1-4c17-9cc4-478b21a0292b",
-        "a82ae92b-5d79-4595-b84f-f8415a565b5e"
+        "a82ae92b-5d79-4595-b84f-f8415a565b5e",
+        "0953d2eb-eb08-4209-93dc-f2c22666bc02",
+        "fca559cc-bf60-4454-9e69-bd7a2a3495b8"
       ],
       "firstName": "Tina",
       "lastName": "Tinic",
@@ -72,7 +74,8 @@
   {
     "entity": {
       "workoutHistoryIds": [
-        "3ee13024-8491-45e9-a0a9-ff822d85023d"
+        "3ee13024-8491-45e9-a0a9-ff822d85023d",
+        "5942d49f-3c96-4cf1-afdc-3b679b839199"
       ],
       "firstName": "Vlado",
       "lastName": "Cvijanovic",

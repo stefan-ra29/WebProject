@@ -46,5 +46,17 @@
       "isFilled": true
     },
     "deleted": false
+  },
+  {
+    "entity": {
+      "customerID": "saska",
+      "facilityID": "8eb7aeaf-1fab-4503-93af-69fec50ba92c",
+      "text": "Jedna od losijih teretana... nema tus",
+      "grade": 1,
+      "id": "7bd8556c-7246-42ee-a268-344c941b7e87",
+      "isApproved": false,
+      "isFilled": true
+    },
+    "deleted": false
   }
 ]

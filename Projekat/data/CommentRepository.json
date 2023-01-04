@@ -1,0 +1,62 @@
+[
+  {
+    "entity": {
+      "customerID": "saska",
+      "facilityID": "a8ffbc7c-cf81-4fe3-a9ab-9df625b43cb6",
+      "text": "Sve oke, malo smrdi u wc-u",
+      "grade": 4,
+      "id": "ecb03750-5ec8-4212-914a-11b92983b0ea",
+      "isApproved": true,
+      "isFilled": true
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "customerID": "stefan",
+      "facilityID": "8eb7aeaf-1fab-4503-93af-69fec50ba92c",
+      "text": "Sve pohvale",
+      "grade": 5,
+      "id": "cf4d1b58-499f-4b3d-be34-e43233f947c7",
+      "isApproved": false,
+      "isFilled": true
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "customerID": "zlaja",
+      "facilityID": "8eb7aeaf-1fab-4503-93af-69fec50ba92c",
+      "text": "Nice",
+      "grade": 4,
+      "id": "b6b75017-ca3e-4756-b512-228597f38032",
+      "isApproved": false,
+      "isFilled": true
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "customerID": "zlaja",
+      "facilityID": "a8ffbc7c-cf81-4fe3-a9ab-9df625b43cb6",
+      "text": "Preglasna muzika",
+      "grade": 3,
+      "id": "048a179c-ff7b-44e8-817d-d41c8dedaeac",
+      "isApproved": false,
+      "isFilled": true
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "customerID": "saska",
+      "facilityID": "8eb7aeaf-1fab-4503-93af-69fec50ba92c",
+      "text": "Jedna od losijih teretana... nema tus",
+      "grade": 1,
+      "id": "7bd8556c-7246-42ee-a268-344c941b7e87",
+      "isApproved": false,
+      "isFilled": true
+    },
+    "deleted": false
+  }
+]

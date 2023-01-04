@@ -1,0 +1,95 @@
+[
+  {
+    "entity": {
+      "workoutHistoryIds": [
+        "e0f8edf3-3f4d-4438-8ebb-ffc8ba5c61c9",
+        "22f84b36-6c89-498e-b9a9-d80c400c784e"
+      ],
+      "firstName": "Mina",
+      "lastName": "Minic",
+      "email": "mina@gmail.com",
+      "username": "mina",
+      "password": "mina",
+      "gender": "female",
+      "dob": {
+        "year": 1987,
+        "month": 9,
+        "day": 13
+      },
+      "role": "Coach"
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "workoutHistoryIds": [
+        "89315ec6-a615-4f8a-a6a2-5b09df021f13"
+      ],
+      "firstName": "David",
+      "lastName": "Davidovic",
+      "email": "david@gmail.com",
+      "username": "david",
+      "password": "david",
+      "gender": "male",
+      "dob": {
+        "year": 1995,
+        "month": 4,
+        "day": 26
+      },
+      "role": "Coach"
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "workoutHistoryIds": [
+        "f4e81119-238b-431e-8e19-7046c490cfa4",
+        "639a8435-9410-40ea-b513-084a92eda23f",
+        "2454f125-999a-4ad2-83d5-3647e853ac13",
+        "729e0fdb-ea3b-4272-9358-34ea9b252bb1",
+        "f3680618-5e9c-4388-8657-b14c6be67040",
+        "a68d2a9f-aeb4-45ce-8ca7-1f9ce0baa106",
+        "a2ed7104-0aef-4363-b6e7-a297af46afe2",
+        "c9dd8b90-0161-45e2-a23c-e1db71aeb7f5",
+        "cc4a2fad-adc1-4c17-9cc4-478b21a0292b",
+        "a82ae92b-5d79-4595-b84f-f8415a565b5e",
+        "0953d2eb-eb08-4209-93dc-f2c22666bc02",
+        "fca559cc-bf60-4454-9e69-bd7a2a3495b8"
+      ],
+      "firstName": "Tina",
+      "lastName": "Tinic",
+      "email": "tina@gmail.com",
+      "username": "tina",
+      "password": "tina",
+      "gender": "female",
+      "dob": {
+        "year": 1992,
+        "month": 11,
+        "day": 13
+      },
+      "role": "Coach"
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "workoutHistoryIds": [
+        "3ee13024-8491-45e9-a0a9-ff822d85023d",
+        "5942d49f-3c96-4cf1-afdc-3b679b839199"
+      ],
+      "firstName": "Vlado",
+      "lastName": "Cvijanovic",
+      "email": "dovla@gmail.com",
+      "username": "vlad",
+      "password": "dovla",
+      "gender": "male",
+      "dob": {
+        "year": 1998,
+        "month": 3,
+        "day": 13
+      },
+      "role": "Coach"
+    },
+    "deleted": false
+  }
+]

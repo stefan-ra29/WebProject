@@ -1,0 +1,19 @@
+[
+  {
+    "entity": {
+      "firstName": "SvetskiMegaCar",
+      "lastName": "Legenda",
+      "email": "admin@gmail.com",
+      "username": "admin",
+      "password": "a",
+      "gender": "else",
+      "dob": {
+        "year": 1970,
+        "month": 8,
+        "day": 20
+      },
+      "role": "Administrator"
+    },
+    "deleted": false
+  }
+]

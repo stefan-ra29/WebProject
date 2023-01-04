@@ -1,0 +1,144 @@
+[
+  {
+    "entity": {
+      "visitedFacilitiesIds": [
+        "a8ffbc7c-cf81-4fe3-a9ab-9df625b43cb6",
+        "8eb7aeaf-1fab-4503-93af-69fec50ba92c"
+      ],
+      "points": 1150.0,
+      "customerTypeName": "Srebrni",
+      "firstName": "Aleksandra",
+      "lastName": "Vujovic",
+      "email": "saskavaska@gmail.com",
+      "username": "saska",
+      "password": "saska",
+      "gender": "female",
+      "dob": {
+        "year": 2000,
+        "month": 6,
+        "day": 3
+      },
+      "role": "Customer"
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "visitedFacilitiesIds": [
+        "8eb7aeaf-1fab-4503-93af-69fec50ba92c"
+      ],
+      "points": 0.0,
+      "firstName": "Stefan",
+      "lastName": "Tosic",
+      "email": "stefantosic23@gmail.com",
+      "username": "stefan",
+      "password": "stefan",
+      "gender": "male",
+      "dob": {
+        "year": 2000,
+        "month": 1,
+        "day": 7
+      },
+      "role": "Customer"
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "visitedFacilitiesIds": [],
+      "points": 1070.0,
+      "customerTypeName": "Srebrni",
+      "firstName": "Marko",
+      "lastName": "Markovic",
+      "email": "markoni23@gmail.com",
+      "username": "marko",
+      "password": "marko",
+      "gender": "male",
+      "dob": {
+        "year": 2000,
+        "month": 8,
+        "day": 22
+      },
+      "role": "Customer"
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "visitedFacilitiesIds": [],
+      "points": 0.0,
+      "firstName": "Ognjen",
+      "lastName": "Gogi",
+      "email": "ognjenas@gmail.com",
+      "username": "ogi",
+      "password": "bogi",
+      "gender": "male",
+      "dob": {
+        "year": 1998,
+        "month": 7,
+        "day": 31
+      },
+      "role": "Customer"
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "visitedFacilitiesIds": [
+        "8eb7aeaf-1fab-4503-93af-69fec50ba92c",
+        "a8ffbc7c-cf81-4fe3-a9ab-9df625b43cb6"
+      ],
+      "points": 810.0,
+      "customerTypeName": "Bronzani",
+      "firstName": "Zlatko",
+      "lastName": "Ivanovic",
+      "email": "zlaivson@gmail.com",
+      "username": "zlaja",
+      "password": "zlaiva",
+      "gender": "else",
+      "dob": {
+        "year": 1996,
+        "month": 3,
+        "day": 5
+      },
+      "role": "Customer"
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "points": 0.0,
+      "firstName": "Vladanka",
+      "lastName": "Tosic",
+      "email": "tvladanka@gmail.com",
+      "username": "pilja",
+      "password": "pilja56",
+      "gender": "female",
+      "dob": {
+        "year": 1989,
+        "month": 10,
+        "day": 5
+      },
+      "role": "Customer"
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "points": 0.0,
+      "firstName": "Nebojsa",
+      "lastName": "Tosic",
+      "email": "neso@gmail.com",
+      "username": "neso",
+      "password": "shone",
+      "gender": "male",
+      "dob": {
+        "year": 1995,
+        "month": 4,
+        "day": 4
+      },
+      "role": "Customer"
+    },
+    "deleted": false
+  }
+]

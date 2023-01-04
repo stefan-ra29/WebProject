@@ -1,0 +1,237 @@
+body{
+    margin: 0px;
+    height: 100%;
+}
+
+html {
+    height: 100%;
+}
+
+.login_wrap{
+    text-align: center;
+    padding-bottom: 488px;
+    background-color: #e76f51;
+}
+.login_wrap h1{
+        margin-top: 20px;
+        color: #f0f0f0;
+}
+
+.login_form{
+    display:flex;
+    justify-content: center;
+}
+
+.login_form td{
+    font-size: 20px;
+    padding: 5px;
+}
+
+.registration_wrap{
+    text-align: center;
+    padding-bottom: 310px;
+    background-color: #e76f51;
+}
+
+.registration_wrap h1 {
+    margin-top: 20px;
+    color: #f0f0f0;
+}
+
+.registration_form{
+    display:flex;
+    justify-content: center;
+}
+table{
+    border: 2px solid #f0f0f0;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #f4a261;
+}
+.registration_form td{
+    font-size: 20px;
+    padding: 5px;
+    color: #1f1f1f;
+}
+
+.facility_heading {
+    font-size: 40px;
+    text-align: center;
+}
+
+.sport_facility_display_header {
+    margin-bottom: 10px;
+    text-align: right;
+    background-color: #1F1F1F;
+    height: 30px;
+    padding-top: 10px;
+    padding-right: 10px;
+}
+.sport_facility_display_header a{
+    text-decoration: none;
+    color: #F0F0F0;
+    font-weight: 500;
+}
+
+.sport_facility_search_display {
+    text-align: left;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.sport_facilities_sort{
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
+
+.sport_facilities_filter{
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
+
+.facility_table_wrap{
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.image_display {
+    height: 200px;
+    width: 330px;
+}
+
+.facility_table_wrap th{
+    font-size : 30px;
+    width : 300px;
+}
+.facility_table_wrap td{
+    font-size : 20px;
+}
+
+.facility_button {
+    font-size : 20px;
+}
+.facility_button_row{
+    vertical-align: middle;
+    text-align: center;
+}
+.membership_table{
+    background-color: #E76F51;;
+    border: 0px;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+.membership_table div{
+    text-align: center;
+    border: 2px solid #f0f0f0;
+    border-radius: 20px;
+    padding: 10px;
+}
+.membership_table div h2 {
+    color: white;
+    font-size: 28px;
+}
+
+.membership_table div p {
+    font-size: 18px;
+}
+
+.monthly_membership_premium{
+    margin-right: 80px;
+    background-color: #f46169;
+}
+
+.monthly_membership_light{
+    margin-right: 80px;
+    background-color: #f4a261;
+}
+
+.yearly_membership{
+    background-color: #f4a261;
+}
+
+.icon_style{
+    height: 10px;
+    width: 10px;
+    margin: 0px,0px,0px,0px;
+    padding: 0px;
+}
+
+.button_icon_style{
+    height: 20px;
+    width: 20px;
+    margin: 0px,0px,0px,0px;
+    padding: 0px;
+    background-color: transparent;
+    border: none;
+}
+.button_icon_style:hover{
+    background-color: yellow;
+}
+.button_icon_style:click{
+    background-color: orange;
+}
+
+.workout_history_wrap{
+    text-align: center;
+}
+
+.workout_history_wrap table {
+    margin: 0 auto;
+}
+
+.workout_schedule_table{
+    margin: 0 auto;
+}
+
+.orange_wrap{
+    background-color: #E76F51;
+    padding-bottom: 150px;
+}
+
+.orange_wrap h1{
+    color: #F0F0F0;
+}
+
+.orange_wrap h2{
+    color: #F0F0F0;
+}
+
+.current_membership_info{
+    color: #F0F0F0;
+    letter-spacing: 1px;
+    font-size: 16px;
+    height: 100%;
+}
+
+.manager_users_display_table{
+    margin: 0 auto;
+}
+.comment_form{
+    margin-bottom: 100px;
+    text-align: center;
+}
+.single_comment{
+    background-color: #F0F0F0;
+    width: 70%;
+    margin: 0 auto;
+    padding: 1px 8px 1px 8px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+}
+.single_comment_user{
+    font-size: 15px;
+    margin-bottom: 4px;
+    margin-top: 5px;
+}
+.single_comment_grade {
+    font-size: 18px;
+    margin: 0;
+}
+.single_comment_text {
+    font-size: 19px;
+    text-align: center;
+    margin: 8px 0px 8px 0px;
+}

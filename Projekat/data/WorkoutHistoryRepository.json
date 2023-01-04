@@ -1,0 +1,222 @@
+[
+  {
+    "entity": {
+      "startTime": {
+        "date": {
+          "year": 2022,
+          "month": 7,
+          "day": 9
+        },
+        "time": {
+          "hour": 19,
+          "minute": 43,
+          "second": 32,
+          "nano": 144349800
+        }
+      },
+      "workoutId": "7ffe5fc1-291a-4a3a-9159-992010e12fb0",
+      "customerId": "saska",
+      "coachId": "mina",
+      "id": "22f84b36-6c89-498e-b9a9-d80c400c784e"
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "startTime": {
+        "date": {
+          "year": 2022,
+          "month": 7,
+          "day": 1
+        },
+        "time": {
+          "hour": 15,
+          "minute": 44,
+          "second": 50,
+          "nano": 556889300
+        }
+      },
+      "workoutId": "f5bddaf7-93e6-42f8-b3e8-2bb272eea590",
+      "customerId": "saska",
+      "coachId": "david",
+      "id": "89315ec6-a615-4f8a-a6a2-5b09df021f13"
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "startTime": {
+        "date": {
+          "year": 2022,
+          "month": 7,
+          "day": 11
+        },
+        "time": {
+          "hour": 22,
+          "minute": 48,
+          "second": 56,
+          "nano": 346079800
+        }
+      },
+      "workoutId": "98c6de4b-1b24-472a-b463-2ea7f2dc4162",
+      "customerId": "stefan",
+      "coachId": "tina",
+      "id": "cc4a2fad-adc1-4c17-9cc4-478b21a0292b"
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "startTime": {
+        "date": {
+          "year": 2022,
+          "month": 6,
+          "day": 30
+        },
+        "time": {
+          "hour": 22,
+          "minute": 50,
+          "second": 45,
+          "nano": 94212200
+        }
+      },
+      "workoutId": "98c6de4b-1b24-472a-b463-2ea7f2dc4162",
+      "customerId": "zlaja",
+      "coachId": "tina",
+      "id": "a82ae92b-5d79-4595-b84f-f8415a565b5e"
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "startTime": {
+        "date": {
+          "year": 2022,
+          "month": 7,
+          "day": 5
+        },
+        "time": {
+          "hour": 22,
+          "minute": 51,
+          "second": 26,
+          "nano": 482154500
+        }
+      },
+      "workoutId": "aa3b9037-0dfe-4e26-b249-55b3d0abc7b4",
+      "customerId": "zlaja",
+      "coachId": "",
+      "id": "0fe613b6-6e4a-47a8-b235-d44d41628ca7"
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "startTime": {
+        "date": {
+          "year": 2022,
+          "month": 6,
+          "day": 10
+        },
+        "time": {
+          "hour": 22,
+          "minute": 51,
+          "second": 37,
+          "nano": 521688000
+        }
+      },
+      "workoutId": "e6c2db08-ed00-44e9-b678-b5ad1b6c0a12",
+      "customerId": "zlaja",
+      "coachId": "vlad",
+      "id": "3ee13024-8491-45e9-a0a9-ff822d85023d"
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "startTime": {
+        "date": {
+          "year": 2022,
+          "month": 6,
+          "day": 16
+        },
+        "time": {
+          "hour": 23,
+          "minute": 49,
+          "second": 57,
+          "nano": 387258100
+        }
+      },
+      "workoutId": "98c6de4b-1b24-472a-b463-2ea7f2dc4162",
+      "customerId": "saska",
+      "coachId": "tina",
+      "id": "0953d2eb-eb08-4209-93dc-f2c22666bc02"
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "startTime": {
+        "date": {
+          "year": 2022,
+          "month": 5,
+          "day": 11
+        },
+        "time": {
+          "hour": 23,
+          "minute": 50,
+          "second": 2,
+          "nano": 771887700
+        }
+      },
+      "workoutId": "98c6de4b-1b24-472a-b463-2ea7f2dc4162",
+      "customerId": "saska",
+      "coachId": "tina",
+      "id": "fca559cc-bf60-4454-9e69-bd7a2a3495b8"
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "startTime": {
+        "date": {
+          "year": 2022,
+          "month": 7,
+          "day": 3
+        },
+        "time": {
+          "hour": 23,
+          "minute": 50,
+          "second": 55,
+          "nano": 440980700
+        }
+      },
+      "workoutId": "aa3b9037-0dfe-4e26-b249-55b3d0abc7b4",
+      "customerId": "saska",
+      "coachId": "",
+      "id": "49c1ad54-8fb0-4fc1-afe1-81f22e3de91f"
+    },
+    "deleted": false
+  },
+  {
+    "entity": {
+      "startTime": {
+        "date": {
+          "year": 2022,
+          "month": 6,
+          "day": 27
+        },
+        "time": {
+          "hour": 23,
+          "minute": 50,
+          "second": 59,
+          "nano": 311704100
+        }
+      },
+      "workoutId": "e6c2db08-ed00-44e9-b678-b5ad1b6c0a12",
+      "customerId": "saska",
+      "coachId": "vlad",
+      "id": "5942d49f-3c96-4cf1-afdc-3b679b839199"
+    },
+    "deleted": false
+  }
+]
